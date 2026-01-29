@@ -11,6 +11,8 @@ import { CartComponent } from './features/pages/cart/cart.component';
 import { CheckoutComponent } from './features/pages/checkout/checkout.component';
 import { DashboardComponent } from './features/private/dashboard/dashboard.component';
 import { RegisterComponent } from './features/pages/register/register.component';
+import { TestComponent } from './features/private/test/test.component';
+import { ResultComponent } from './features/private/result/result.component';
 
 export const routes: Routes = [
   // 🌐 Public Website
@@ -36,6 +38,9 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: RegisterComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'test', component: TestComponent },
+      { path: 'result', component: ResultComponent },
+
       // later: register, otp, forgot-password
     ],
   },
