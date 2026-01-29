@@ -1,36 +1,226 @@
-<section class="bg-gray-100 py-16 text-center px-4">
-  <h1 class="text-3xl md:text-5xl font-bold mb-4">
-    Prepare for BPSC with Confidence
+<!-- HERO SECTION -->
+<section class="bg-blue-700 text-white py-20 px-4 text-center">
+  <h1 class="text-4xl md:text-5xl font-bold mb-4">
+    Crack BPSC with Confidence
   </h1>
-  <p class="text-lg mb-6">
-    Online Test Series • Expert Guidance • Affordable Books
+  <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">
+    Prepare for Bihar Public Service Commission exams with online tests, expert
+    guidance, and high-quality study material.
   </p>
-
-  <div class="flex justify-center gap-4">
+  <div class="flex flex-col sm:flex-row justify-center gap-4">
     <a
       routerLink="/test-series"
-      class="bg-blue-600 text-white px-6 py-2 rounded"
-      >Start Tests</a
+      class="bg-yellow-400 text-blue-700 px-6 py-3 rounded font-semibold hover:bg-yellow-300 transition"
     >
-    <a routerLink="/books" class="border border-blue-600 px-6 py-2 rounded"
-      >Buy Books</a
+      Start Test Series
+    </a>
+    <a
+      routerLink="/books"
+      class="border border-white px-6 py-3 rounded hover:bg-white hover:text-blue-700 transition"
     >
+      Buy Study Material
+    </a>
   </div>
 </section>
 
-<section class="max-w-7xl mx-auto py-12 px-4 grid md:grid-cols-3 gap-6">
-  <div class="bg-white p-6 shadow rounded">
-    <h3 class="font-bold mb-2">Expert Faculty</h3>
-    <p>Learn from experienced mentors & BPSC toppers.</p>
+<!-- FEATURES SECTION -->
+<section
+  class="max-w-7xl mx-auto py-16 px-4 grid md:grid-cols-3 gap-8 text-center"
+>
+  <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+    <h3 class="text-xl font-bold mb-2">Expert Faculty</h3>
+    <p class="text-gray-600">
+      Learn from experienced BPSC mentors who guide you step by step.
+    </p>
+  </div>
+  <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+    <h3 class="text-xl font-bold mb-2">Updated Test Series</h3>
+    <p class="text-gray-600">
+      Practice according to the latest BPSC syllabus and exam pattern.
+    </p>
+  </div>
+  <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+    <h3 class="text-xl font-bold mb-2">Affordable Learning</h3>
+    <p class="text-gray-600">
+      High-quality study material and courses at pocket-friendly prices.
+    </p>
+  </div>
+</section>
+
+<!-- TEST SERIES HIGHLIGHTS -->
+<section class="bg-gray-100 py-16 px-4">
+  <div class="max-w-7xl mx-auto text-center mb-8">
+    <h2 class="text-3xl font-bold mb-2">Our Test Series</h2>
+    <p class="text-gray-600 max-w-2xl mx-auto">
+      Choose from multiple full-length tests, mock papers, and section-wise
+      quizzes designed for BPSC aspirants.
+    </p>
   </div>
 
-  <div class="bg-white p-6 shadow rounded">
-    <h3 class="font-bold mb-2">Latest Pattern Tests</h3>
-    <p>Practice according to latest BPSC syllabus.</p>
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="bg-white shadow rounded p-6 hover:shadow-lg transition">
+      <h3 class="font-bold mb-2">Prelims Full Test</h3>
+      <p class="text-gray-600 mb-3">50 questions, 2 hours, fully timed.</p>
+      <a
+        routerLink="/test-series"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        >Start Test</a
+      >
+    </div>
+    <div class="bg-white shadow rounded p-6 hover:shadow-lg transition">
+      <h3 class="font-bold mb-2">CSAT Section Test</h3>
+      <p class="text-gray-600 mb-3">
+        Focus on reasoning and comprehension for prelims.
+      </p>
+      <a
+        routerLink="/test-series"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        >Start Test</a
+      >
+    </div>
+    <div class="bg-white shadow rounded p-6 hover:shadow-lg transition">
+      <h3 class="font-bold mb-2">Mains Answer Writing</h3>
+      <p class="text-gray-600 mb-3">
+        Practice essay and answer writing for mains exams.
+      </p>
+      <a
+        routerLink="/test-series"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        >Start Test</a
+      >
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED BOOKS -->
+<section class="max-w-7xl mx-auto py-16 px-4 text-center">
+  <h2 class="text-3xl font-bold mb-6">Recommended Books</h2>
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <div class="bg-white rounded shadow p-5 hover:shadow-lg transition">
+      <img
+        src="assets/books/gs.jpg"
+        alt="BPSC GS"
+        class="h-40 w-full object-cover mb-3 rounded"
+      />
+      <h3 class="font-bold mb-1">BPSC General Studies</h3>
+      <p class="text-sm text-gray-600 mb-2">Expert Faculty</p>
+      <p class="font-semibold">₹299</p>
+      <a
+        routerLink="/books"
+        class="mt-2 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+        >Buy Now</a
+      >
+    </div>
+    <div class="bg-white rounded shadow p-5 hover:shadow-lg transition">
+      <img
+        src="assets/books/history.jpg"
+        alt="Bihar History"
+        class="h-40 w-full object-cover mb-3 rounded"
+      />
+      <h3 class="font-bold mb-1">Bihar History</h3>
+      <p class="text-sm text-gray-600 mb-2">Dr. Kumar</p>
+      <p class="font-semibold">₹199</p>
+      <a
+        routerLink="/books"
+        class="mt-2 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+        >Buy Now</a
+      >
+    </div>
+    <div class="bg-white rounded shadow p-5 hover:shadow-lg transition">
+      <img
+        src="assets/books/polity.jpg"
+        alt="Indian Polity"
+        class="h-40 w-full object-cover mb-3 rounded"
+      />
+      <h3 class="font-bold mb-1">Indian Polity</h3>
+      <p class="text-sm text-gray-600 mb-2">M. Laxmikant</p>
+      <p class="font-semibold">₹349</p>
+      <a
+        routerLink="/books"
+        class="mt-2 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+        >Buy Now</a
+      >
+    </div>
+  </div>
+</section>
+
+<!-- TIPS SECTION -->
+<section class="bg-gray-100 py-16 px-4">
+  <div class="max-w-7xl mx-auto text-center mb-8">
+    <h2 class="text-3xl font-bold mb-2">Exam Preparation Tips</h2>
+    <p class="text-gray-600 max-w-2xl mx-auto">
+      Follow these tips to boost your BPSC preparation and maximize your score.
+    </p>
   </div>
 
-  <div class="bg-white p-6 shadow rounded">
-    <h3 class="font-bold mb-2">Low Cost</h3>
-    <p>High quality education at affordable prices.</p>
+  <div class="grid md:grid-cols-3 gap-6">
+    <div
+      class="bg-white shadow rounded p-6 hover:shadow-lg transition text-center"
+    >
+      <h3 class="font-bold mb-2">Time Management</h3>
+      <p class="text-gray-600">
+        Plan your daily study schedule and stick to it for consistent progress.
+      </p>
+    </div>
+    <div
+      class="bg-white shadow rounded p-6 hover:shadow-lg transition text-center"
+    >
+      <h3 class="font-bold mb-2">Practice Tests</h3>
+      <p class="text-gray-600">
+        Attempt daily mock tests to analyze strengths and weaknesses.
+      </p>
+    </div>
+    <div
+      class="bg-white shadow rounded p-6 hover:shadow-lg transition text-center"
+    >
+      <h3 class="font-bold mb-2">Revision</h3>
+      <p class="text-gray-600">
+        Regularly revise important topics to retain information effectively.
+      </p>
+    </div>
   </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="max-w-7xl mx-auto py-16 px-4 text-center">
+  <h2 class="text-3xl font-bold mb-8">What Our Students Say</h2>
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="bg-white rounded shadow p-6 hover:shadow-lg transition">
+      <p class="text-gray-600 mb-4">
+        "BPSC Prep Portal helped me structure my preparation and score top
+        marks!"
+      </p>
+      <h4 class="font-bold">Anjali S.</h4>
+      <p class="text-sm text-gray-500">Patna</p>
+    </div>
+    <div class="bg-white rounded shadow p-6 hover:shadow-lg transition">
+      <p class="text-gray-600 mb-4">
+        "The mock tests were very close to the actual exam pattern. Highly
+        recommend!"
+      </p>
+      <h4 class="font-bold">Ravi K.</h4>
+      <p class="text-sm text-gray-500">Gaya</p>
+    </div>
+    <div class="bg-white rounded shadow p-6 hover:shadow-lg transition">
+      <p class="text-gray-600 mb-4">
+        "Affordable books and expert guidance made my preparation easy."
+      </p>
+      <h4 class="font-bold">Priya M.</h4>
+      <p class="text-sm text-gray-500">Bhagalpur</p>
+    </div>
+  </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="bg-blue-700 text-white py-16 px-4 text-center">
+  <h2 class="text-3xl font-bold mb-4">Start Your BPSC Journey Today</h2>
+  <p class="text-lg mb-6">
+    Join thousands of students preparing with us for success.
+  </p>
+  <a
+    routerLink="/test-series"
+    class="bg-yellow-400 text-blue-700 px-6 py-3 rounded font-semibold hover:bg-yellow-300 transition"
+  >
+    Join Test Series Now
+  </a>
 </section>

@@ -1,15 +1,82 @@
-<h2 class="text-2xl font-bold text-center mb-4">Student Login</h2>
+<section
+  class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-blue-700 via-purple-600 to-pink-500 animated-gradient"
+>
+  <!-- Glass Card -->
+  <div
+    class="bg-white/30 backdrop-blur-xl rounded-3xl shadow-2xl max-w-md w-full p-10 space-y-8 animate-card"
+  >
+    <!-- Header -->
+    <div class="text-center">
+      <h1 class="text-4xl font-bold text-white mb-2 drop-shadow-lg">
+        Welcome Back
+      </h1>
+      <p class="text-white/90 drop-shadow-sm">
+        Login to continue your BPSC journey
+      </p>
+    </div>
 
-<input class="w-full border p-2 mb-3 rounded" placeholder="Mobile or Email" />
-<input
-  type="password"
-  class="w-full border p-2 mb-4 rounded"
-  placeholder="Password"
-/>
+    <!-- Form -->
+    <form (ngSubmit)="login()" class="space-y-5">
+      <div>
+        <label class="block text-white/90 font-semibold mb-1">Email</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="you@example.com"
+          required
+          class="w-full border border-white/40 bg-white/20 p-3 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/70"
+        />
+      </div>
 
-<button class="bg-blue-600 text-white w-full py-2 rounded mb-3">Login</button>
+      <div>
+        <label class="block text-white/90 font-semibold mb-1">Password</label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="********"
+          required
+          class="w-full border border-white/40 bg-white/20 p-3 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/70"
+        />
+      </div>
 
-<p class="text-center text-sm">
-  New student?
-  <a class="text-blue-600" href="#">Register</a>
-</p>
+      <button
+        type="submit"
+        class="w-full bg-white text-blue-700 font-bold py-3 rounded-xl hover:bg-white/90 transition"
+      >
+        Login
+      </button>
+    </form>
+
+    <!-- Links -->
+    <div class="flex justify-between text-sm text-white/90">
+      <a routerLink="/forgot-password" class="hover:text-white transition">
+        Forgot Password?
+      </a>
+      <a routerLink="/signup" class="hover:text-white transition"> Sign Up </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="flex items-center gap-4">
+      <div class="flex-1 h-px bg-white/40"></div>
+      <span class="text-white/70 font-semibold">OR</span>
+      <div class="flex-1 h-px bg-white/40"></div>
+    </div>
+
+    <!-- Social Buttons -->
+    <div class="flex gap-4 justify-center">
+      <button
+        class="flex items-center gap-2 bg-red-600 text-white px-5 py-2 rounded-xl hover:bg-red-700 transition shadow-lg"
+      >
+        <i class="fab fa-google"></i> Google
+      </button>
+
+      <button
+        class="flex items-center gap-2 bg-blue-800 text-white px-5 py-2 rounded-xl hover:bg-blue-900 transition shadow-lg"
+      >
+        <i class="fab fa-facebook-f"></i> Facebook
+      </button>
+    </div>
+  </div>
+</section>

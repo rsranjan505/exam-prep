@@ -1,0 +1,100 @@
+<section class="min-h-screen bg-gray-100 py-10 px-4">
+  <div class="max-w-7xl mx-auto space-y-8">
+    <!-- Welcome Card -->
+    <div
+      class="bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row justify-between items-center"
+    >
+      <div>
+        <h1 class="text-2xl font-bold">Welcome, Rajeev 👋</h1>
+        <p class="text-gray-600">
+          Keep going! You're doing great in your preparation.
+        </p>
+      </div>
+      <div class="mt-4 md:mt-0">
+        <a
+          routerLink="/test-series"
+          class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition"
+        >
+          Continue Test
+        </a>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="bg-white rounded-2xl shadow p-6">
+      <h2 class="font-bold mb-3">Your Progress</h2>
+      <div class="w-full bg-gray-200 rounded-full h-4">
+        <div class="bg-green-600 h-4 rounded-full" style="width: 45%"></div>
+      </div>
+      <p class="text-sm mt-2 text-gray-600">4 of 9 tests completed</p>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="grid md:grid-cols-4 gap-6">
+      <div
+        class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center"
+      >
+        <h3 class="font-bold mb-2">Test Series</h3>
+        <p class="text-sm text-gray-600 mb-3">Attempt mock tests</p>
+        <a routerLink="/test-series" class="text-blue-600 font-semibold"
+          >Go →</a
+        >
+      </div>
+
+      <div
+        class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center"
+      >
+        <h3 class="font-bold mb-2">Books</h3>
+        <p class="text-sm text-gray-600 mb-3">Buy study materials</p>
+        <a routerLink="/books" class="text-blue-600 font-semibold">Shop →</a>
+      </div>
+
+      <div
+        class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center"
+      >
+        <h3 class="font-bold mb-2">Results</h3>
+        <p class="text-sm text-gray-600 mb-3">Check performance</p>
+        <a class="text-blue-600 font-semibold">View →</a>
+      </div>
+
+      <div
+        class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center"
+      >
+        <h3 class="font-bold mb-2">Profile</h3>
+        <p class="text-sm text-gray-600 mb-3">Update details</p>
+        <a class="text-blue-600 font-semibold">Edit →</a>
+      </div>
+    </div>
+
+    <!-- Enrolled Test Series -->
+    <div class="bg-white rounded-2xl shadow p-6">
+      <h2 class="font-bold mb-4">Your Test Series</h2>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="border rounded-xl p-4">
+          <h3 class="font-semibold">BPSC Prelims Full Test</h3>
+          <p class="text-sm text-gray-600">Progress: 60%</p>
+          <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded text-sm">
+            Resume
+          </button>
+        </div>
+
+        <div class="border rounded-xl p-4">
+          <h3 class="font-semibold">CSAT Practice Set</h3>
+          <p class="text-sm text-gray-600">Progress: 30%</p>
+          <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded text-sm">
+            Resume
+          </button>
+        </div>
+
+        <div class="border rounded-xl p-4">
+          <h3 class="font-semibold">Mains Answer Writing</h3>
+          <p class="text-sm text-gray-600">Progress: 10%</p>
+          <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded text-sm">
+            Resume
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
