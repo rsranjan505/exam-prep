@@ -1,55 +1,59 @@
-<nav class="bg-blue-700 text-white sticky top-0 z-50 shadow">
+<nav class="bg-white text-primary sticky top-0 z-50 shadow">
   <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-    <a routerLink="/" class="text-xl font-bold">Exam Prep</a>
+    <div class="flex items-center flex-row ">
+      <img src="assets/logo.png" alt="Logo" class="h-10 w-12 mr-2" />
+      <a routerLink="/" class="text-xl font-bold">Exam Prep</a>
+    </div>
+
 
     <button class="md:hidden" (click)="open = !open">☰</button>
 
     <div class="hidden md:flex gap-2 items-center">
       <a
         routerLink="/"
-        routerLinkActive="bg-blue-900"
+        routerLinkActive="bg-secondary"
         [routerLinkActiveOptions]="{ exact: true }"
-        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
         Home
       </a>
 
       <a
         routerLink="/about"
-        routerLinkActive="bg-blue-900"
-        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+        routerLinkActive="bg-secondary"
+        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
         About
       </a>
 
       <a
         routerLink="/test-series"
-        routerLinkActive="bg-blue-900"
-        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+        routerLinkActive="bg-secondary"
+        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
         Test Series
       </a>
 
       <a
         routerLink="/books"
-        routerLinkActive="bg-blue-900"
-        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+        routerLinkActive="bg-secondary"
+        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
         Books
       </a>
 
       <a
         routerLink="/contact"
-        routerLinkActive="bg-blue-900"
-        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+        routerLinkActive="bg-secondary"
+        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
         Contact
       </a>
 
       <a
         routerLink="/cart"
-        routerLinkActive="bg-blue-900"
-        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+        routerLinkActive="bg-secondary"
+        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
         Cart
       </a>
@@ -57,7 +61,7 @@
       <a
         routerLink="/login"
         routerLinkActive="bg-yellow-400 text-blue-900"
-        class="bg-white text-blue-700 px-3 py-2 rounded hover:bg-yellow-300 transition"
+        class="bg-secondary text-white px-3 py-2 rounded hover:bg-secondary/80 transition"
       >
         Login
       </a>
@@ -69,9 +73,9 @@
     <a
       routerLink="/"
       (click)="closeMenu()"
-      routerLinkActive="bg-blue-900"
+      routerLinkActive="bg-secondary"
       [routerLinkActiveOptions]="{ exact: true }"
-      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+      class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
       Home
     </a>
@@ -79,8 +83,8 @@
     <a
       routerLink="/about"
       (click)="closeMenu()"
-      routerLinkActive="bg-blue-900"
-      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+      routerLinkActive="bg-secondary"
+      class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
       About
     </a>
@@ -88,8 +92,8 @@
     <a
       routerLink="/test-series"
       (click)="closeMenu()"
-      routerLinkActive="bg-blue-900"
-      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+      routerLinkActive="bg-secondary"
+      class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
       Test Series
     </a>
@@ -97,8 +101,8 @@
     <a
       routerLink="/books"
       (click)="closeMenu()"
-      routerLinkActive="bg-blue-900"
-      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+      routerLinkActive="bg-secondary"
+      class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
       Books
     </a>
@@ -106,8 +110,8 @@
     <a
       routerLink="/contact"
       (click)="closeMenu()"
-      routerLinkActive="bg-blue-900"
-      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+      routerLinkActive="bg-secondary"
+      class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
       Contact
     </a>
@@ -115,8 +119,8 @@
     <a
       routerLink="/cart"
       (click)="closeMenu()"
-      routerLinkActive="bg-blue-900"
-      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+      routerLinkActive="bg-secondary"
+      class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
       Cart
     </a>

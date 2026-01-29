@@ -1,3 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
+
+/* 1️⃣ Define your brand colors */
+:root {
+  --color-primary: #1F4F82;    /* pink-500 */
+  --color-secondary: #F4B41A;  /* blue-500 */
+  --color-dark: #0B2E4F;       /* pink-700 */
+  --color-ascent: #d93706;     /* orange-600 */
+}
+
+/* 2️⃣ Register them with Tailwind */
+@theme {
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-dark: var(--color-dark);
+  --color-ascent: var(--color-ascent);
+
+  --color-text-primary: var(--color-primary);
+  --color-text-secondary: var(--color-secondary);
+  /* background */
+  /* --color-bg-primary: var(--color-primary);
+  --color-bg-secondary: var(--color-secondary);
+  --color-bg-dark: var(--color-dark); */
+
+  /* border */
+  --color-border-primary: var(--color-primary);
+
+}
