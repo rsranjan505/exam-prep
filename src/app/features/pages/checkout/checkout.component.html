@@ -1,0 +1,48 @@
+<section class="max-w-3xl mx-auto py-10 px-4">
+  <h2 class="text-2xl font-bold mb-6">Checkout</h2>
+
+  <div class="bg-white shadow rounded p-6 space-y-6">
+    <h3 class="font-semibold mb-2">Billing Details</h3>
+    <div class="grid md:grid-cols-2 gap-4">
+      <input
+        type="text"
+        placeholder="Full Name"
+        [(ngModel)]="name"
+        class="border p-2 rounded w-full"
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        [(ngModel)]="email"
+        class="border p-2 rounded w-full"
+      />
+      <input
+        type="tel"
+        placeholder="Mobile Number"
+        [(ngModel)]="mobile"
+        class="border p-2 rounded w-full"
+      />
+      <input
+        type="text"
+        placeholder="Address"
+        [(ngModel)]="address"
+        class="border p-2 rounded w-full"
+      />
+    </div>
+
+    <h3 class="font-semibold mb-2">Payment Method</h3>
+    <select [(ngModel)]="paymentMethod" class="border p-2 rounded w-full">
+      <option value="cod">Cash on Delivery</option>
+      <option value="online">Online Payment (Razorpay)</option>
+    </select>
+
+    <p class="text-right font-semibold text-lg">Total: ₹{{ total }}</p>
+
+    <button
+      (click)="placeOrder()"
+      class="bg-green-600 text-white w-full py-2 rounded hover:bg-green-700 transition"
+    >
+      Place Order
+    </button>
+  </div>
+</section>

@@ -1,30 +1,133 @@
 <nav class="bg-blue-700 text-white">
   <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-    <a routerLink="/" class="text-xl font-bold">BPSC Prep</a>
+    <a routerLink="/" class="text-xl font-bold">Exam Prep</a>
 
     <button class="md:hidden" (click)="open = !open">☰</button>
 
-    <div class="hidden md:flex gap-6 items-center">
-      <a routerLink="/" class="hover:text-yellow-300">Home</a>
-      <a routerLink="/about">About</a>
-      <a routerLink="/test-series">Test Series</a>
-      <a routerLink="/books">Books</a>
-      <a routerLink="/contact">Contact</a>
-      <a routerLink="/cart">Cart</a>
-      <a routerLink="/login" class="bg-white text-blue-700 px-3 py-1 rounded"
-        >Login</a
+    <div class="hidden md:flex gap-2 items-center">
+      <a
+        routerLink="/"
+        routerLinkActive="bg-blue-900"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="px-3 py-2 rounded hover:bg-blue-800 transition"
       >
+        Home
+      </a>
+
+      <a
+        routerLink="/about"
+        routerLinkActive="bg-blue-900"
+        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+      >
+        About
+      </a>
+
+      <a
+        routerLink="/test-series"
+        routerLinkActive="bg-blue-900"
+        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+      >
+        Test Series
+      </a>
+
+      <a
+        routerLink="/books"
+        routerLinkActive="bg-blue-900"
+        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+      >
+        Books
+      </a>
+
+      <a
+        routerLink="/contact"
+        routerLinkActive="bg-blue-900"
+        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+      >
+        Contact
+      </a>
+
+      <a
+        routerLink="/cart"
+        routerLinkActive="bg-blue-900"
+        class="px-3 py-2 rounded hover:bg-blue-800 transition"
+      >
+        Cart
+      </a>
+
+      <a
+        routerLink="/login"
+        routerLinkActive="bg-yellow-400 text-blue-900"
+        class="bg-white text-blue-700 px-3 py-2 rounded hover:bg-yellow-300 transition"
+      >
+        Login
+      </a>
     </div>
   </div>
 
   <!-- Mobile -->
-  <div *ngIf="open" class="md:hidden px-4 pb-3 space-y-2">
-    <a routerLink="/" class="block">Home</a>
-    <a routerLink="/about" class="block">About</a>
-    <a routerLink="/test-series" class="block">Test Series</a>
-    <a routerLink="/books" class="block">Books</a>
-    <a routerLink="/contact" class="block">Contact</a>
-    <a routerLink="/cart" class="block">Cart</a>
-    <a routerLink="/login" class="block">Login</a>
+  <div *ngIf="open" class="md:hidden px-4 pb-3 space-y-1">
+    <a
+      routerLink="/"
+      (click)="closeMenu()"
+      routerLinkActive="bg-blue-900"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+    >
+      Home
+    </a>
+
+    <a
+      routerLink="/about"
+      (click)="closeMenu()"
+      routerLinkActive="bg-blue-900"
+      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+    >
+      About
+    </a>
+
+    <a
+      routerLink="/test-series"
+      (click)="closeMenu()"
+      routerLinkActive="bg-blue-900"
+      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+    >
+      Test Series
+    </a>
+
+    <a
+      routerLink="/books"
+      (click)="closeMenu()"
+      routerLinkActive="bg-blue-900"
+      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+    >
+      Books
+    </a>
+
+    <a
+      routerLink="/contact"
+      (click)="closeMenu()"
+      routerLinkActive="bg-blue-900"
+      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+    >
+      Contact
+    </a>
+
+    <a
+      routerLink="/cart"
+      (click)="closeMenu()"
+      routerLinkActive="bg-blue-900"
+      class="block px-3 py-2 rounded hover:bg-blue-800 transition"
+    >
+      Cart
+    </a>
+
+    <a
+      routerLink="/login"
+      (click)="closeMenu()"
+      routerLinkActive="bg-yellow-400 text-blue-900"
+      class="block px-3 py-2 rounded hover:bg-yellow-300 transition"
+    >
+      Login
+    </a>
   </div>
 </nav>
