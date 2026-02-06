@@ -15,7 +15,7 @@ export class BooksComponent {
       name: 'BPSC General Studies',
       author: 'Expert Faculty',
       price: 299,
-      image: 'assets/books/gs.jpg',
+      image: 'assets/books/paper1_mains.jpeg',
       added: false,
     },
     {
@@ -23,7 +23,7 @@ export class BooksComponent {
       name: 'Bihar History',
       author: 'Dr. Kumar',
       price: 199,
-      image: 'assets/books/history.jpg',
+      image: 'assets/books/paper2_mains.jpeg',
       added: false,
     },
     {
@@ -31,7 +31,7 @@ export class BooksComponent {
       name: 'Indian Polity',
       author: 'M. Laxmikant',
       price: 349,
-      image: 'assets/books/polity.jpg',
+      image: 'assets/books/paper1_mains.jpeg',
       added: false,
     },
   ];
