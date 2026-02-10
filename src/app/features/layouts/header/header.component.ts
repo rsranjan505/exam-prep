@@ -11,6 +11,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
   open = false;
 
+  testSeriesOpen = false;
+  materialsOpen = false;
   closeMenu() {
     this.open = false;
   }

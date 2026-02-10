@@ -176,30 +176,103 @@
     >
       About
     </a>
-    <a
+    <!-- <a
         routerLink="/study-materials"
         routerLinkActive="bg-secondary/10"
         class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
         Study Materials
-      </a>
+      </a> -->
+
+    <div>
+      <button
+        (click)="materialsOpen = !materialsOpen"
+        class="w-full flex justify-between items-center
+              text-md font-bold px-3 py-2 rounded
+              hover:bg-secondary/10 transition"
+      >
+        Study Materials
+
+        <!-- Arrow -->
+        <svg
+          class="w-4 h-4 transition-transform duration-300"
+          [class.rotate-180]="materialsOpen"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <div *ngIf="materialsOpen" class="ml-4 mt-1 space-y-1">
+        <a routerLink="/study-materials/all" (click)="closeMenu()" class="block px-3 py-2 hover:bg-secondary/10">
+          BPSC Prelims
+        </a>
+        <a routerLink="/study-materials/free" (click)="closeMenu()" class="block px-3 py-2 hover:bg-secondary/10">
+          BPSC Mains
+        </a>
+         <a routerLink="/study-materials/ncert-series" (click)="closeMenu()" class="block px-3 py-2 hover:bg-secondary/10">
+          NCERT Series
+        </a>
+      </div>
+    </div>
+
+
+
 
       <a
         routerLink="/online-support"
+        (click)="closeMenu()"
         routerLinkActive="bg-secondary/10"
         class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
         Online Support
     </a>
 
-    <a
+    <!-- <a
       routerLink="/test-series"
       (click)="closeMenu()"
       routerLinkActive="bg-secondary/10"
       class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
       Test Series
-    </a>
+    </a> -->
+
+    <!-- Mobile Test Series -->
+    <div>
+      <button
+        (click)="testSeriesOpen = !testSeriesOpen"
+        class="w-full flex justify-between items-center
+              text-md font-bold px-3 py-2 rounded
+              hover:bg-secondary/10 transition"
+      >
+        Test Series
+
+        <!-- Arrow -->
+        <svg
+          class="w-4 h-4 transition-transform duration-300"
+          [class.rotate-180]="testSeriesOpen"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <div *ngIf="testSeriesOpen" class="ml-4 mt-1 space-y-1">
+        <a routerLink="/test-series/all" (click)="closeMenu()" class="block px-3 py-2 hover:bg-secondary/10">
+          BPSC Prelims
+        </a>
+        <a routerLink="/test-series/free" (click)="closeMenu()" class="block px-3 py-2 hover:bg-secondary/10">
+          BPSC Mains
+        </a>
+      </div>
+    </div>
+
 
     <!-- <a
       routerLink="/cart"
@@ -211,6 +284,7 @@
     </a> -->
       <a
         routerLink="/gallery"
+        (click)="closeMenu()"
         routerLinkActive="bg-secondary/10"
         class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
