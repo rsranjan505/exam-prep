@@ -1,8 +1,8 @@
 <nav class="bg-white text-primary sticky top-0 z-50 shadow">
   <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
     <div class="flex items-center flex-row ">
-      <img src="assets/logo.png" alt="Logo" class="h-10 w-12 mr-2" />
-      <a routerLink="/" class="text-xl font-bold">Exam Prep</a>
+      <img src="assets/logo.png" alt="Logo" class="h-12 w-12 mr-2" />
+      <a routerLink="/" class="text-xl font-bold">Knowledge Nation</a>
     </div>
 
 
@@ -11,7 +11,7 @@
     <div class="hidden md:flex gap-2 items-center">
       <a
         routerLink="/"
-        routerLinkActive="bg-secondary"
+        routerLinkActive="bg-secondary/10"
         [routerLinkActiveOptions]="{ exact: true }"
         class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
@@ -20,35 +20,123 @@
 
       <a
         routerLink="/about"
-        routerLinkActive="bg-secondary"
+        routerLinkActive="bg-secondary/10"
         class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
         About
       </a>
+      <!-- <a
+        routerLink="/study-materials"
+        routerLinkActive="bg-secondary/10"
+        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
+      >
+        Study Materials
+      </a> -->
 
+
+      <div class="relative group">
+      <a
+        routerLink="/study-materials"
+        routerLinkActive="bg-secondary/10"
+        class="text-md font-bold px-3 py-2 rounded
+              hover:bg-secondary/10 transition
+              inline-flex items-center gap-1"
+      >
+        Study Materials
+
+        <!-- Arrow -->
+        <svg
+          class="w-4 h-4 transition-transform duration-300
+                group-hover:rotate-180"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 9l-7 7-7-7" />
+        </svg>
+      </a>
+
+      <!-- Dropdown -->
+      <div
+        class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md
+              opacity-0 invisible
+              group-hover:opacity-100 group-hover:visible
+              transition-all duration-200 z-50"
+      >
+        <a routerLink="/test-series/all" class="block px-4 py-2 hover:bg-secondary/10">
+          BPSC Prelims
+        </a>
+        <a routerLink="/test-series/free" class="block px-4 py-2 hover:bg-secondary/10">
+          BPSC Mains
+        </a>
+        <a routerLink="/test-series/free" class="block px-4 py-2 hover:bg-secondary/10">
+          NCERT Series
+        </a>
+      </div>
+    </div>
+
+      <a
+        routerLink="/online-support"
+        routerLinkActive="bg-secondary/10"
+        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
+      >
+        Online Support
+      </a>
+
+
+    <!-- Test Series with hover arrow -->
+    <div class="relative group">
       <a
         routerLink="/test-series"
-        routerLinkActive="bg-secondary"
-        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
+        routerLinkActive="bg-secondary/10"
+        class="text-md font-bold px-3 py-2 rounded
+              hover:bg-secondary/10 transition
+              inline-flex items-center gap-1"
       >
         Test Series
+
+        <!-- Arrow -->
+        <svg
+          class="w-4 h-4 transition-transform duration-300
+                group-hover:rotate-180"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 9l-7 7-7-7" />
+        </svg>
       </a>
 
-      <a
-        routerLink="/books"
-        routerLinkActive="bg-secondary"
-        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
+      <!-- Dropdown -->
+      <div
+        class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md
+              opacity-0 invisible
+              group-hover:opacity-100 group-hover:visible
+              transition-all duration-200 z-50"
       >
-        Books
-      </a>
+        <a routerLink="/test-series/all" class="block px-4 py-2 hover:bg-secondary/10">
+          BPSC Prelims
+        </a>
+        <a routerLink="/test-series/free" class="block px-4 py-2 hover:bg-secondary/10">
+          BPSC Mains
+        </a>
+      </div>
+    </div>
+
+
+
 
       <a
-        routerLink="/contact"
-        routerLinkActive="bg-secondary"
+        routerLink="/gallery"
+        routerLinkActive="bg-secondary/10"
         class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
-        Contact
+        Gallery
       </a>
+
+      <!--
 
       <a
         routerLink="/cart"
@@ -56,7 +144,7 @@
         class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
       >
         Cart
-      </a>
+      </a> -->
 
       <a
         routerLink="/login"
@@ -73,7 +161,7 @@
     <a
       routerLink="/"
       (click)="closeMenu()"
-      routerLinkActive="bg-secondary"
+      routerLinkActive="bg-secondary/10"
       [routerLinkActiveOptions]="{ exact: true }"
       class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
@@ -83,53 +171,56 @@
     <a
       routerLink="/about"
       (click)="closeMenu()"
-      routerLinkActive="bg-secondary"
+      routerLinkActive="bg-secondary/10"
       class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
       About
+    </a>
+    <a
+        routerLink="/study-materials"
+        routerLinkActive="bg-secondary/10"
+        class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
+    >
+        Study Materials
+      </a>
+
+      <a
+        routerLink="/online-support"
+        routerLinkActive="bg-secondary/10"
+        class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
+    >
+        Online Support
     </a>
 
     <a
       routerLink="/test-series"
       (click)="closeMenu()"
-      routerLinkActive="bg-secondary"
+      routerLinkActive="bg-secondary/10"
       class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
       Test Series
     </a>
 
-    <a
-      routerLink="/books"
-      (click)="closeMenu()"
-      routerLinkActive="bg-secondary"
-      class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
-    >
-      Books
-    </a>
-
-    <a
-      routerLink="/contact"
-      (click)="closeMenu()"
-      routerLinkActive="bg-secondary"
-      class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
-    >
-      Contact
-    </a>
-
-    <a
+    <!-- <a
       routerLink="/cart"
       (click)="closeMenu()"
       routerLinkActive="bg-secondary"
       class="block text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
     >
       Cart
-    </a>
-
+    </a> -->
+      <a
+        routerLink="/gallery"
+        routerLinkActive="bg-secondary/10"
+        class="text-md font-bold px-3 py-2 rounded hover:bg-secondary/10 transition"
+      >
+        Gallery
+      </a>
     <a
       routerLink="/login"
       (click)="closeMenu()"
-      routerLinkActive="bg-yellow-400 text-blue-900"
-      class="block px-3 py-2 rounded hover:bg-yellow-300 transition"
+      routerLinkActive="bg-secoundary/10 text-blue-900"
+      class="block px-3 py-2 rounded hover:bg-secoundary transition"
     >
       Login
     </a>

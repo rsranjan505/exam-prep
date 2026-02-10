@@ -4,10 +4,10 @@
 
 /* 1️⃣ Define your brand colors */
 :root {
-  --color-primary: #1F4F82;    /* pink-500 */
-  --color-secondary: #F4B41A;  /* blue-500 */
-  --color-dark: #0B2E4F;       /* pink-700 */
-  --color-ascent: #d93706;     /* orange-600 */
+  --color-primary: #890117;    /* pink-500 */
+  --color-secondary: #410040;  /* blue-500 */
+  --color-dark: #3f043e;       /* pink-700 */
+  --color-ascent: #400675;     /* orange-600 */
 }
 
 /* 2️⃣ Register them with Tailwind */

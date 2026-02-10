@@ -1,0 +1,100 @@
+<section class="bg-gray-50 min-h-screen">
+  <!-- Hero -->
+  <div class="bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4 py-12 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-primary">
+        Our Gallery
+      </h1>
+      <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+        A glimpse of our online test series, student achievements,
+        live classes, and learning environment.
+      </p>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="max-w-7xl mx-auto px-4 py-8 flex flex-wrap gap-3 justify-center">
+    <button class="px-4 py-2 rounded-full bg-secondary text-white text-sm">
+      All
+    </button>
+    <button class="px-4 py-2 rounded-full bg-white border text-sm hover:bg-secondary/10">
+      Online Tests
+    </button>
+    <button class="px-4 py-2 rounded-full bg-white border text-sm hover:bg-secondary/10">
+      Live Classes
+    </button>
+    <button class="px-4 py-2 rounded-full bg-white border text-sm hover:bg-secondary/10">
+      Results
+    </button>
+    <button class="px-4 py-2 rounded-full bg-white border text-sm hover:bg-secondary/10">
+      Student Reviews
+    </button>
+  </div>
+
+  <!-- Gallery Grid -->
+  <div class="max-w-7xl mx-auto px-4 pb-16 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <!-- Card -->
+    <div
+      class="bg-white rounded-xl shadow overflow-hidden
+             hover:shadow-lg transition group"
+    >
+      <img
+        src="assets/gallery/test-1.jpg"
+        alt="Online Test"
+        class="h-52 w-full object-cover
+               group-hover:scale-105 transition-transform duration-300"
+      />
+      <div class="p-4">
+        <h3 class="font-semibold">Online Mock Test</h3>
+        <p class="text-sm text-gray-500">
+          Real exam-like experience
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow overflow-hidden hover:shadow-lg transition group">
+      <img
+        src="assets/gallery/class-1.jpg"
+        alt="Live Class"
+        class="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+      <div class="p-4">
+        <h3 class="font-semibold">Live Online Class</h3>
+        <p class="text-sm text-gray-500">
+          Expert faculty guidance
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow overflow-hidden hover:shadow-lg transition group">
+      <img
+        src="assets/gallery/result-1.jpg"
+        alt="Result"
+        class="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+      <div class="p-4">
+        <h3 class="font-semibold">Top Results</h3>
+        <p class="text-sm text-gray-500">
+          Student success stories
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow overflow-hidden hover:shadow-lg transition group">
+      <img
+        src="assets/gallery/student-1.jpg"
+        alt="Students"
+        class="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+      <div class="p-4">
+        <h3 class="font-semibold">Happy Students</h3>
+        <p class="text-sm text-gray-500">
+          Learning made easy
+        </p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<app-join-test></app-join-test>

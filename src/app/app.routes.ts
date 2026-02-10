@@ -13,6 +13,9 @@ import { DashboardComponent } from './features/private/dashboard/dashboard.compo
 import { RegisterComponent } from './features/pages/register/register.component';
 import { TestComponent } from './features/private/test/test.component';
 import { ResultComponent } from './features/private/result/result.component';
+import { StudyMaterial } from './features/pages/study-material/study-material';
+import { Gallery } from './features/pages/gallery/gallery';
+import { OnlineSupport } from './features/pages/online-support/online-support';
 
 export const routes: Routes = [
   // 🌐 Public Website
@@ -23,7 +26,9 @@ export const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'about', component: AboutComponent },
       { path: 'test-series', component: TestSeriesComponent },
-      { path: 'books', component: BooksComponent },
+      { path: 'study-materials', component: StudyMaterial },
+      { path: 'gallery', component: Gallery },
+      { path: 'online-support', component: OnlineSupport },
       { path: 'cart', component: CartComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'checkout', component: CheckoutComponent },

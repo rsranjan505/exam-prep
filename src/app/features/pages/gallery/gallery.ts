@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { JoinTest } from "../../components/join-test/join-test";
 
 @Component({
-  selector: 'app-about',
+  selector: 'app-gallery',
   imports: [JoinTest],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.css'
+  templateUrl: './gallery.html',
+  styleUrl: './gallery.css',
 })
-export class AboutComponent {
+export class Gallery {
 
+  activeFilter = 'all';
 }
