@@ -1,100 +1,210 @@
-<section class="bg-gray-50 min-h-screen">
-  <!-- Hero -->
-  <div class="bg-white border-b">
-    <div class="max-w-7xl mx-auto px-4 py-12 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-primary">
-        Our Gallery
+<div class="min-h-screen bg-gradient-to-br from-[#f8f0f2] to-[#f3eef8]">
+  <!-- HERO -->
+  <section
+    class="relative overflow-hidden py-20 bg-gradient-to-br from-[#3f043e] via-[#2a0040] to-[#400675]"
+  >
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-14">
+      <!-- Breadcrumb -->
+      <div
+        class="flex items-center gap-2 text-white/40 text-xs font-semibold uppercase tracking-widest mb-5"
+      >
+        <span>Home</span>
+        <span>›</span>
+        <span class="text-[#f5a623]">Gallery</span>
+      </div>
+
+      <!-- Badge -->
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5 bg-[#f5a623]/15 text-[#f5a623] border border-[#f5a623]/30"
+      >
+        📸 Moments & Memories
+      </div>
+
+      <h1
+        class="font-['Playfair_Display'] text-4xl md:text-6xl font-black text-white leading-tight mb-5"
+      >
+        Our <span class="text-[#f5a623]">Gallery</span>
       </h1>
-      <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
-        A glimpse of our online test series, student achievements,
-        live classes, and learning environment.
+
+      <p class="text-white/60 text-lg max-w-xl mb-10">
+        Glimpses from our classrooms, events, topper celebrations, and campus
+        life.
       </p>
+
+      <!-- STATS -->
+      <div class="flex flex-wrap gap-6">
+        @for (s of stats(); track s.label) {
+        <div class="text-center">
+          <div class="font-['Playfair_Display'] text-2xl font-black text-white">
+            {{ s.val }}
+          </div>
+          <div class="text-white/45 text-[11px] uppercase tracking-widest">
+            {{ s.label }}
+          </div>
+        </div>
+        }
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Filters -->
-  <div class="max-w-7xl mx-auto px-4 py-8 flex flex-wrap gap-3 justify-center">
-    <button class="px-4 py-2 rounded-full bg-secondary text-white text-sm">
-      All
-    </button>
-    <button class="px-4 py-2 rounded-full bg-white border text-sm hover:bg-secondary/10">
-      Online Tests
-    </button>
-    <button class="px-4 py-2 rounded-full bg-white border text-sm hover:bg-secondary/10">
-      Live Classes
-    </button>
-    <button class="px-4 py-2 rounded-full bg-white border text-sm hover:bg-secondary/10">
-      Results
-    </button>
-    <button class="px-4 py-2 rounded-full bg-white border text-sm hover:bg-secondary/10">
-      Student Reviews
-    </button>
-  </div>
-
-  <!-- Gallery Grid -->
-  <div class="max-w-7xl mx-auto px-4 pb-16 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-    <!-- Card -->
+  <!-- FILTER TOOLBAR -->
+  <div class="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
     <div
-      class="bg-white rounded-xl shadow overflow-hidden
-             hover:shadow-lg transition group"
+      class="max-w-7xl mx-auto px-4 md:px-10 py-3 flex flex-col sm:flex-row gap-3 items-center"
     >
-      <img
-        src="assets/gallery/test-1.jpg"
-        alt="Online Test"
-        class="h-52 w-full object-cover
-               group-hover:scale-105 transition-transform duration-300"
-      />
-      <div class="p-4">
-        <h3 class="font-semibold">Online Mock Test</h3>
-        <p class="text-sm text-gray-500">
-          Real exam-like experience
-        </p>
+      <!-- Categories -->
+      <div class="flex gap-2 overflow-x-auto pb-1 flex-1 w-full">
+        @for (cat of categories; track cat) {
+        <button
+          (click)="activeCategory.set(cat)"
+          class="text-sm font-bold px-4 py-2 rounded-full shrink-0"
+          [class.bg-primary]="activeCategory() === cat"
+          [class.text-white]="activeCategory() === cat"
+          [class.border]="activeCategory() !== cat"
+        >
+          {{ cat }} @if (cat !== 'All') {
+          <span class="ml-1 text-[10px]"> ({{ categoryCounts()[cat] }}) </span>
+          }
+        </button>
+        }
       </div>
-    </div>
 
-    <div class="bg-white rounded-xl shadow overflow-hidden hover:shadow-lg transition group">
-      <img
-        src="assets/gallery/class-1.jpg"
-        alt="Live Class"
-        class="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-300"
-      />
-      <div class="p-4">
-        <h3 class="font-semibold">Live Online Class</h3>
-        <p class="text-sm text-gray-500">
-          Expert faculty guidance
-        </p>
+      <!-- Search -->
+      <div class="relative shrink-0">
+        <input
+          type="text"
+          placeholder="Search photos..."
+          [value]="searchQuery()"
+          (input)="searchQuery.set($any($event.target).value)"
+          class="px-4 py-2 rounded-xl border border-gray-200 text-sm bg-gray-50 w-44"
+        />
       </div>
-    </div>
 
-    <div class="bg-white rounded-xl shadow overflow-hidden hover:shadow-lg transition group">
-      <img
-        src="assets/gallery/result-1.jpg"
-        alt="Result"
-        class="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-300"
-      />
-      <div class="p-4">
-        <h3 class="font-semibold">Top Results</h3>
-        <p class="text-sm text-gray-500">
-          Student success stories
-        </p>
-      </div>
-    </div>
-
-    <div class="bg-white rounded-xl shadow overflow-hidden hover:shadow-lg transition group">
-      <img
-        src="assets/gallery/student-1.jpg"
-        alt="Students"
-        class="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-300"
-      />
-      <div class="p-4">
-        <h3 class="font-semibold">Happy Students</h3>
-        <p class="text-sm text-gray-500">
-          Learning made easy
-        </p>
+      <!-- Count -->
+      <div
+        class="text-xs font-bold px-3 py-2 rounded-full bg-primary/10 text-primary"
+      >
+        {{ filteredItems().length }} photos
       </div>
     </div>
   </div>
 
-</section>
+  <!-- GALLERY GRID -->
+  <section class="py-10">
+    <div class="max-w-7xl mx-auto px-4 md:px-10">
+      @if (filteredItems().length === 0) {
+      <div class="text-center py-20">
+        <div class="text-6xl mb-4">📭</div>
+        <h3 class="text-2xl font-black mb-2">No photos found</h3>
+        <button
+          (click)="searchQuery.set(''); activeCategory.set('All')"
+          class="font-bold text-sm px-6 py-3 rounded-full text-white bg-primary"
+        >
+          Clear Filters
+        </button>
+      </div>
+      }
 
-<app-join-test></app-join-test>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @for (item of filteredItems(); track item.id) {
+        <div
+          class="bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition cursor-pointer"
+          (click)="openLightbox(item)"
+        >
+          <img
+            [src]="item.thumb"
+            [alt]="item.title"
+            class="w-full object-cover"
+            [style.height]="item.span === 'tall' ? '350px' : item.span === 'wide' ? '260px' : '220px'"
+          />
+
+          <div class="p-4 flex justify-between items-center">
+            <div>
+              <p class="font-bold text-sm">{{ item.title }}</p>
+              <p class="text-xs text-gray-400">{{ item.date }}</p>
+            </div>
+
+            <button
+              class="flex items-center gap-1 text-sm"
+              [class.text-red-600]="likedItems().has(item.id)"
+              (click)="toggleLike(item.id, $event)"
+            >
+              ♥ {{ itemLikes(item) }}
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY SHOWCASE -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-14">
+      <h2 class="text-3xl font-black text-center mb-10">
+        Browse by <span class="text-primary">Category</span>
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        @for (cat of showcaseCategories(); track cat.name) {
+        <div
+          class="bg-white rounded-2xl p-5 text-center border border-gray-100 cursor-pointer shadow hover:shadow-lg transition"
+          (click)="activeCategory.set($any(cat.name)); scrollToTopSection()"
+        >
+          <div class="text-2xl mb-2">{{ cat.icon }}</div>
+          <div class="font-bold text-sm">{{ cat.name }}</div>
+          <div class="text-xs text-gray-500">{{ cat.count }} Photos</div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  @if (lightboxItem()) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
+    (click)="closeLightbox()"
+  >
+    <div
+      class="relative max-w-5xl w-full mx-4"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        class="absolute -top-12 right-0 text-white text-3xl"
+        (click)="closeLightbox()"
+      >
+        ✕
+      </button>
+
+      <img
+        [src]="lightboxItem()!.src"
+        [alt]="lightboxItem()!.title"
+        class="w-full rounded-xl"
+      />
+
+      <div class="flex justify-between items-center mt-4 text-white">
+        <div>
+          <h3 class="font-bold text-lg">{{ lightboxItem()!.title }}</h3>
+          <p class="text-sm text-white/60">
+            {{ lightboxItem()!.category }} · {{ lightboxItem()!.date }}
+          </p>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button
+            (click)="toggleLike(lightboxItem()!.id, $event)"
+            [class.text-red-600]="likedItems().has(lightboxItem()!.id)"
+          >
+            ♥ {{ itemLikes(lightboxItem()!) }}
+          </button>
+
+          <span class="text-sm text-white/60">
+            {{ lightboxIndex() }} / {{ filteredItems().length }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

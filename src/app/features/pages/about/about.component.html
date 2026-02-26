@@ -1,87 +1,768 @@
-<!-- Hero Section -->
-<section class="bg-primary/80 text-white py-16 text-center px-4">
-  <h1 class="text-3xl md:text-4xl font-bold mb-4">About BPSC Prep</h1>
-  <p class="max-w-2xl mx-auto text-lg">
-    Empowering Bihar’s youth to crack BPSC with quality education and affordable
-    resources.
-  </p>
+<!-- ═══════════════════════════════════════════════════════════
+     KNOWLEDGE NATION — About Page
+     Angular 19 | Tailwind CSS v4
+     Brand: #890117 · #410040 · #400675 · #3f043e
+════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════
+     1. HERO BANNER
+════════════════════════════════════════════════════════ -->
+<section class="hero-about">
+  <!-- Gradient base -->
+  <div class="hero-about-bg"></div>
+
+  <!-- Background image (very low opacity) -->
+  <div
+    class="hero-about-img"
+    style="
+      background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&q=80');
+    "
+  ></div>
+
+  <!-- Floating blobs -->
+  <div
+    class="blob-float absolute w-[500px] h-[500px] rounded-full pointer-events-none -top-40 -right-40"
+    style="background: rgba(137, 1, 23, 0.15); filter: blur(60px)"
+  ></div>
+  <div
+    class="blob-float-slow absolute w-[350px] h-[350px] rounded-full pointer-events-none -bottom-28 -left-28"
+    style="background: rgba(64, 6, 117, 0.2); filter: blur(50px)"
+  ></div>
+
+  <!-- Dot grid -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style="
+      opacity: 0.04;
+      background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+      background-size: 28px 28px;
+    "
+  ></div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-14 w-full py-20">
+    <div class="max-w-3xl">
+      <!-- Breadcrumb -->
+      <div
+        class="flex items-center gap-2 text-white/45 text-xs mb-6 font-semibold uppercase tracking-widest"
+      >
+        <span>Home</span>
+        <span>›</span>
+        <span style="color: #f5a623">About Us</span>
+      </div>
+
+      <!-- Eyebrow -->
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5"
+        style="
+          background: rgba(245, 166, 35, 0.15);
+          color: #f5a623;
+          border: 1px solid rgba(245, 166, 35, 0.3);
+        "
+      >
+        🏛️ Our Story Since 2009
+      </div>
+
+      <h1
+        class="font-['Playfair_Display'] text-4xl md:text-6xl font-black text-white leading-tight mb-6"
+      >
+        Empowering Bihar's <br />
+        <em class="not-italic" style="color: #f5a623">Future Leaders</em>
+      </h1>
+
+      <p class="text-white/65 text-lg leading-relaxed max-w-2xl mb-10">
+        Knowledge Nation was born from a single belief — that every aspirant in
+        Bihar deserves world-class coaching, regardless of their background or
+        location. Over 15 years later, we've turned that belief into 10,000+
+        success stories.
+      </p>
+
+      <!-- Hero CTA row -->
+      <div class="flex flex-wrap gap-4 items-center">
+        <button
+          class="cta-btn-primary text-white font-extrabold px-8 py-3.5 rounded-full text-sm cursor-pointer border-none tracking-wide"
+          style="
+            background: var(--color-primary);
+            box-shadow: 0 6px 24px rgba(137, 1, 23, 0.4);
+          "
+        >
+          Explore Courses
+        </button>
+        <button
+          class="font-bold text-sm px-8 py-3.5 rounded-full cursor-pointer transition-all duration-200 hover:bg-white/10"
+          style="
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+          "
+        >
+          Meet Our Faculty →
+        </button>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Mission & Vision -->
-<section class="max-w-7xl mx-auto py-12 px-4 grid md:grid-cols-2 gap-8">
-  <div class="bg-white p-6 rounded shadow">
-    <h2 class="text-xl font-bold mb-3">Our Mission</h2>
-    <p class="text-gray-700">
-      Our mission is to provide high-quality, exam-oriented preparation for BPSC
-      aspirants using expert guidance, updated content, and technology- driven
-      learning methods.
+<!-- ════════════════════════════════════════════════════════
+     2. STATS STRIP
+════════════════════════════════════════════════════════ -->
+<div class="relative z-20 max-w-6xl mx-auto px-6 md:px-12 -mt-8">
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+    @for (s of stats; track s.label; let i = $index) {
+    <div
+      class="stat-card fade-in-up bg-white rounded-2xl p-5 text-center border border-gray-100 cursor-default"
+      [class]="'delay-' + (i + 1)"
+      style="box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08)"
+    >
+      <div class="text-2xl mb-1">{{ s.icon }}</div>
+      <div
+        class="font-['Playfair_Display'] text-2xl font-black"
+        style="color: var(--color-primary)"
+      >
+        {{ s.num }}
+      </div>
+      <div
+        class="text-gray-400 text-[10px] uppercase tracking-widest mt-0.5 font-semibold"
+      >
+        {{ s.label }}
+      </div>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     3. MISSION & VISION
+════════════════════════════════════════════════════════ -->
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-6 md:px-14">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: Image collage -->
+      <div class="relative fade-in-up delay-1">
+        <!-- Main image -->
+        <div
+          class="rounded-3xl overflow-hidden shadow-2xl"
+          style="box-shadow: 0 32px 80px rgba(137, 1, 23, 0.2)"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80"
+            alt="Knowledge Nation classroom"
+            class="w-full h-80 object-cover"
+          />
+        </div>
+
+        <!-- Floating small card — top right -->
+        <div
+          class="absolute -top-5 -right-5 w-44 rounded-2xl p-4 shadow-xl"
+          style="
+            background: linear-gradient(
+              135deg,
+              var(--color-primary),
+              var(--color-dark)
+            );
+          "
+        >
+          <div class="text-white/60 text-[10px] uppercase tracking-widest mb-1">
+            Founded
+          </div>
+          <div class="font-['Playfair_Display'] text-3xl font-black text-white">
+            2009
+          </div>
+          <div class="text-white/60 text-xs mt-0.5">Patna, Bihar</div>
+        </div>
+
+        <!-- Floating small card — bottom left -->
+        <div
+          class="absolute -bottom-5 -left-5 w-52 rounded-2xl p-4 shadow-xl"
+          style="
+            background: linear-gradient(
+              135deg,
+              var(--color-ascent),
+              var(--color-dark)
+            );
+          "
+        >
+          <div class="text-white/60 text-[10px] uppercase tracking-widest mb-1">
+            Total Selections
+          </div>
+          <div class="font-['Playfair_Display'] text-3xl font-black text-white">
+            10,000+
+          </div>
+          <div class="text-white/60 text-xs mt-0.5">
+            BPSC · UPSC · SSC · Banking
+          </div>
+        </div>
+
+        <!-- Accent circle -->
+        <div
+          class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full -z-10"
+          style="
+            background: rgba(137, 1, 23, 0.08);
+            border: 2px dashed rgba(137, 1, 23, 0.2);
+          "
+        ></div>
+      </div>
+
+      <!-- Right: Text -->
+      <div class="fade-in-up delay-2">
+        <div
+          class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5"
+          style="
+            background: rgba(137, 1, 23, 0.07);
+            color: var(--color-primary);
+            border: 1px solid rgba(137, 1, 23, 0.14);
+          "
+        >
+          🎯 Our Purpose
+        </div>
+
+        <h2
+          class="font-['Playfair_Display'] text-3xl md:text-4xl font-black mb-4 section-title-left"
+          style="color: var(--color-dark)"
+        >
+          More Than a Coaching —
+          <em class="not-italic" style="color: var(--color-primary)"
+            >A Movement</em
+          >
+        </h2>
+
+        <p class="text-gray-500 leading-relaxed mb-6 text-base">
+          Knowledge Nation was founded with the conviction that Bihar's talent
+          deserves the finest preparation. We bridge the gap between aspiration
+          and achievement by combining expert mentorship, updated curriculum,
+          and affordable access.
+        </p>
+
+        <!-- Mission & Vision cards side by side -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <div
+            class="rounded-2xl p-5 border"
+            style="
+              background: rgba(137, 1, 23, 0.04);
+              border-color: rgba(137, 1, 23, 0.12);
+            "
+          >
+            <div class="text-2xl mb-2">🎯</div>
+            <div
+              class="font-bold text-sm mb-1"
+              style="color: var(--color-primary)"
+            >
+              Our Mission
+            </div>
+            <p class="text-gray-500 text-xs leading-relaxed">
+              Provide affordable, expert-led coaching to every aspirant in Bihar
+              and help them crack government exams.
+            </p>
+          </div>
+          <div
+            class="rounded-2xl p-5 border"
+            style="
+              background: rgba(64, 6, 117, 0.04);
+              border-color: rgba(64, 6, 117, 0.12);
+            "
+          >
+            <div class="text-2xl mb-2">🔭</div>
+            <div
+              class="font-bold text-sm mb-1"
+              style="color: var(--color-ascent)"
+            >
+              Our Vision
+            </div>
+            <p class="text-gray-500 text-xs leading-relaxed">
+              To be India's most trusted regional coaching institute, producing
+              leaders who transform public service.
+            </p>
+          </div>
+        </div>
+
+        <!-- Inline stats -->
+        <div class="flex flex-wrap gap-6">
+          @for (item of [ {label:'Students Enrolled', val:'25,000+'},
+          {label:'Cities Covered', val:'10+'}, {label:'Online Learners',
+          val:'1M+'} ]; track item.label) {
+          <div>
+            <div
+              class="font-['Playfair_Display'] text-2xl font-black"
+              style="color: var(--color-primary)"
+            >
+              {{ item.val }}
+            </div>
+            <div class="text-gray-400 text-xs uppercase tracking-wider">
+              {{ item.label }}
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     4. OUR VALUES
+════════════════════════════════════════════════════════ -->
+<section
+  class="py-20 relative overflow-hidden"
+  style="
+    background: linear-gradient(160deg, #f8f0f8 0%, #f3eef8 60%, #faf0f2 100%);
+  "
+>
+  <div
+    class="absolute -top-20 -right-20 w-72 h-72 rounded-full pointer-events-none"
+    style="
+      background: radial-gradient(
+        circle,
+        rgba(64, 6, 117, 0.07) 0%,
+        transparent 70%
+      );
+    "
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-14 relative z-10">
+    <div class="text-center mb-14">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(64, 6, 117, 0.07);
+          color: var(--color-ascent);
+          border: 1px solid rgba(64, 6, 117, 0.14);
+        "
+      >
+        💎 What We Stand For
+      </div>
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        Our Core
+        <em class="not-italic" style="color: var(--color-primary)">Values</em>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (v of values; track v.title; let i = $index) {
+      <div
+        class="value-card fade-in-up bg-white rounded-2xl p-7 border border-gray-100 group cursor-default"
+        [class]="'delay-' + (i + 1)"
+        style="box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05)"
+      >
+        <!-- Icon -->
+        <div
+          class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
+          [style]="
+            'background:' + v.color + '14; border:1.5px solid ' + v.color + '22'
+          "
+        >
+          {{ v.icon }}
+        </div>
+
+        <h3
+          class="font-['Playfair_Display'] font-bold text-lg mb-2"
+          style="color: var(--color-dark)"
+        >
+          {{ v.title }}
+        </h3>
+        <p class="text-gray-500 text-sm leading-relaxed">{{ v.description }}</p>
+
+        <!-- Bottom bar -->
+        <div
+          class="mt-5 h-0.5 w-0 group-hover:w-full rounded-full transition-all duration-500"
+          [style.background]="
+            'linear-gradient(to right,' + v.color + ', transparent)'
+          "
+        ></div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     5. JOURNEY TIMELINE
+════════════════════════════════════════════════════════ -->
+<section class="py-24 bg-white overflow-hidden">
+  <div class="max-w-5xl mx-auto px-6 md:px-14">
+    <div class="text-center mb-16">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(137, 1, 23, 0.07);
+          color: var(--color-primary);
+          border: 1px solid rgba(137, 1, 23, 0.14);
+        "
+      >
+        📅 Our Journey
+      </div>
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        15 Years of
+        <em class="not-italic" style="color: var(--color-primary)">Legacy</em>
+      </h2>
+      <p class="mt-5 text-gray-500 text-base max-w-lg mx-auto">
+        From a single room in Patna to Bihar's most trusted coaching platform —
+        here's our story.
+      </p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- Vertical line (desktop) -->
+      <div class="timeline-line hidden md:block"></div>
+
+      <div class="flex flex-col gap-10">
+        @for (m of milestones; track m.year; let i = $index) {
+
+        <div
+          class="timeline-item fade-in-up flex items-start gap-6 md:gap-0"
+          [class]="'delay-' + (i + 1)"
+        >
+          <!-- LEFT content (even items) / spacer (odd) -->
+          <div
+            class="hidden md:block w-[calc(50%-30px)]"
+            [class]="i % 2 === 0 ? 'pr-8 text-right' : ''"
+          >
+            @if (i % 2 === 0) {
+            <div
+              class="timeline-card bg-white rounded-2xl p-6 border border-gray-100 inline-block text-left w-full"
+              style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06)"
+            >
+              <span
+                class="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
+                style="
+                  background: rgba(137, 1, 23, 0.1);
+                  color: var(--color-primary);
+                "
+              >
+                {{ m.year }}
+              </span>
+              <h3
+                class="font-['Playfair_Display'] font-bold text-lg mt-3 mb-2"
+                style="color: var(--color-dark)"
+              >
+                {{ m.title }}
+              </h3>
+              <p class="text-gray-500 text-sm leading-relaxed">
+                {{ m.description }}
+              </p>
+            </div>
+            }
+          </div>
+
+          <!-- Center dot -->
+          <div class="flex flex-col items-center shrink-0">
+            <div
+              class="timeline-dot text-white font-black text-xs"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  var(--color-primary),
+                  var(--color-dark)
+                );
+                box-shadow: 0 0 0 6px rgba(137, 1, 23, 0.12),
+                  0 0 0 12px rgba(137, 1, 23, 0.05);
+              "
+            >
+              {{ m.year.slice(2) }}
+            </div>
+          </div>
+
+          <!-- RIGHT content (odd items) / spacer (even) -->
+          <div class="md:w-[calc(50%-30px)] pl-0 md:pl-8 flex-1">
+            @if (i % 2 !== 0) {
+            <!-- Desktop: right side -->
+            <div
+              class="timeline-card hidden md:block bg-white rounded-2xl p-6 border border-gray-100"
+              style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06)"
+            >
+              <span
+                class="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
+                style="
+                  background: rgba(64, 6, 117, 0.1);
+                  color: var(--color-ascent);
+                "
+              >
+                {{ m.year }}
+              </span>
+              <h3
+                class="font-['Playfair_Display'] font-bold text-lg mt-3 mb-2"
+                style="color: var(--color-dark)"
+              >
+                {{ m.title }}
+              </h3>
+              <p class="text-gray-500 text-sm leading-relaxed">
+                {{ m.description }}
+              </p>
+            </div>
+            }
+
+            <!-- Mobile: always show on right -->
+            <div
+              class="timeline-card md:hidden bg-white rounded-2xl p-5 border border-gray-100"
+              style="box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06)"
+            >
+              <span
+                class="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
+                style="
+                  background: rgba(137, 1, 23, 0.1);
+                  color: var(--color-primary);
+                "
+              >
+                {{ m.year }}
+              </span>
+              <h3
+                class="font-['Playfair_Display'] font-bold text-base mt-2 mb-1"
+                style="color: var(--color-dark)"
+              >
+                {{ m.title }}
+              </h3>
+              <p class="text-gray-500 text-sm leading-relaxed">
+                {{ m.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     6. MEET THE TEAM
+════════════════════════════════════════════════════════ -->
+<section
+  class="py-24 relative overflow-hidden"
+  style="background: linear-gradient(160deg, #faf0f2 0%, #f8f0f8 100%)"
+>
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style="
+      background: radial-gradient(
+          ellipse at 100% 50%,
+          rgba(137, 1, 23, 0.04) 0%,
+          transparent 50%
+        ),
+        radial-gradient(
+          ellipse at 0% 50%,
+          rgba(64, 6, 117, 0.04) 0%,
+          transparent 50%
+        );
+    "
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-14 relative z-10">
+    <div class="text-center mb-14">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(137, 1, 23, 0.07);
+          color: var(--color-primary);
+          border: 1px solid rgba(137, 1, 23, 0.14);
+        "
+      >
+        👨‍🏫 The People Behind KN
+      </div>
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        Meet Our
+        <em class="not-italic" style="color: var(--color-primary)"
+          >Expert Faculty</em
+        >
+      </h2>
+      <p class="mt-5 text-gray-500 text-base max-w-xl mx-auto">
+        Experienced educators, IAS officers, and subject matter experts — united
+        by one goal: your success.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+      @for (member of team; track member.name; let i = $index) {
+
+      <div
+        class="team-card fade-in-up bg-white rounded-2xl overflow-hidden border border-gray-100 group cursor-default"
+        [class]="'delay-' + (i + 1)"
+        style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07)"
+      >
+        <!-- Card top colored band -->
+        <div
+          class="h-24 relative flex items-end justify-center pb-0"
+          [style.background]="
+            'linear-gradient(135deg,' + member.color + ', #2a0040)'
+          "
+        >
+          <!-- Dot texture -->
+          <div
+            class="absolute inset-0"
+            style="
+              opacity: 0.06;
+              background-image: radial-gradient(
+                circle,
+                #fff 1px,
+                transparent 1px
+              );
+              background-size: 20px 20px;
+            "
+          ></div>
+
+          <!-- Avatar — half overlapping -->
+          <div
+            class="team-avatar w-20 h-20 rounded-full flex items-center justify-center shadow-lg translate-y-10 relative z-10"
+          >
+            <span class="text-white font-black text-lg tracking-tight">{{
+              member.avatar
+            }}</span>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="pt-14 px-6 pb-6 text-center">
+          <h3
+            class="font-['Playfair_Display'] font-bold text-lg"
+            style="color: var(--color-dark)"
+          >
+            {{ member.name }}
+          </h3>
+
+          <div
+            class="text-xs font-bold uppercase tracking-widest mt-1 mb-0.5"
+            [style.color]="member.color"
+          >
+            {{ member.role }}
+          </div>
+
+          <div class="text-gray-400 text-xs">{{ member.subject }}</div>
+
+          <!-- Divider -->
+          <div
+            class="w-12 h-0.5 mx-auto my-4 rounded-full"
+            [style.background]="member.color + '40'"
+          ></div>
+
+          <!-- Experience badge -->
+          <span
+            class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full"
+            [style]="
+              'background:' +
+              member.color +
+              '12; color:' +
+              member.color +
+              '; border:1px solid ' +
+              member.color +
+              '25'
+            "
+          >
+            🏆 {{ member.experience }}
+          </span>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     7. CTA BANNER
+════════════════════════════════════════════════════════ -->
+<section
+  class="relative py-20 overflow-hidden"
+  style="
+    background: linear-gradient(
+      135deg,
+      var(--color-dark) 0%,
+      #2a0040 50%,
+      var(--color-primary) 100%
+    );
+  "
+>
+  <!-- Dot grid -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style="
+      opacity: 0.04;
+      background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+      background-size: 24px 24px;
+    "
+  ></div>
+
+  <!-- Glow -->
+  <div
+    class="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none"
+    style="
+      background: rgba(137, 1, 23, 0.25);
+      filter: blur(70px);
+      transform: translate(30%, -30%);
+    "
+  ></div>
+  <div
+    class="absolute bottom-0 left-0 w-72 h-72 rounded-full pointer-events-none"
+    style="
+      background: rgba(64, 6, 117, 0.3);
+      filter: blur(60px);
+      transform: translate(-30%, 30%);
+    "
+  ></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-14 text-center">
+    <div
+      class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6"
+      style="
+        background: rgba(245, 166, 35, 0.15);
+        color: #f5a623;
+        border: 1px solid rgba(245, 166, 35, 0.3);
+      "
+    >
+      🚀 Start Your Journey Today
+    </div>
+
+    <h2
+      class="font-['Playfair_Display'] text-3xl md:text-5xl font-black text-white mb-5"
+    >
+      Ready to Join the
+      <em class="not-italic" style="color: #f5a623">Knowledge Nation</em>
+      Family?
+    </h2>
+
+    <p class="text-white/55 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+      Over 25,000 students have trusted us with their BPSC, UPSC, SSC and
+      Banking preparation. Take the first step — it's free to start.
     </p>
-  </div>
 
-  <div class="bg-white p-6 rounded shadow">
-    <h2 class="text-xl font-bold mb-3">Our Vision</h2>
-    <p class="text-gray-700">
-      To become Bihar’s most trusted digital platform for competitive exam
-      preparation and to support every serious aspirant in achieving their dream
-      of government service.
-    </p>
-  </div>
-</section>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button
+        class="cta-btn-primary text-white font-extrabold px-10 py-4 rounded-full text-base cursor-pointer border-none"
+        style="
+          background: var(--color-primary);
+          box-shadow: 0 8px 28px rgba(137, 1, 23, 0.45);
+        "
+      >
+        Enroll Now — It's Free
+      </button>
+      <button
+        class="font-bold text-base px-10 py-4 rounded-full cursor-pointer transition-all hover:bg-white/10"
+        style="
+          background: transparent;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          color: white;
+        "
+      >
+        Talk to a Counsellor
+      </button>
+    </div>
 
-<!-- Why Choose Us -->
-<section class="bg-gray-100 py-12 px-4">
-  <div class="max-w-7xl mx-auto">
-    <h2 class="text-2xl font-bold text-center mb-8">Why Choose Us</h2>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white p-6 rounded shadow text-center">
-        <h3 class="font-bold mb-2">Experienced Faculty</h3>
-        <p class="text-sm text-gray-600">
-          Learn from mentors with years of BPSC teaching experience.
-        </p>
-      </div>
-
-      <div class="bg-white p-6 rounded shadow text-center">
-        <h3 class="font-bold mb-2">Updated Test Series</h3>
-        <p class="text-sm text-gray-600">
-          Tests designed as per latest BPSC exam pattern & syllabus.
-        </p>
-      </div>
-
-      <div class="bg-white p-6 rounded shadow text-center">
-        <h3 class="font-bold mb-2">Affordable Learning</h3>
-        <p class="text-sm text-gray-600">
-          Quality education at prices affordable for all students.
-        </p>
-      </div>
+    <!-- Trust indicators -->
+    <div
+      class="flex flex-wrap justify-center gap-8 mt-12 text-white/40 text-xs font-semibold uppercase tracking-widest"
+    >
+      @for (t of ['No Credit Card Required','Free Demo Available','Expert
+      Guidance','Cancel Anytime']; track t) {
+      <span class="flex items-center gap-1.5">
+        <span style="color: #f5a623">✓</span> {{ t }}
+      </span>
+      }
     </div>
   </div>
 </section>
-
-<!-- Our Team -->
-<section class="max-w-7xl mx-auto py-12 px-4">
-  <h2 class="text-2xl font-bold text-center mb-8">Our Expert Team</h2>
-
-  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-    <div class="bg-white rounded shadow p-5 text-center">
-      <div class="h-24 w-24 mx-auto rounded-full bg-gray-300 mb-3"></div>
-      <h4 class="font-bold">Dr. R. Kumar</h4>
-      <p class="text-sm text-gray-600">General Studies</p>
-    </div>
-
-    <div class="bg-white rounded shadow p-5 text-center">
-      <div class="h-24 w-24 mx-auto rounded-full bg-gray-300 mb-3"></div>
-      <h4 class="font-bold">Prof. S. Singh</h4>
-      <p class="text-sm text-gray-600">History & Polity</p>
-    </div>
-
-    <div class="bg-white rounded shadow p-5 text-center">
-      <div class="h-24 w-24 mx-auto rounded-full bg-gray-300 mb-3"></div>
-      <h4 class="font-bold">Mr. A. Verma</h4>
-      <p class="text-sm text-gray-600">Answer Writing</p>
-    </div>
-  </div>
-</section>
-
-<!-- Call to Action -->
-<app-join-test></app-join-test>

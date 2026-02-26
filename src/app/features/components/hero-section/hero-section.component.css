@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════════════════════════
+   knowledge-nation hero — component styles
+   Custom keyframe animations that complement Tailwind CSS v4
+════════════════════════════════════════════════════════════ */
+
+/* ── Slide-in animations (triggered by .slide-in-* classes) ── */
+.slide-in-badge {
+  animation: fadeSlideUp 0.55s ease 0.1s both;
+}
+.slide-in-title {
+  animation: fadeSlideUp 0.6s ease 0.25s both;
+}
+.slide-in-desc {
+  animation: fadeSlideUp 0.6s ease 0.4s both;
+}
+.slide-in-btns {
+  animation: fadeSlideUp 0.6s ease 0.55s both;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Floating blob animations ─────────────────────────────── */
+.animate-float {
+  animation: floatBlob 7s ease-in-out infinite alternate;
+}
+.animate-float-delayed {
+  animation: floatBlob 7s ease-in-out 2s infinite alternate;
+}
+.animate-float-slow {
+  animation: floatBlob 9s ease-in-out 1s infinite alternate;
+}
+
+@keyframes floatBlob {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(-22px) scale(1.06);
+  }
+}
+
+/* ── Scroll hint line ─────────────────────────────────────── */
+.animate-scroll-line {
+  animation: scrollPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.5);
+    opacity: 0.35;
+  }
+}
+
+/* ── Progress bar ─────────────────────────────────────────── */
+/* Each bump of progressKey restarts the animation via a new class */
+.progress-bar {
+  animation: progressSlide 5s linear forwards;
+}
+
+@keyframes progressSlide {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}

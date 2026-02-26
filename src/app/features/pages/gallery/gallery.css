@@ -1,0 +1,220 @@
+/* ═══════════════════════════════════════════════════════════
+   Gallery Page — Styles
+   Knowledge Nation | Angular 19 + Tailwind CSS v4
+════════════════════════════════════════════════════════════ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  animation: fadeInUp 0.5s ease both;
+}
+.delay-1 {
+  animation-delay: 0.05s;
+}
+.delay-2 {
+  animation-delay: 0.1s;
+}
+.delay-3 {
+  animation-delay: 0.15s;
+}
+.delay-4 {
+  animation-delay: 0.2s;
+}
+.delay-5 {
+  animation-delay: 0.25s;
+}
+.delay-6 {
+  animation-delay: 0.3s;
+}
+.delay-7 {
+  animation-delay: 0.35s;
+}
+.delay-8 {
+  animation-delay: 0.4s;
+}
+.delay-9 {
+  animation-delay: 0.45s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fadeIn 0.3s ease both;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, #890117, #400675);
+  margin: 10px auto 0;
+}
+
+/* ── Masonry grid ────────────────────────────────────────── */
+.masonry-grid {
+  columns: 1;
+  column-gap: 20px;
+}
+@media (min-width: 640px) {
+  .masonry-grid {
+    columns: 2;
+  }
+}
+@media (min-width: 1024px) {
+  .masonry-grid {
+    columns: 3;
+  }
+}
+@media (min-width: 1280px) {
+  .masonry-grid {
+    columns: 4;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* ── Gallery card ────────────────────────────────────────── */
+.gallery-card {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+}
+.gallery-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 24px 56px rgba(137, 1, 23, 0.2);
+  z-index: 5;
+}
+
+/* Overlay reveal on hover */
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(63, 4, 62, 0.92) 0%,
+    rgba(63, 4, 62, 0.3) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}
+.gallery-card:hover .gallery-overlay {
+  opacity: 1;
+}
+
+/* Image zoom */
+.gallery-img {
+  transition: transform 0.5s ease;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+.gallery-card:hover .gallery-img {
+  transform: scale(1.07);
+}
+
+/* ── Like button ────────────────────────────────────────── */
+.like-btn {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+  cursor: pointer;
+}
+.like-btn:hover {
+  transform: scale(1.3);
+}
+.like-btn.liked {
+  color: #dc2626 !important;
+}
+
+/* ── Category tabs ──────────────────────────────────────── */
+.cat-tab {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+.cat-tab:hover:not(.active) {
+  background: rgba(137, 1, 23, 0.07) !important;
+  color: var(--color-primary) !important;
+}
+
+/* ── Lightbox ───────────────────────────────────────────── */
+@keyframes lightboxIn {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.lightbox-img-wrap {
+  animation: lightboxIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.lightbox-nav {
+  transition: all 0.2s ease;
+}
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.1);
+}
+
+/* ── Stats ticker ────────────────────────────────────────── */
+.stat-card {
+  transition: transform 0.22s ease;
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+}
+
+/* ── Hero blobs ─────────────────────────────────────────── */
+@keyframes blobFloat {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(-16px) scale(1.04);
+  }
+}
+.blob {
+  animation: blobFloat 8s ease-in-out infinite alternate;
+}
+.blob-2 {
+  animation: blobFloat 11s ease-in-out 2s infinite alternate;
+}
+
+/* ── Category color dots ────────────────────────────────── */
+.cat-color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}

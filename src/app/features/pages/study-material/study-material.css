@@ -1,0 +1,273 @@
+/* ═══════════════════════════════════════════════════════════
+   Study Materials — CSS
+   Knowledge Nation | Angular 19 + Tailwind CSS v4
+════════════════════════════════════════════════════════════ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  animation: fadeInUp 0.5s ease both;
+}
+.delay-1 {
+  animation-delay: 0.06s;
+}
+.delay-2 {
+  animation-delay: 0.12s;
+}
+.delay-3 {
+  animation-delay: 0.18s;
+}
+.delay-4 {
+  animation-delay: 0.24s;
+}
+.delay-5 {
+  animation-delay: 0.3s;
+}
+.delay-6 {
+  animation-delay: 0.36s;
+}
+.delay-7 {
+  animation-delay: 0.42s;
+}
+.delay-8 {
+  animation-delay: 0.48s;
+}
+.delay-9 {
+  animation-delay: 0.54s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fadeIn 0.35s ease both;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.scale-in {
+  animation: scaleIn 0.3s ease both;
+}
+
+/* ── Section heading underline ──────────────────────────── */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, #890117, #400675);
+  margin: 10px auto 0;
+}
+
+/* ── Book card ──────────────────────────────────────────── */
+.book-card {
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.28s ease;
+  position: relative;
+}
+.book-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 22px 54px rgba(137, 1, 23, 0.15);
+}
+
+.book-cover-wrap {
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+.book-cover-wrap img {
+  transition: transform 0.4s ease;
+}
+.book-card:hover .book-cover-wrap img {
+  transform: scale(1.06);
+}
+
+/* ── Wishlist heart ─────────────────────────────────────── */
+.wish-btn {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+}
+.wish-btn:hover {
+  transform: scale(1.25);
+}
+.wish-btn.active {
+  color: #dc2626 !important;
+}
+
+/* ── Add to cart button ─────────────────────────────────── */
+.atc-btn {
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+.atc-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+}
+.atc-btn:hover::after {
+  transform: translateX(0);
+}
+.atc-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(137, 1, 23, 0.38);
+}
+
+/* ── Cart item ──────────────────────────────────────────── */
+.cart-item {
+  transition: box-shadow 0.2s ease;
+}
+.cart-item:hover {
+  box-shadow: 0 8px 28px rgba(137, 1, 23, 0.1);
+}
+
+/* ── Qty controls ───────────────────────────────────────── */
+.qty-btn {
+  transition: all 0.18s ease;
+}
+.qty-btn:hover {
+  background: var(--color-primary) !important;
+  color: white !important;
+}
+
+/* ── Category filter tabs ───────────────────────────────── */
+.cat-tab {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+.cat-tab:hover:not(.active) {
+  background: rgba(137, 1, 23, 0.07) !important;
+  color: var(--color-primary) !important;
+}
+
+/* ── Form input focus ───────────────────────────────────── */
+.form-input {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+.form-input:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(137, 1, 23, 0.1);
+}
+.form-input.error {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08);
+}
+
+/* ── Payment option card ────────────────────────────────── */
+.pay-card {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.pay-card:hover {
+  border-color: rgba(137, 1, 23, 0.3) !important;
+}
+.pay-card.selected {
+  border-color: var(--color-primary) !important;
+  background: rgba(137, 1, 23, 0.04) !important;
+}
+
+/* ── Success animation ──────────────────────────────────── */
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.success-icon {
+  animation: successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120px) rotate(720deg);
+    opacity: 0;
+  }
+}
+.confetti-1 {
+  animation: confetti 1.2s ease 0.1s both;
+}
+.confetti-2 {
+  animation: confetti 1.4s ease 0.3s both;
+}
+.confetti-3 {
+  animation: confetti 1.1s ease 0.5s both;
+}
+
+/* ── Progress bar ───────────────────────────────────────── */
+.progress-fill {
+  transition: width 0.5s ease;
+}
+
+/* ── Shimmer loading skeleton ───────────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+/* ── Sticky cart summary ────────────────────────────────── */
+.sticky-summary {
+  position: sticky;
+  top: 84px;
+}
+
+/* ── Nav buttons ────────────────────────────────────────── */
+.action-btn {
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+.action-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateX(-100%);
+  transition: transform 0.28s ease;
+}
+.action-btn:hover::after {
+  transform: translateX(0);
+}
+.action-btn:hover {
+  transform: translateY(-1px);
+}

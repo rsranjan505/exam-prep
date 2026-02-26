@@ -1,99 +1,397 @@
 <!-- HERO SECTION -->
-<section class="bg-primary/80 text-white py-20 px-4 text-center">
-  <h1 class="text-4xl md:text-5xl font-bold mb-4">
-    Crack BPSC with Confidence
-  </h1>
-  <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">
-    Prepare for Bihar Public Service Commission exams with online tests, expert
-    guidance, and high-quality study material.
-  </p>
-  <div class="flex flex-col sm:flex-row justify-center gap-4">
-    <a
-      routerLink="/test-series"
-      class="bg-secondary text-white px-6 py-3 rounded font-semibold hover:bg-secondary/70 transition cursor-pointer"
-    >
-      Start Test Series
-    </a>
-    <a
-      routerLink="/books"
-      class="border border-white px-6 py-3 rounded hover:bg-white hover:text-primary transition cursor-pointer"
-    >
-      Buy Study Material
-    </a>
-  </div>
-</section>
 
-<!-- FEATURES SECTION -->
+<app-hero-section></app-hero-section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     KNOWLEDGE NATION — Features + Test Series Section
+     Angular 19 (@for control flow) | Tailwind CSS v4
+     Brand: Maroon #890117 · Deep Purple #410040 · Violet #400675
+════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 1 — WHY CHOOSE US (Feature Cards)
+════════════════════════════════════════════════════════ -->
 <section
-  class="max-w-7xl mx-auto py-16 px-4 grid md:grid-cols-3 gap-8 text-center"
+  class="relative py-20 overflow-hidden"
+  style="
+    background: linear-gradient(160deg, #fafafa 0%, #f3f0f8 50%, #faf0f2 100%);
+  "
 >
-  <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
-    <h3 class="text-xl font-bold mb-2">Expert Faculty</h3>
-    <p class="text-gray-600">
-      Learn from experienced BPSC mentors who guide you step by step.
-    </p>
-  </div>
-  <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
-    <h3 class="text-xl font-bold mb-2">Updated Test Series</h3>
-    <p class="text-gray-600">
-      Practice according to the latest BPSC syllabus and exam pattern.
-    </p>
-  </div>
-  <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
-    <h3 class="text-xl font-bold mb-2">Affordable Learning</h3>
-    <p class="text-gray-600">
-      High-quality study material and courses at pocket-friendly prices.
-    </p>
+  <!-- Background decorative circles -->
+  <div
+    class="absolute -top-32 -left-32 w-96 h-96 rounded-full pointer-events-none"
+    style="
+      background: radial-gradient(
+        circle,
+        rgba(137, 1, 23, 0.06) 0%,
+        transparent 70%
+      );
+    "
+  ></div>
+  <div
+    class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full pointer-events-none"
+    style="
+      background: radial-gradient(
+        circle,
+        rgba(64, 6, 117, 0.06) 0%,
+        transparent 70%
+      );
+    "
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <!-- Section header -->
+    <div class="text-center mb-14">
+      <!-- Eyebrow label -->
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(137, 1, 23, 0.08);
+          color: var(--color-primary);
+          border: 1px solid rgba(137, 1, 23, 0.15);
+        "
+      >
+        ✦ Why Choose Us
+      </div>
+
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        Everything You Need to
+        <em class="not-italic" style="color: var(--color-primary)">Succeed</em>
+      </h2>
+
+      <p
+        class="mt-5 text-gray-500 text-base md:text-lg max-w-xl mx-auto leading-relaxed"
+      >
+        Knowledge Nation brings together the best tools, faculty, and resources
+        — all in one place.
+      </p>
+    </div>
+
+    <!-- Feature cards grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (f of features; track trackByTitle($index, f); let i = $index) {
+
+      <div
+        class="feature-card fade-in-up bg-white rounded-2xl p-7 border border-gray-100 cursor-default group"
+        [class]="'delay-' + (i + 1)"
+      >
+        <!-- Icon orb -->
+        <div
+          class="icon-orb w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5 shadow-sm"
+          [style.background]="f.color + '15'"
+          [style.border]="'1.5px solid ' + f.color + '25'"
+        >
+          {{ f.icon }}
+        </div>
+
+        <!-- Colored top accent line (visible on hover via group) -->
+        <div
+          class="h-0.5 w-0 group-hover:w-12 rounded-full mb-3 transition-all duration-500 ease-out"
+          [style.background]="f.color"
+        ></div>
+
+        <h3
+          class="font-['Playfair_Display'] text-lg font-bold mb-2"
+          style="color: var(--color-dark)"
+        >
+          {{ f.title }}
+        </h3>
+
+        <p class="text-gray-500 text-sm leading-relaxed">
+          {{ f.description }}
+        </p>
+
+        <!-- Learn more link -->
+        <a
+          href="#"
+          class="inline-flex items-center gap-1.5 mt-5 text-xs font-bold uppercase tracking-wider no-underline transition-all duration-200 hover:gap-3"
+          [style.color]="f.color"
+        >
+          Learn more
+          <span
+            class="transition-transform duration-200 group-hover:translate-x-1"
+            >→</span
+          >
+        </a>
+      </div>
+
+      }
+    </div>
+
+    <!-- Stats strip below cards -->
+    <div
+      class="mt-16 rounded-2xl grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100"
+      style="
+        background: linear-gradient(
+          135deg,
+          var(--color-dark),
+          var(--color-ascent)
+        );
+        box-shadow: 0 20px 60px rgba(63, 4, 62, 0.25);
+      "
+    >
+      @for (stat of [ {num: '10K+', label: 'Selections'}, {num: '50+', label:
+      'Expert Faculty'}, {num: '25K+', label: 'Active Students'}, {num: '98%',
+      label: 'Satisfaction Rate'} ]; track stat.label) {
+      <div
+        class="flex flex-col items-center justify-center py-7 px-4 text-center"
+      >
+        <span
+          class="font-['Playfair_Display'] text-3xl font-black text-white"
+          >{{ stat.num }}</span
+        >
+        <span
+          class="text-white/50 text-[11px] uppercase tracking-widest mt-1"
+          >{{ stat.label }}</span
+        >
+      </div>
+      }
+    </div>
   </div>
 </section>
 
-<!-- TEST SERIES HIGHLIGHTS -->
-<section class="bg-gray-100 py-16 px-4">
-  <div class="max-w-7xl mx-auto text-center mb-8">
-    <h2 class="text-3xl font-bold mb-2">Our Test Series</h2>
-    <p class="text-gray-600 max-w-2xl mx-auto">
-      Choose from multiple full-length tests, mock papers, and section-wise
-      quizzes designed for BPSC aspirants.
-    </p>
-  </div>
+<!-- ════════════════════════════════════════════════════════
+     SECTION 2 — TEST SERIES
+════════════════════════════════════════════════════════ -->
+<section class="relative py-20 overflow-hidden bg-white">
+  <!-- Subtle mesh background -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style="
+      background: radial-gradient(
+          ellipse at 0% 50%,
+          rgba(137, 1, 23, 0.04) 0%,
+          transparent 50%
+        ),
+        radial-gradient(
+          ellipse at 100% 50%,
+          rgba(64, 6, 117, 0.04) 0%,
+          transparent 50%
+        );
+    "
+  ></div>
 
-  <div class="grid md:grid-cols-3 gap-6">
-    <div class="bg-white shadow rounded p-6 hover:shadow-lg transition">
-      <h3 class="font-bold mb-2">Prelims Full Test</h3>
-      <p class="text-gray-600 mb-3">50 questions, 2 hours, fully timed.</p>
-      <a
-        routerLink="/test-series"
-        class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition cursor-pointer"
-        >Start Test</a
+  <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+    <!-- Section header -->
+    <div class="text-center mb-14">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(64, 6, 117, 0.07);
+          color: var(--color-ascent);
+          border: 1px solid rgba(64, 6, 117, 0.15);
+        "
       >
-    </div>
-    <div class="bg-white shadow rounded p-6 hover:shadow-lg transition">
-      <h3 class="font-bold mb-2">CSAT Section Test</h3>
-      <p class="text-gray-600 mb-3">
-        Focus on reasoning and comprehension for prelims.
+        📋 Practice &amp; Evaluate
+      </div>
+
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        Our
+        <em class="not-italic" style="color: var(--color-primary)"
+          >Test Series</em
+        >
+      </h2>
+
+      <p
+        class="mt-5 text-gray-500 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+      >
+        Choose from full-length tests, mock papers, and section-wise quizzes —
+        all designed specifically for BPSC, UPSC and Banking aspirants.
       </p>
-      <a
-        routerLink="/test-series"
-        class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition cursor-pointer"
-        >Start Test</a
-      >
     </div>
-    <div class="bg-white shadow rounded p-6 hover:shadow-lg transition">
-      <h3 class="font-bold mb-2">Mains Answer Writing</h3>
-      <p class="text-gray-600 mb-3">
-        Practice essay and answer writing for mains exams.
-      </p>
-      <a
-        routerLink="/test-series"
-        class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition cursor-pointer"
-        >Start Test</a
+
+    <!-- Test cards grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (test of tests; track trackByTitle($index, test); let i = $index) {
+
+      <div
+        class="test-card fade-in-up bg-white rounded-2xl border border-gray-100 flex flex-col group cursor-default"
+        [class]="'delay-' + (i + 1)"
+        style="box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06)"
       >
+        <!-- Card top bar with icon + tag + popular badge -->
+        <div
+          class="flex items-start justify-between px-6 pt-6 pb-4 border-b border-gray-50"
+        >
+          <div class="flex items-center gap-3">
+            <!-- Icon circle -->
+            <div
+              class="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  rgba(137, 1, 23, 0.1),
+                  rgba(64, 6, 117, 0.1)
+                );
+              "
+            >
+              {{ test.icon }}
+            </div>
+            <div>
+              <!-- Tag pill -->
+              <span
+                class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                [style]="
+                  'background:' +
+                  test.difficultyColor +
+                  '15; color:' +
+                  test.difficultyColor
+                "
+              >
+                {{ test.tag }}
+              </span>
+              <h3
+                class="font-['Playfair_Display'] font-bold text-base mt-0.5"
+                style="color: var(--color-dark)"
+              >
+                {{ test.title }}
+              </h3>
+            </div>
+          </div>
+
+          <!-- Popular badge -->
+          @if (test.popular) {
+          <span
+            class="popular-badge text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shrink-0 shadow-sm"
+          >
+            Popular
+          </span>
+          }
+        </div>
+
+        <!-- Card body -->
+        <div class="px-6 py-4 flex-1 flex flex-col">
+          <p class="text-gray-500 text-sm leading-relaxed mb-5 flex-1">
+            {{ test.description }}
+          </p>
+
+          <!-- Meta info row -->
+          <div
+            class="flex items-center gap-4 mb-5 text-xs text-gray-400 font-semibold"
+          >
+            <span class="flex items-center gap-1.5">
+              <span class="text-base">❓</span> {{ test.questions }}
+            </span>
+            <span class="w-px h-4 bg-gray-200"></span>
+            <span class="flex items-center gap-1.5">
+              <span class="text-base">⏱️</span> {{ test.duration }}
+            </span>
+            <span class="w-px h-4 bg-gray-200"></span>
+            <span class="font-bold" [style.color]="test.difficultyColor">
+              {{ test.difficulty }}
+            </span>
+          </div>
+
+          <!-- CTA Button -->
+          <button
+            class="start-btn w-full text-white font-extrabold text-sm py-3 rounded-xl cursor-pointer border-none tracking-wide"
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--color-primary),
+                var(--color-dark)
+              );
+              box-shadow: 0 4px 16px rgba(137, 1, 23, 0.25);
+            "
+          >
+            Start Test →
+          </button>
+        </div>
+      </div>
+
+      }
+    </div>
+
+    <!-- Bottom CTA Banner -->
+    <div
+      class="mt-14 relative rounded-3xl overflow-hidden"
+      style="
+        background: linear-gradient(
+          135deg,
+          var(--color-dark) 0%,
+          var(--color-ascent) 50%,
+          var(--color-primary) 100%
+        );
+        box-shadow: 0 24px 64px rgba(63, 4, 62, 0.3);
+      "
+    >
+      <!-- Dot pattern overlay -->
+      <div
+        class="absolute inset-0 pointer-events-none"
+        style="
+          opacity: 0.04;
+          background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+          background-size: 24px 24px;
+        "
+      ></div>
+
+      <!-- Glow blobs -->
+      <div
+        class="absolute top-0 right-0 w-72 h-72 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"
+        style="background: rgba(137, 1, 23, 0.3); filter: blur(60px)"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 w-48 h-48 rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none"
+        style="background: rgba(64, 6, 117, 0.35); filter: blur(50px)"
+      ></div>
+
+      <div
+        class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 px-10 py-10"
+      >
+        <div>
+          <p
+            class="text-white/60 text-sm uppercase tracking-widest font-semibold mb-1"
+          >
+            Ready to crack BPSC?
+          </p>
+          <h3
+            class="font-['Playfair_Display'] text-2xl md:text-3xl font-black text-white"
+          >
+            Take a
+            <em class="not-italic" style="color: #f5a623">Free Mock Test</em>
+            Today
+          </h3>
+          <p class="text-white/55 text-sm mt-1 max-w-md">
+            No registration needed. Experience our test platform and see your
+            current preparation level.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+          <button
+            class="start-btn bg-white font-extrabold text-sm px-8 py-3.5 rounded-full cursor-pointer border-none transition-all"
+            style="
+              color: var(--color-primary);
+              box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+            "
+          >
+            Try Free Test
+          </button>
+          <button
+            class="font-bold text-sm px-8 py-3.5 rounded-full cursor-pointer transition-all hover:bg-white/10"
+            style="
+              background: transparent;
+              border: 2px solid rgba(255, 255, 255, 0.35);
+              color: white;
+            "
+          >
+            View All Tests
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<app-testimonials-section></app-testimonials-section>
 
 <!-- FEATURED BOOKS -->
-<section class="max-w-7xl mx-auto py-16 px-4 text-center">
+<!-- <section class="max-w-7xl mx-auto py-16 px-4 text-center">
   <h2 class="text-3xl font-bold mb-6">Recommended Books</h2>
   <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
     <div class="bg-white rounded shadow p-5 hover:shadow-lg transition">
@@ -142,10 +440,10 @@
       >
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- TIPS SECTION -->
-<section class="bg-gray-100 py-16 px-4">
+<!-- <section class="bg-gray-100 py-16 px-4">
   <div class="max-w-7xl mx-auto text-center mb-8">
     <h2 class="text-3xl font-bold mb-2">Exam Preparation Tips</h2>
     <p class="text-gray-600 max-w-2xl mx-auto">
@@ -179,10 +477,10 @@
       </p>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- TESTIMONIALS -->
-<section class="max-w-7xl mx-auto py-16 px-4 text-center">
+<!-- <section class="max-w-7xl mx-auto py-16 px-4 text-center">
   <h2 class="text-3xl font-bold mb-8">What Our Students Say</h2>
   <div class="grid md:grid-cols-3 gap-6">
     <div class="bg-white rounded shadow p-6 hover:shadow-lg transition">
@@ -209,7 +507,7 @@
       <p class="text-sm text-gray-500">Bhagalpur</p>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- CALL TO ACTION -->
 <app-join-test></app-join-test>

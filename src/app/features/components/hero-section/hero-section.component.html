@@ -1,0 +1,179 @@
+<section
+  class="relative w-full overflow-hidden select-none"
+  style="height: 70vh; min-height: 320px;"
+  (touchstart)="onTouchStart($event)"
+  (touchend)="onTouchEnd($event)">
+
+  <!-- SLIDES WRAPPER -->
+  <div class="flex h-full transition-transform duration-700 ease-[cubic-bezier(.77,0,.18,1)] will-change-transform"
+       [style.transform]="'translateX(-' + currentIndex() * 100 + '%)'">
+
+    @for (slide of slides; track trackByIndex($index)) {
+
+      <!-- ── SINGLE SLIDE ───────────────────────────────────── -->
+      <div class="relative min-w-full h-full flex-shrink-0 overflow-hidden">
+
+        <!-- LAYER 1 — Gradient base -->
+        <div class="absolute inset-0"
+             [style.background]="'linear-gradient(135deg,' + slide.gradientFrom + ' 0%, #2a0040 55%,' + slide.gradientTo + ' 100%)'">
+        </div>
+
+        <!-- LAYER 2 — Background image (very low opacity: 0.08) -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+             [style.backgroundImage]="'url(' + slide.bgImage + ')'"
+             style="opacity: 0.08; mix-blend-mode: luminosity;">
+        </div>
+
+        <!-- LAYER 3 — Dark color overlay to keep text readable -->
+        <div class="absolute inset-0"
+             style="background: linear-gradient(
+               to right,
+               rgba(63,4,62,0.90) 0%,
+               rgba(42,0,64,0.78) 45%,
+               rgba(63,4,62,0.50) 100%
+             );">
+        </div>
+
+        <!-- LAYER 4 — Radial glow accents -->
+        <div class="absolute inset-0 pointer-events-none"
+             style="background:
+               radial-gradient(ellipse at 85% 0%, rgba(137,1,23,0.22) 0%, transparent 50%),
+               radial-gradient(ellipse at 5% 100%, rgba(64,6,117,0.28) 0%, transparent 50%);">
+        </div>
+
+        <!-- LAYER 5 — Subtle dot grid -->
+        <div class="absolute inset-0 pointer-events-none"
+             style="opacity: 0.03;
+                    background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+                    background-size: 28px 28px;">
+        </div>
+
+        <!-- ── CONTENT ROW ──────────────────────────────────── -->
+        <div class="absolute inset-0 flex items-center justify-between px-8 md:px-16 gap-6">
+
+          <!-- Left: Text -->
+          <div class="flex flex-col justify-center max-w-xl z-10">
+
+            <!-- Badge -->
+            <div [class]="$index === currentIndex() ? 'slide-in-badge' : 'opacity-0'"
+                 class="inline-flex items-center gap-2 border text-[11px] font-bold
+                        tracking-widest uppercase px-3 py-1.5 rounded-full w-fit mb-3"
+                 style="background: rgba(137,1,23,0.25);
+                        border-color: rgba(245,166,35,0.4);
+                        color: #f5a623;">
+              {{ slide.badge }}
+            </div>
+
+            <!-- Title -->
+            <h1 [class]="$index === currentIndex() ? 'slide-in-title' : 'opacity-0'"
+                class="font-['Playfair_Display'] font-black text-white leading-tight mb-3
+                       text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem]">
+              {{ slide.title }}<em class="not-italic" style="color: #f5a623;">{{ slide.titleHighlight }}</em>{{ slide.titleSuffix }}
+            </h1>
+
+            <!-- Description -->
+            <p [class]="$index === currentIndex() ? 'slide-in-desc' : 'opacity-0'"
+               class="text-white/65 text-sm md:text-base leading-relaxed mb-5 max-w-md line-clamp-2">
+              {{ slide.description }}
+            </p>
+
+            <!-- Buttons -->
+            <div [class]="$index === currentIndex() ? 'slide-in-btns' : 'opacity-0'"
+                 class="flex flex-wrap gap-3 items-center">
+              <button class="text-white font-extrabold px-6 py-2.5 rounded-full text-sm
+                             cursor-pointer border-none transition-all duration-200
+                             hover:-translate-y-0.5 hover:brightness-110"
+                      style="background: var(--color-primary);
+                             box-shadow: 0 6px 22px var(--color-primary-glow);">
+                {{ slide.cta1 }}
+              </button>
+              <button class="bg-transparent text-white border-2 font-bold px-6 py-2.5
+                             rounded-full text-sm cursor-pointer transition-all duration-200
+                             hover:bg-white/10"
+                      style="border-color: rgba(255,255,255,0.3);">
+                {{ slide.cta2 }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Center-right: Visual card -->
+          <div class="hidden lg:flex relative flex-col items-center justify-center gap-2
+                      w-52 h-[210px] rounded-2xl overflow-hidden shrink-0 z-10
+                      shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+               [style.background]="'linear-gradient(160deg,' + slide.gradientTo + 'dd,' + slide.gradientFrom + ')'">
+            <div class="absolute inset-0 rounded-2xl ring-1 ring-white/10 pointer-events-none"></div>
+            <div class="absolute -top-5 -right-5 w-20 h-20 rounded-full blur-2xl opacity-25"
+                 style="background: #f5a623;"></div>
+            <div class="text-5xl z-10 drop-shadow-lg">{{ slide.icon }}</div>
+            <div class="font-['Playfair_Display'] text-base font-bold text-white z-10 text-center px-3">
+              {{ slide.visualLabel }}
+            </div>
+            <div class="text-white/45 text-xs z-10">{{ slide.visualSub }}</div>
+            <div class="absolute bottom-3 px-3 py-1 rounded-full text-[10px] font-semibold text-white/60"
+                 style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);">
+              Knowledge Nation
+            </div>
+          </div>
+
+          <!-- Far-right: Stats column -->
+          <div class="hidden md:flex flex-col gap-4 z-10 shrink-0 pr-2">
+            @for (stat of slide.stats; track stat.label) {
+              <div class="text-center">
+                <div class="font-['Playfair_Display'] text-xl font-black leading-none"
+                     style="color: #f5a623;">{{ stat.num }}</div>
+                <div class="text-white/40 text-[9px] uppercase tracking-wider mt-0.5">{{ stat.label }}</div>
+              </div>
+            }
+          </div>
+
+        </div><!-- /content row -->
+
+      </div><!-- /slide -->
+    }
+  </div><!-- /slides wrapper -->
+
+
+  <!-- PREV -->
+  <button
+    (click)="prev()"
+    aria-label="Previous slide"
+    class="absolute left-3 top-1/2 -translate-y-1/2 z-40
+           w-9 h-9 rounded-full flex items-center justify-center border
+           text-white text-sm font-bold transition-all duration-200 cursor-pointer hover:scale-110"
+    style="background: rgba(63,4,62,0.65); backdrop-filter: blur(8px); border-color: rgba(255,255,255,0.2);"
+    onmouseover="this.style.background='var(--color-primary)'"
+    onmouseout="this.style.background='rgba(63,4,62,0.65)'">←</button>
+
+  <!-- NEXT -->
+  <button
+    (click)="next()"
+    aria-label="Next slide"
+    class="absolute right-3 top-1/2 -translate-y-1/2 z-40
+           w-9 h-9 rounded-full flex items-center justify-center border
+           text-white text-sm font-bold transition-all duration-200 cursor-pointer hover:scale-110"
+    style="background: rgba(63,4,62,0.65); backdrop-filter: blur(8px); border-color: rgba(255,255,255,0.2);"
+    onmouseover="this.style.background='var(--color-primary)'"
+    onmouseout="this.style.background='rgba(63,4,62,0.65)'">→</button>
+
+
+  <!-- DOTS -->
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 flex gap-2 items-center">
+    @for (slide of slides; track trackByIndex($index)) {
+      <button
+        (click)="goTo($index)"
+        [attr.aria-label]="'Go to slide ' + ($index + 1)"
+        class="border-none cursor-pointer transition-all duration-300 rounded-full"
+        [style]="$index === currentIndex()
+          ? 'width:28px; height:8px; border-radius:4px; background:var(--color-primary); transform:scale(1.1)'
+          : 'width:8px; height:8px; background:rgba(255,255,255,0.28)'">
+      </button>
+    }
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="absolute bottom-0 left-0 h-[3px] z-50 progress-bar"
+       [class]="'progress-key-' + progressKey()"
+       style="background: var(--color-primary);">
+  </div>
+
+</section>

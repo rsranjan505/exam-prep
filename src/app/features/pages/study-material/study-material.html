@@ -1,37 +1,1218 @@
-<div class="max-w-7xl mx-auto py-10 px-4">
-  <h2 class="text-2xl font-bold text-center mb-6">Study Books</h2>
+<!-- ═══════════════════════════════════════════════════════════
+     KNOWLEDGE NATION — Study Materials (Catalog · Cart · Checkout)
+     Angular 19 Signals | Tailwind CSS v4
+     Brand: #890117 · #410040 · #400675 · #3f043e
+════════════════════════════════════════════════════════════ -->
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+<div
+  class="min-h-screen"
+  style="background: linear-gradient(160deg, #f8f0f2 0%, #f3eef8 100%)"
+>
+  <!-- ════════════════════════════════════════════════════════
+       SHARED TOP NAV BAR
+  ════════════════════════════════════════════════════════ -->
+  <nav
+    class="sticky top-0 z-50 bg-white border-b border-gray-100"
+    style="box-shadow: 0 2px 14px rgba(0, 0, 0, 0.07)"
+  >
     <div
-      *ngFor="let b of books"
-      class="bg-white shadow rounded-lg overflow-hidden hover:shadow-lg transition"
+      class="max-w-7xl mx-auto px-4 md:px-10 py-3 flex items-center justify-between gap-4"
     >
-      <!-- Image -->
-      <img [src]="b.image" alt="book" class="h-88 w-full object-full" />
+      <!-- Logo -->
+      <button
+        (click)="goTo('catalog')"
+        class="font-['Playfair_Display'] text-xl font-black shrink-0 cursor-pointer border-none bg-transparent"
+      >
+        Knowledge<span style="color: var(--color-primary)">Nation</span>
+      </button>
 
-      <div class="p-5">
-        <h3 class="font-bold text-lg">{{ b.name }}</h3>
-        <p class="text-sm text-gray-600">{{ b.author }}</p>
+      <!-- Breadcrumb path -->
+      <div
+        class="hidden md:flex items-center gap-2 text-xs font-semibold text-gray-400"
+      >
+        <button
+          (click)="goTo('catalog')"
+          class="cursor-pointer border-none bg-transparent transition-colors hover:text-gray-700"
+          [style]="currentView()==='catalog' ? 'color:var(--color-primary); font-weight:700' : ''"
+        >
+          📚 Study Materials
+        </button>
+        @if (currentView() !== 'catalog') {
+        <span>›</span>
+        <button
+          (click)="goTo('cart')"
+          class="cursor-pointer border-none bg-transparent transition-colors hover:text-gray-700"
+          [style]="currentView()==='cart' ? 'color:var(--color-primary); font-weight:700' : ''"
+        >
+          🛒 Cart
+        </button>
+        } @if (currentView() === 'checkout' || currentView() === 'success') {
+        <span>›</span>
+        <span
+          [style]="currentView()==='checkout'||currentView()==='success' ? 'color:var(--color-primary); font-weight:700' : ''"
+        >
+          💳 Checkout
+        </span>
+        }
+      </div>
 
-        <div class="flex justify-between items-center mt-3">
-          <span class="font-semibold text-lg">₹{{ b.price }}</span>
+      <!-- Cart icon -->
+      <button
+        (click)="goTo('cart')"
+        class="relative flex items-center gap-2 font-bold text-sm px-4 py-2.5 rounded-xl cursor-pointer border transition-all hover:opacity-90"
+        style="
+          background: linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-dark)
+          );
+          color: white;
+          border-color: transparent;
+          box-shadow: 0 4px 14px rgba(137, 1, 23, 0.3);
+        "
+      >
+        🛒 Cart @if (cartCount() > 0) {
+        <span
+          class="w-5 h-5 rounded-full text-[11px] font-black flex items-center justify-center"
+          style="background: #f5a623; color: var(--color-dark)"
+        >
+          {{ cartCount() }}
+        </span>
+        }
+      </button>
+    </div>
+  </nav>
 
+  <!-- ════════════════════════════════════════════════════════
+       VIEW 1 — CATALOG
+  ════════════════════════════════════════════════════════ -->
+  @if (currentView() === 'catalog') {
+
+  <!-- Hero banner -->
+  <section
+    class="relative overflow-hidden py-14"
+    style="
+      background: linear-gradient(
+        135deg,
+        #3f043e 0%,
+        #2a0040 55%,
+        #400675 100%
+      );
+    "
+  >
+    <div
+      class="absolute inset-0"
+      style="
+        opacity: 0.04;
+        background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+        background-size: 26px 26px;
+      "
+    ></div>
+    <div
+      class="absolute -top-20 -right-20 w-80 h-80 rounded-full pointer-events-none"
+      style="background: rgba(137, 1, 23, 0.2); filter: blur(60px)"
+    ></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-14">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(245, 166, 35, 0.14);
+          color: #f5a623;
+          border: 1px solid rgba(245, 166, 35, 0.3);
+        "
+      >
+        📚 Curated Study Material
+      </div>
+      <h1
+        class="font-['Playfair_Display'] text-4xl md:text-5xl font-black text-white mb-3"
+      >
+        Books &
+        <em class="not-italic" style="color: #f5a623">Study Materials</em>
+      </h1>
+      <p class="text-white/55 text-lg max-w-xl">
+        Handpicked by BPSC toppers. Get physical books or instant digital PDFs
+        delivered to your device.
+      </p>
+    </div>
+  </section>
+
+  <!-- Toolbar -->
+  <div class="max-w-7xl mx-auto px-4 md:px-10 py-6">
+    <!-- Category tabs + Search + Sort -->
+    <div class="flex flex-col md:flex-row md:items-center gap-4 mb-6">
+      <!-- Category scroll tabs -->
+      <div class="flex gap-2 overflow-x-auto pb-1 flex-1">
+        @for (cat of categories; track cat) {
+        <button
+          (click)="activeCategory.set(cat)"
+          class="cat-tab text-sm font-bold px-4 py-2 rounded-full shrink-0"
+          [style]="activeCategory()===cat
+                      ? 'background:var(--color-primary);color:white;box-shadow:0 4px 14px rgba(137,1,23,0.3);'
+                      : 'background:white;color:#6b7280;border:1.5px solid #e5e7eb;'"
+        >
+          {{ cat }}
+        </button>
+        }
+      </div>
+
+      <!-- Search -->
+      <div class="relative shrink-0">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+          >🔍</span
+        >
+        <input
+          type="text"
+          placeholder="Search books..."
+          [value]="searchQuery()"
+          (input)="searchQuery.set($any($event.target).value)"
+          class="form-input pl-9 pr-4 py-2.5 rounded-xl text-sm border border-gray-200 bg-white w-56"
+          style="outline: none"
+        />
+      </div>
+
+      <!-- Sort -->
+      <select
+        [value]="sortBy()"
+        (change)="sortBy.set($any($event.target).value)"
+        class="form-input text-sm border border-gray-200 bg-white px-3 py-2.5 rounded-xl cursor-pointer shrink-0"
+        style="outline: none; color: var(--color-dark)"
+      >
+        <option value="popular">Most Popular</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="newest">Newest First</option>
+      </select>
+    </div>
+
+    <!-- Results count -->
+    <div class="text-sm text-gray-400 font-semibold mb-6">
+      Showing
+      <span style="color: var(--color-primary); font-weight: 800"
+        >{{ filteredBooks().length }}</span
+      >
+      books
+    </div>
+
+    <!-- Books grid -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+    >
+      @for (book of filteredBooks(); track book.id; let i = $index) {
+
+      <div
+        class="book-card fade-in-up bg-white rounded-2xl overflow-hidden border border-gray-100 flex flex-col"
+        [class]="'delay-' + ((i % 9) + 1)"
+        style="box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07)"
+      >
+        <!-- Cover -->
+        <div class="book-cover-wrap relative h-52">
+          <img
+            [src]="book.cover"
+            [alt]="book.title"
+            class="w-full h-full object-cover"
+          />
+          <!-- Gradient overlay -->
+          <div
+            class="absolute inset-x-0 bottom-0 h-20"
+            style="
+              background: linear-gradient(
+                to top,
+                rgba(63, 4, 62, 0.75),
+                transparent
+              );
+            "
+          ></div>
+          <!-- Tag -->
+          <span
+            class="absolute top-3 left-3 text-[10px] font-black uppercase tracking-widest text-white px-2.5 py-1 rounded-full shadow"
+            [style.background]="book.tagColor"
+            >{{ book.tag }}</span
+          >
+          <!-- Discount badge -->
+          <span
+            class="absolute top-3 right-10 text-[10px] font-black text-white w-9 h-9 rounded-full flex items-center justify-center shadow"
+            style="background: var(--color-primary)"
+            >-{{ discount(book) }}%</span
+          >
+          <!-- Wishlist -->
           <button
-            (click)="addToCart(b)"
-            [disabled]="b.added"
-            class="px-4 py-1 rounded text-white transition"
-            [ngClass]="
-              b.added
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-secondary/80 hover:bg-secondary cursor-pointer'
+            (click)="toggleWishlist(book.id)"
+            class="wish-btn absolute top-2.5 right-2.5 text-xl bg-white/80 backdrop-blur w-8 h-8 rounded-full flex items-center justify-center cursor-pointer border-none shadow"
+            [class]="wishlist().has(book.id) ? 'active' : ''"
+            [style]="wishlist().has(book.id) ? 'color:#dc2626' : 'color:#9ca3af'"
+          >
+            ♥
+          </button>
+          <!-- Out of stock -->
+          @if (!book.inStock) {
+          <div
+            class="absolute inset-0 bg-white/60 flex items-center justify-center rounded-t-2xl"
+          >
+            <span
+              class="font-black text-xs uppercase tracking-widest px-3 py-1.5 rounded-full text-white"
+              style="background: #6b7280"
+              >Out of Stock</span
+            >
+          </div>
+          }
+          <!-- Digital badge -->
+          @if (book.digital) {
+          <span
+            class="absolute bottom-3 left-3 text-[10px] font-bold text-white px-2 py-0.5 rounded-full"
+            style="background: rgba(64, 6, 117, 0.8)"
+            >📱 PDF Available</span
+          >
+          }
+        </div>
+
+        <!-- Info -->
+        <div class="p-4 flex flex-col flex-1">
+          <div
+            class="text-[10px] font-black uppercase tracking-widest mb-1"
+            style="color: var(--color-ascent)"
+          >
+            {{ book.category }} · {{ book.edition }}
+          </div>
+          <h3
+            class="font-['Playfair_Display'] font-bold text-[15px] leading-tight mb-0.5"
+            style="color: var(--color-dark)"
+          >
+            {{ book.title }}
+          </h3>
+          <p class="text-gray-400 text-xs mb-2">by {{ book.author }}</p>
+
+          <!-- Stars -->
+          <div class="flex items-center gap-1.5 mb-3">
+            <div class="flex gap-0.5">
+              @for (s of starsArray; track trackByIndex($index)) {
+              <span class="text-xs" style="color: #f5a623">★</span>
+              }
+            </div>
+            <span class="text-gray-400 text-[11px]"
+              >{{ book.rating }} ({{ book.reviews }})</span
+            >
+          </div>
+
+          <!-- Price -->
+          <div class="flex items-end gap-2 mb-3 mt-auto">
+            <span
+              class="font-['Playfair_Display'] text-2xl font-black"
+              style="color: var(--color-primary)"
+              >₹{{ book.price }}</span
+            >
+            <span class="text-gray-400 text-sm line-through mb-0.5"
+              >₹{{ book.originalPrice }}</span
+            >
+          </div>
+
+          <!-- Meta row -->
+          <div class="flex gap-2 text-[10px] font-semibold text-gray-400 mb-3">
+            <span>📄 {{ book.pages }}pp</span>
+            <span>·</span>
+            <span>🌐 {{ book.language }}</span>
+          </div>
+
+          <!-- Buttons -->
+          @if (book.inStock) {
+          <div class="flex gap-2">
+            <button
+              (click)="addToCart(book, false)"
+              class="atc-btn flex-1 text-white font-extrabold text-xs py-2.5 rounded-xl cursor-pointer border-none"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  var(--color-primary),
+                  var(--color-dark)
+                );
+                box-shadow: 0 4px 14px rgba(137, 1, 23, 0.25);
+              "
+            >
+              {{ isInCart(book.id) ? '✓ In Cart' : '🛒 Add to Cart' }}
+            </button>
+            @if (book.digital) {
+            <button
+              (click)="addToCart(book, true)"
+              class="atc-btn font-extrabold text-xs px-3 py-2.5 rounded-xl cursor-pointer border-none"
+              style="
+                background: rgba(64, 6, 117, 0.1);
+                color: var(--color-ascent);
+              "
+              title="Add Digital PDF"
+            >
+              📱
+            </button>
+            }
+          </div>
+          } @else {
+          <button
+            disabled
+            class="w-full font-bold text-xs py-2.5 rounded-xl cursor-not-allowed"
+            style="background: #f3f4f6; color: #9ca3af"
+          >
+            Out of Stock
+          </button>
+          }
+        </div>
+      </div>
+
+      }
+    </div>
+
+    <!-- Empty state -->
+    @if (filteredBooks().length === 0) {
+    <div class="text-center py-20 fade-in">
+      <div class="text-6xl mb-4">📭</div>
+      <h3
+        class="font-['Playfair_Display'] text-2xl font-black mb-2"
+        style="color: var(--color-dark)"
+      >
+        No books found
+      </h3>
+      <p class="text-gray-400 mb-6">
+        Try changing the search or category filter
+      </p>
+      <button
+        (click)="searchQuery.set(''); activeCategory.set('All')"
+        class="font-bold text-sm px-6 py-3 rounded-full cursor-pointer border-none"
+        style="background: var(--color-primary); color: white"
+      >
+        Clear Filters
+      </button>
+    </div>
+    }
+  </div>
+  }
+
+  <!-- ════════════════════════════════════════════════════════
+       VIEW 2 — CART
+  ════════════════════════════════════════════════════════ -->
+  @if (currentView() === 'cart') {
+  <div class="max-w-7xl mx-auto px-4 md:px-10 py-8">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1
+          class="font-['Playfair_Display'] text-3xl font-black"
+          style="color: var(--color-dark)"
+        >
+          Your Cart
+        </h1>
+        <p class="text-gray-400 text-sm mt-1">
+          {{ cartCount() }} item{{ cartCount()!==1?'s':'' }} · ₹{{ cartSavings()
+          }} saved
+        </p>
+      </div>
+      <button
+        (click)="goTo('catalog')"
+        class="flex items-center gap-2 text-sm font-bold cursor-pointer border-none bg-transparent hover:opacity-75 transition-opacity"
+        style="color: var(--color-primary)"
+      >
+        ← Continue Shopping
+      </button>
+    </div>
+
+    @if (cart().length === 0) {
+    <!-- Empty cart -->
+    <div class="text-center py-24 scale-in">
+      <div class="text-7xl mb-5">🛒</div>
+      <h2
+        class="font-['Playfair_Display'] text-2xl font-black mb-3"
+        style="color: var(--color-dark)"
+      >
+        Your cart is empty
+      </h2>
+      <p class="text-gray-400 mb-8 max-w-sm mx-auto">
+        Looks like you haven't added any books yet. Browse our collection and
+        start learning!
+      </p>
+      <button
+        (click)="goTo('catalog')"
+        class="action-btn text-white font-extrabold px-8 py-3.5 rounded-full cursor-pointer border-none"
+        style="
+          background: linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-dark)
+          );
+          box-shadow: 0 6px 22px rgba(137, 1, 23, 0.35);
+        "
+      >
+        Browse Books →
+      </button>
+    </div>
+    } @else {
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Cart items -->
+      <div class="flex-1 flex flex-col gap-4">
+        @for (item of cart(); track item.book.id; let i = $index) {
+        <div
+          class="cart-item fade-in-up bg-white rounded-2xl p-5 border border-gray-100 flex gap-5"
+          [class]="'delay-' + (i + 1)"
+          style="box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06)"
+        >
+          <!-- Cover thumb -->
+          <div class="w-20 h-24 rounded-xl overflow-hidden shrink-0 shadow-md">
+            <img
+              [src]="item.book.cover"
+              [alt]="item.book.title"
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+          <!-- Info -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-2 mb-1">
+              <div>
+                <div
+                  class="text-[10px] font-black uppercase tracking-widest mb-0.5"
+                  style="color: var(--color-ascent)"
+                >
+                  {{ item.book.category }} @if (item.digital) {
+                  <span
+                    class="ml-1 text-[9px] px-1.5 py-0.5 rounded-full"
+                    style="background: rgba(64, 6, 117, 0.1)"
+                    >📱 Digital PDF</span
+                  >
+                  }
+                </div>
+                <h3
+                  class="font-['Playfair_Display'] font-bold text-base"
+                  style="color: var(--color-dark)"
+                >
+                  {{ item.book.title }}
+                </h3>
+                <p class="text-gray-400 text-xs">
+                  by {{ item.book.author }} · {{ item.book.edition }}
+                </p>
+              </div>
+              <button
+                (click)="removeItem(item.book.id, item.digital)"
+                class="text-gray-300 hover:text-red-400 transition-colors cursor-pointer border-none bg-transparent text-lg shrink-0"
+              >
+                ✕
+              </button>
+            </div>
+
+            <!-- Price & qty row -->
+            <div class="flex items-center justify-between mt-3 flex-wrap gap-3">
+              <!-- Qty controls -->
+              <div
+                class="flex items-center gap-2 rounded-xl border border-gray-200 overflow-hidden"
+              >
+                <button
+                  (click)="updateQty(item.book.id, item.digital, -1)"
+                  class="qty-btn w-8 h-8 flex items-center justify-center font-bold text-gray-500 cursor-pointer border-none bg-gray-50 transition-all"
+                >
+                  −
+                </button>
+                <span
+                  class="px-3 font-black text-sm"
+                  style="color: var(--color-dark)"
+                  >{{ item.qty }}</span
+                >
+                <button
+                  (click)="updateQty(item.book.id, item.digital, 1)"
+                  class="qty-btn w-8 h-8 flex items-center justify-center font-bold text-gray-500 cursor-pointer border-none bg-gray-50 transition-all"
+                >
+                  +
+                </button>
+              </div>
+
+              <!-- Price -->
+              <div class="flex items-center gap-2">
+                <span
+                  class="font-['Playfair_Display'] text-xl font-black"
+                  style="color: var(--color-primary)"
+                >
+                  ₹{{ item.book.price * item.qty }}
+                </span>
+                @if (item.qty > 1) {
+                <span class="text-gray-400 text-xs"
+                  >(₹{{ item.book.price }} each)</span
+                >
+                }
+                <span class="text-green-600 text-xs font-bold"
+                  >-{{ discount(item.book) }}%</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+
+        <!-- Savings banner -->
+        <div
+          class="rounded-2xl px-5 py-4 flex items-center gap-3 border"
+          style="
+            background: rgba(22, 163, 74, 0.06);
+            border-color: rgba(22, 163, 74, 0.2);
+          "
+        >
+          <span class="text-2xl">🎉</span>
+          <div>
+            <div class="font-bold text-sm" style="color: #15803d">
+              You're saving ₹{{ cartSavings() }} on this order!
+            </div>
+            <div class="text-xs text-gray-500">
+              Free delivery on orders above ₹500
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order summary -->
+      <div class="sticky-summary w-full lg:w-80 shrink-0">
+        <div
+          class="bg-white rounded-2xl overflow-hidden border border-gray-100"
+          style="box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08)"
+        >
+          <!-- Top -->
+          <div class="px-6 py-5 border-b border-gray-100">
+            <h2
+              class="font-['Playfair_Display'] font-black text-lg"
+              style="color: var(--color-dark)"
+            >
+              Order Summary
+            </h2>
+          </div>
+
+          <div class="px-6 py-5 flex flex-col gap-3 text-sm">
+            <div class="flex justify-between text-gray-500">
+              <span>Subtotal ({{ cartCount() }} items)</span>
+              <span class="font-bold" style="color: var(--color-dark)"
+                >₹{{ cartSubtotal() }}</span
+              >
+            </div>
+            <div class="flex justify-between" style="color: #15803d">
+              <span class="font-semibold">Discount Savings</span>
+              <span class="font-bold">−₹{{ cartSavings() }}</span>
+            </div>
+            <div class="flex justify-between text-gray-500">
+              <span>GST (5%)</span>
+              <span class="font-bold" style="color: var(--color-dark)"
+                >₹{{ cartTax() }}</span
+              >
+            </div>
+            <div class="flex justify-between text-gray-500">
+              <span>Shipping</span>
+              <span
+                class="font-bold"
+                [style]="cartShipping()===0 ? 'color:#15803d' : 'color:var(--color-dark)'"
+              >
+                {{ cartShipping() === 0 ? 'FREE' : '₹' + cartShipping() }}
+              </span>
+            </div>
+            <div
+              class="border-t border-gray-100 pt-3 flex justify-between font-black text-base"
+            >
+              <span style="color: var(--color-dark)">Total</span>
+              <span style="color: var(--color-primary)"
+                >₹{{ cartTotal() }}</span
+              >
+            </div>
+          </div>
+
+          <div class="px-6 pb-6">
+            <button
+              (click)="goTo('checkout')"
+              class="action-btn w-full text-white font-extrabold py-4 rounded-2xl cursor-pointer border-none text-base"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  var(--color-primary),
+                  var(--color-dark)
+                );
+                box-shadow: 0 6px 22px rgba(137, 1, 23, 0.35);
+              "
+            >
+              Proceed to Checkout →
+            </button>
+            <div
+              class="text-center text-xs text-gray-400 mt-3 flex items-center justify-center gap-1"
+            >
+              <span>🔒</span> Secure & Encrypted Checkout
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+
+  <!-- ════════════════════════════════════════════════════════
+       VIEW 3 — CHECKOUT
+  ════════════════════════════════════════════════════════ -->
+  @if (currentView() === 'checkout') {
+  <div class="max-w-7xl mx-auto px-4 md:px-10 py-8">
+    <div class="mb-8">
+      <h1
+        class="font-['Playfair_Display'] text-3xl font-black"
+        style="color: var(--color-dark)"
+      >
+        Checkout
+      </h1>
+      <p class="text-gray-400 text-sm mt-1">
+        Complete your order · ₹{{ cartTotal() }} total
+      </p>
+    </div>
+
+    <!-- Progress steps -->
+    <div class="flex items-center gap-0 mb-10 max-w-md">
+      @for (step of
+      [{n:1,label:'Cart'},{n:2,label:'Details'},{n:3,label:'Payment'}]; track
+      step.n) {
+      <div class="flex items-center">
+        <div class="flex flex-col items-center">
+          <div
+            class="w-8 h-8 rounded-full flex items-center justify-center font-black text-xs text-white"
+            [style]="step.n<=2 ? 'background:var(--color-primary)' : 'background:#e5e7eb; color:#9ca3af'"
+          >
+            {{ step.n < 2 ? '✓' : step.n }}
+          </div>
+          <span
+            class="text-[10px] font-semibold mt-1"
+            [style]="step.n<=2 ? 'color:var(--color-primary)' : 'color:#9ca3af'"
+            >{{ step.label }}</span
+          >
+        </div>
+        @if (step.n < 3) {
+        <div
+          class="w-16 md:w-24 h-0.5 mx-1 mb-4"
+          [style]="step.n<2 ? 'background:var(--color-primary)' : 'background:#e5e7eb'"
+        ></div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- LEFT: Form -->
+      <div class="flex-1 flex flex-col gap-6">
+        <!-- Delivery details -->
+        <div
+          class="bg-white rounded-2xl p-6 border border-gray-100"
+          style="box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07)"
+        >
+          <h2
+            class="font-['Playfair_Display'] font-bold text-lg mb-5 flex items-center gap-2"
+            style="color: var(--color-dark)"
+          >
+            <span
+              class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm"
+              style="background: var(--color-primary)"
+              >1</span
+            >
+            Delivery Details
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Full Name -->
+            <div class="sm:col-span-2">
+              <label
+                class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+                style="color: var(--color-dark)"
+                >Full Name *</label
+              >
+              <input
+                type="text"
+                placeholder="Rahul Kumar"
+                [value]="form().name"
+                (input)="updateForm('name', $any($event.target).value)"
+                class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white"
+                [class]="formErrors().name ? 'error' : ''"
+              />
+              @if (formErrors().name) {
+              <p class="text-red-500 text-xs mt-1">{{ formErrors().name }}</p>
+              }
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label
+                class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+                style="color: var(--color-dark)"
+                >Email *</label
+              >
+              <input
+                type="email"
+                placeholder="rahul@email.com"
+                [value]="form().email"
+                (input)="updateForm('email', $any($event.target).value)"
+                class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white"
+                [class]="formErrors().email ? 'error' : ''"
+              />
+              @if (formErrors().email) {
+              <p class="text-red-500 text-xs mt-1">{{ formErrors().email }}</p>
+              }
+            </div>
+
+            <!-- Phone -->
+            <div>
+              <label
+                class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+                style="color: var(--color-dark)"
+                >Phone *</label
+              >
+              <input
+                type="tel"
+                placeholder="9876543210"
+                [value]="form().phone"
+                (input)="updateForm('phone', $any($event.target).value)"
+                class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white"
+                [class]="formErrors().phone ? 'error' : ''"
+              />
+              @if (formErrors().phone) {
+              <p class="text-red-500 text-xs mt-1">{{ formErrors().phone }}</p>
+              }
+            </div>
+
+            <!-- Address -->
+            <div class="sm:col-span-2">
+              <label
+                class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+                style="color: var(--color-dark)"
+              >
+                Delivery Address {{ hasPhysical() ? '*' : '(optional for
+                digital)' }}
+              </label>
+              <textarea
+                rows="2"
+                placeholder="House/Flat No., Street, Locality"
+                [value]="form().address"
+                (input)="updateForm('address', $any($event.target).value)"
+                class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white resize-none"
+                [class]="formErrors().address ? 'error' : ''"
+              ></textarea>
+              @if (formErrors().address) {
+              <p class="text-red-500 text-xs mt-1">
+                {{ formErrors().address }}
+              </p>
+              }
+            </div>
+
+            <!-- City -->
+            <div>
+              <label
+                class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+                style="color: var(--color-dark)"
+                >City</label
+              >
+              <input
+                type="text"
+                placeholder="Patna"
+                [value]="form().city"
+                (input)="updateForm('city', $any($event.target).value)"
+                class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white"
+              />
+            </div>
+
+            <!-- Pincode -->
+            <div>
+              <label
+                class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+                style="color: var(--color-dark)"
+                >Pincode *</label
+              >
+              <input
+                type="text"
+                placeholder="800001"
+                [value]="form().pincode"
+                (input)="updateForm('pincode', $any($event.target).value)"
+                class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white"
+                [class]="formErrors().pincode ? 'error' : ''"
+              />
+              @if (formErrors().pincode) {
+              <p class="text-red-500 text-xs mt-1">
+                {{ formErrors().pincode }}
+              </p>
+              }
+            </div>
+
+            <!-- State -->
+            <div class="sm:col-span-2">
+              <label
+                class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+                style="color: var(--color-dark)"
+                >State</label
+              >
+              <select
+                [value]="form().state"
+                (change)="updateForm('state', $any($event.target).value)"
+                class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white cursor-pointer"
+                style="outline: none"
+              >
+                <option value="">Select State</option>
+                @for (s of ['Bihar','Uttar Pradesh','Jharkhand','West
+                Bengal','Delhi','Maharashtra','Other']; track s) {
+                <option [value]="s">{{ s }}</option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment section -->
+        <div
+          class="bg-white rounded-2xl p-6 border border-gray-100"
+          style="box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07)"
+        >
+          <h2
+            class="font-['Playfair_Display'] font-bold text-lg mb-5 flex items-center gap-2"
+            style="color: var(--color-dark)"
+          >
+            <span
+              class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm"
+              style="background: var(--color-primary)"
+              >2</span
+            >
+            Payment Method
+          </h2>
+
+          <!-- Payment options -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+            @for (pm of [ {mode:'upi', icon:'📱', label:'UPI', sub:'Google Pay,
+            PhonePe'}, {mode:'card', icon:'💳', label:'Card', sub:'Debit /
+            Credit'}, {mode:'cod', icon:'💵', label:'Cash on Delivery', sub:'Pay
+            when delivered'} ]; track pm.mode) {
+            <div
+              class="pay-card rounded-2xl p-4 border-2 text-center cursor-pointer"
+              [class]="form().paymentMode === pm.mode ? 'selected' : ''"
+              [style]="form().paymentMode===pm.mode
+                       ? 'border-color:var(--color-primary);background:rgba(137,1,23,0.04);'
+                       : 'border-color:#e5e7eb;'"
+              (click)="updateForm('paymentMode', pm.mode)"
+            >
+              <div class="text-2xl mb-1">{{ pm.icon }}</div>
+              <div class="font-bold text-sm" style="color: var(--color-dark)">
+                {{ pm.label }}
+              </div>
+              <div class="text-gray-400 text-[11px]">{{ pm.sub }}</div>
+              @if (form().paymentMode === pm.mode) {
+              <div
+                class="mt-2 w-4 h-4 rounded-full mx-auto"
+                style="background: var(--color-primary)"
+              ></div>
+              }
+            </div>
+            }
+          </div>
+
+          <!-- UPI ID input -->
+          @if (form().paymentMode === 'upi') {
+          <div class="fade-in">
+            <label
+              class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+              style="color: var(--color-dark)"
+              >UPI ID *</label
+            >
+            <input
+              type="text"
+              placeholder="yourname@okaxis"
+              [value]="form().upiId"
+              (input)="updateForm('upiId', $any($event.target).value)"
+              class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white"
+              [class]="formErrors().upiId ? 'error' : ''"
+            />
+            @if (formErrors().upiId) {
+            <p class="text-red-500 text-xs mt-1">{{ formErrors().upiId }}</p>
+            }
+          </div>
+          }
+          <!-- Card placeholder -->
+          @if (form().paymentMode === 'card') {
+          <div
+            class="fade-in rounded-2xl p-4 text-center border border-dashed border-gray-200"
+          >
+            <p class="text-gray-400 text-sm">
+              🔐 Secure card payment powered by Razorpay
+            </p>
+            <p class="text-gray-300 text-xs mt-1">
+              Card details collected on next step
+            </p>
+          </div>
+          }
+          <!-- COD note -->
+          @if (form().paymentMode === 'cod') {
+          <div
+            class="fade-in rounded-2xl p-4 border"
+            style="
+              background: rgba(22, 163, 74, 0.06);
+              border-color: rgba(22, 163, 74, 0.2);
             "
           >
-            {{ b.added ? "Added" : "Add to Cart" }}
-          </button>
+            <p class="text-sm font-semibold" style="color: #15803d">
+              ✅ Pay ₹{{ cartTotal() }} when your books arrive.
+            </p>
+            <p class="text-gray-500 text-xs mt-1">
+              Available only for physical books within India.
+            </p>
+          </div>
+          }
+        </div>
+
+        <!-- Place order button -->
+        <button
+          (click)="validateAndSubmit()"
+          class="action-btn w-full text-white font-extrabold py-4 rounded-2xl cursor-pointer border-none text-base tracking-wide"
+          style="
+            background: linear-gradient(
+              135deg,
+              var(--color-primary),
+              var(--color-dark)
+            );
+            box-shadow: 0 8px 28px rgba(137, 1, 23, 0.38);
+          "
+        >
+          🎉 Place Order · ₹{{ cartTotal() }}
+        </button>
+
+        <p class="text-center text-gray-400 text-xs -mt-2">
+          🔒 Your data is encrypted and secure · 7-day return policy
+        </p>
+      </div>
+
+      <!-- RIGHT: Order summary (sticky) -->
+      <div class="sticky-summary w-full lg:w-80 shrink-0">
+        <div
+          class="bg-white rounded-2xl overflow-hidden border border-gray-100"
+          style="box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08)"
+        >
+          <div
+            class="px-6 py-4 border-b border-gray-100"
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--color-dark),
+                var(--color-ascent)
+              );
+            "
+          >
+            <h2
+              class="font-['Playfair_Display'] font-black text-base text-white"
+            >
+              Order Summary
+            </h2>
+            <p class="text-white/50 text-xs">
+              {{ cartCount() }} item{{ cartCount()!==1?'s':'' }}
+            </p>
+          </div>
+
+          <!-- Items list -->
+          <div class="px-5 py-4 flex flex-col gap-3">
+            @for (item of cart(); track item.book.id) {
+            <div class="flex items-center gap-3">
+              <img
+                [src]="item.book.cover"
+                class="w-10 h-12 rounded-lg object-cover shrink-0 shadow-sm"
+              />
+              <div class="flex-1 min-w-0">
+                <div
+                  class="text-xs font-bold truncate"
+                  style="color: var(--color-dark)"
+                >
+                  {{ item.book.title }}
+                </div>
+                <div class="text-gray-400 text-[10px]">
+                  {{ item.digital ? 'PDF' : 'Physical' }} × {{ item.qty }}
+                </div>
+              </div>
+              <div
+                class="font-black text-sm shrink-0"
+                style="color: var(--color-primary)"
+              >
+                ₹{{ item.book.price * item.qty }}
+              </div>
+            </div>
+            }
+          </div>
+
+          <div
+            class="border-t border-gray-100 px-5 py-4 flex flex-col gap-2 text-sm"
+          >
+            <div class="flex justify-between text-gray-500">
+              <span>Subtotal</span
+              ><span class="font-bold" style="color: var(--color-dark)"
+                >₹{{ cartSubtotal() }}</span
+              >
+            </div>
+            <div class="flex justify-between" style="color: #15803d">
+              <span class="font-semibold">Savings</span
+              ><span class="font-bold">−₹{{ cartSavings() }}</span>
+            </div>
+            <div class="flex justify-between text-gray-500">
+              <span>GST</span
+              ><span class="font-bold" style="color: var(--color-dark)"
+                >₹{{ cartTax() }}</span
+              >
+            </div>
+            <div class="flex justify-between text-gray-500">
+              <span>Shipping</span>
+              <span
+                class="font-bold"
+                [style]="cartShipping()===0?'color:#15803d':'color:var(--color-dark)'"
+              >
+                {{ cartShipping()===0 ? 'FREE' : '₹'+cartShipping() }}
+              </span>
+            </div>
+            <div
+              class="border-t border-gray-100 pt-2 flex justify-between font-black text-base"
+            >
+              <span style="color: var(--color-dark)">Total</span>
+              <span style="color: var(--color-primary)"
+                >₹{{ cartTotal() }}</span
+              >
+            </div>
+          </div>
+
+          <!-- Trust badges -->
+          <div class="px-5 pb-5 grid grid-cols-3 gap-2 text-center">
+            @for (b of [{icon:'🔒',label:'Secure'},{icon:'↩️',label:'7-day
+            Return'},{icon:'🚚',label:'Fast Ship'}]; track b.label) {
+            <div
+              class="rounded-xl py-2 px-1"
+              style="background: rgba(137, 1, 23, 0.04)"
+            >
+              <div class="text-lg">{{ b.icon }}</div>
+              <div class="text-[10px] font-semibold text-gray-500">
+                {{ b.label }}
+              </div>
+            </div>
+            }
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+  }
 
-<app-join-test></app-join-test>
+  <!-- ════════════════════════════════════════════════════════
+       VIEW 4 — SUCCESS
+  ════════════════════════════════════════════════════════ -->
+  @if (currentView() === 'success') {
+  <div class="min-h-screen flex items-center justify-center px-4 py-16">
+    <div class="text-center max-w-lg w-full scale-in">
+      <!-- Confetti dots -->
+      <div class="relative inline-block mb-6">
+        <div
+          class="confetti-1 absolute -top-4 left-4 w-3 h-3 rounded-full"
+          style="background: #f5a623"
+        ></div>
+        <div
+          class="confetti-2 absolute -top-6 right-6 w-2 h-2 rounded-full"
+          style="background: var(--color-primary)"
+        ></div>
+        <div
+          class="confetti-3 absolute -top-2 right-2 w-4 h-4 rounded-full"
+          style="background: #400675"
+        ></div>
+
+        <!-- Success icon -->
+        <div
+          class="success-icon w-24 h-24 rounded-full flex items-center justify-center mx-auto text-5xl shadow-2xl"
+          style="
+            background: linear-gradient(
+              135deg,
+              var(--color-primary),
+              var(--color-dark)
+            );
+          "
+        >
+          ✓
+        </div>
+      </div>
+
+      <h1
+        class="font-['Playfair_Display'] text-4xl font-black mb-3"
+        style="color: var(--color-dark)"
+      >
+        Order Placed! 🎉
+      </h1>
+      <p class="text-gray-500 text-lg mb-2">
+        Thank you for your order. We're processing it right now!
+      </p>
+      <div
+        class="inline-flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full mb-8"
+        style="
+          background: rgba(137, 1, 23, 0.08);
+          color: var(--color-primary);
+          border: 1px solid rgba(137, 1, 23, 0.15);
+        "
+      >
+        Order ID: <span class="font-black">{{ orderId() }}</span>
+      </div>
+
+      <!-- Details card -->
+      <div
+        class="bg-white rounded-3xl p-7 mb-8 border border-gray-100 text-left"
+        style="box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1)"
+      >
+        <div class="flex items-center gap-3 mb-5">
+          <div
+            class="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
+            style="background: rgba(22, 163, 74, 0.1)"
+          >
+            ✅
+          </div>
+          <div>
+            <div class="font-bold text-sm" style="color: #15803d">
+              Payment Successful
+            </div>
+            <div class="text-gray-400 text-xs">
+              via {{ form().paymentMode === 'upi' ? 'UPI' : form().paymentMode
+              === 'card' ? 'Card' : 'Cash on Delivery' }}
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3 text-sm">
+          @for (info of [ {label:'Recipient', val: form().name || 'Customer'},
+          {label:'Email', val: form().email}, {label:'Amount Paid', val: '₹' +
+          cartTotal()}, {label:'Delivery', val: hasPhysical() ? '5–7 business
+          days' : 'Digital — instant email'} ]; track info.label) {
+          <div
+            class="flex justify-between py-2 border-b border-gray-50 last:border-0"
+          >
+            <span class="text-gray-400 font-semibold">{{ info.label }}</span>
+            <span class="font-bold" style="color: var(--color-dark)"
+              >{{ info.val }}</span
+            >
+          </div>
+          }
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <button
+          (click)="goTo('catalog')"
+          class="action-btn text-white font-extrabold px-8 py-3.5 rounded-full cursor-pointer border-none"
+          style="
+            background: linear-gradient(
+              135deg,
+              var(--color-primary),
+              var(--color-dark)
+            );
+            box-shadow: 0 6px 22px rgba(137, 1, 23, 0.35);
+          "
+        >
+          Continue Shopping →
+        </button>
+        <button
+          class="font-bold px-8 py-3.5 rounded-full cursor-pointer transition-all hover:opacity-90"
+          style="
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid rgba(137, 1, 23, 0.2);
+          "
+        >
+          Download Invoice
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+<!-- /wrapper -->

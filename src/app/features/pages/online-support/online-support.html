@@ -1,108 +1,882 @@
-<section class="bg-gray-50 min-h-screen">
-  <!-- Hero Section -->
-  <div class="bg-white border-b">
-    <div class="max-w-7xl mx-auto px-4 py-12 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-primary">
-        Online Student Support
-      </h1>
-      <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
-        Get instant academic and technical assistance for your online test series.
-        Our expert team is here to help you succeed.
+<!-- ═══════════════════════════════════════════════════════════
+     KNOWLEDGE NATION — Online Support Page
+     Angular 19 | Tailwind CSS v4
+════════════════════════════════════════════════════════════ -->
+
+<div
+  class="min-h-screen"
+  style="background: linear-gradient(160deg, #f8f0f2 0%, #f3eef8 100%)"
+>
+  <!-- ════════════════════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════════════════ -->
+  <section
+    class="relative overflow-hidden py-20"
+    style="
+      background: linear-gradient(
+        135deg,
+        #3f043e 0%,
+        #2a0040 55%,
+        #400675 100%
+      );
+    "
+  >
+    <div
+      class="absolute inset-0"
+      style="
+        opacity: 0.04;
+        background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+        background-size: 26px 26px;
+      "
+    ></div>
+    <div
+      class="absolute -top-24 -right-24 w-96 h-96 rounded-full pointer-events-none"
+      style="background: rgba(137, 1, 23, 0.2); filter: blur(64px)"
+    ></div>
+    <div
+      class="absolute -bottom-20 -left-20 w-72 h-72 rounded-full pointer-events-none"
+      style="background: rgba(64, 6, 117, 0.25); filter: blur(52px)"
+    ></div>
+
+    <div
+      class="relative z-10 max-w-7xl mx-auto px-6 md:px-14 flex flex-col md:flex-row items-center gap-12"
+    >
+      <div class="flex-1">
+        <!-- Breadcrumb -->
+        <div
+          class="flex items-center gap-2 text-white/40 text-xs font-semibold uppercase tracking-widest mb-5"
+        >
+          <span>Home</span><span>›</span>
+          <span style="color: #f5a623">Online Support</span>
+        </div>
+        <div
+          class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5"
+          style="
+            background: rgba(245, 166, 35, 0.14);
+            color: #f5a623;
+            border: 1px solid rgba(245, 166, 35, 0.3);
+          "
+        >
+          🎧 We're Here For You
+        </div>
+        <h1
+          class="font-['Playfair_Display'] text-4xl md:text-5xl font-black text-white leading-tight mb-4"
+        >
+          Online
+          <em class="not-italic" style="color: #f5a623">Support</em> &<br />Help
+          Centre
+        </h1>
+        <p class="text-white/60 text-lg leading-relaxed max-w-lg mb-8">
+          Got a question? Our support team, mentors, and chatbot are available 7
+          days a week to help you with admissions, tests, payments, and more.
+        </p>
+        <!-- Search bar -->
+        <div class="relative max-w-md">
+          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+            >🔍</span
+          >
+          <input
+            type="text"
+            placeholder="Search FAQs, e.g. refund policy, test access..."
+            class="w-full pl-11 pr-4 py-4 rounded-2xl text-sm font-medium border-none"
+            style="
+              background: rgba(255, 255, 255, 0.1);
+              color: white;
+              backdrop-filter: blur(12px);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              outline: none;
+            "
+            placeholder-style="color:rgba(255,255,255,0.4);"
+          />
+        </div>
+      </div>
+
+      <!-- Right: Stats panel -->
+      <div class="hidden md:flex flex-col gap-3 shrink-0">
+        @for (s of [ {icon:'⚡',val:'< 2 min',label:'Avg. Response Time'},
+        {icon:'⭐',val:'4.9/5', label:'Support Rating'}, {icon:'🎧',val:'7
+        Days', label:'Available Weekly'}, {icon:'👥',val:'50+', label:'Expert
+        Mentors'} ]; track s.label) {
+        <div
+          class="flex items-center gap-4 rounded-2xl px-5 py-4 w-60"
+          style="
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+          "
+        >
+          <span class="text-2xl">{{ s.icon }}</span>
+          <div>
+            <div
+              class="font-['Playfair_Display'] text-xl font-black text-white"
+            >
+              {{ s.val }}
+            </div>
+            <div class="text-white/45 text-[11px] uppercase tracking-wider">
+              {{ s.label }}
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       SUPPORT CHANNELS
+  ════════════════════════════════════════════════════════ -->
+  <section class="py-16 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 md:px-14">
+      <div class="text-center mb-12">
+        <div
+          class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-3"
+          style="
+            background: rgba(137, 1, 23, 0.07);
+            color: var(--color-primary);
+            border: 1px solid rgba(137, 1, 23, 0.14);
+          "
+        >
+          📡 Get In Touch
+        </div>
+        <h2
+          class="font-['Playfair_Display'] text-3xl md:text-4xl font-black section-title"
+          style="color: var(--color-dark)"
+        >
+          Choose How to
+          <em class="not-italic" style="color: var(--color-primary)"
+            >Reach Us</em
+          >
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        @for (ch of supportChannels; track ch.title; let i = $index) {
+        <div
+          class="channel-card fade-in-up bg-white rounded-2xl p-6 border border-gray-100 group cursor-default"
+          [class]="'delay-' + (i+1)"
+          [style]="'--c:' + ch.color"
+          style="box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06)"
+        >
+          <!-- Top row -->
+          <div class="flex items-start justify-between mb-5">
+            <div
+              class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
+              [style]="'background:' + ch.color + '14; border:1.5px solid ' + ch.color + '22'"
+            >
+              {{ ch.icon }}
+            </div>
+            @if (ch.badge) {
+            <span
+              class="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full text-white"
+              [style.background]="ch.color === '#1a7a2e' ? '#1a7a2e' : 'var(--color-primary)'"
+            >
+              {{ ch.badge }}
+            </span>
+            }
+          </div>
+
+          <h3
+            class="font-['Playfair_Display'] font-bold text-lg mb-2"
+            style="color: var(--color-dark)"
+          >
+            {{ ch.title }}
+          </h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">
+            {{ ch.description }}
+          </p>
+
+          <a
+            [href]="ch.link"
+            (click)="ch.link==='#chat' ? openChat() : null"
+            class="inline-flex items-center gap-1.5 font-black text-sm no-underline transition-all hover:gap-3"
+            [style.color]="ch.color"
+          >
+            {{ ch.action }} →
+          </a>
+
+          <!-- Bottom accent -->
+          <div
+            class="mt-5 h-0.5 w-0 group-hover:w-full rounded-full transition-all duration-500"
+            [style.background]="'linear-gradient(to right,' + ch.color + ', transparent)'"
+          ></div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       FAQ SECTION
+  ════════════════════════════════════════════════════════ -->
+  <section
+    class="py-20 relative overflow-hidden"
+    style="
+      background: linear-gradient(
+        160deg,
+        #f8f0f8 0%,
+        #f3eef8 60%,
+        #faf0f2 100%
+      );
+    "
+  >
+    <div
+      class="absolute -top-20 -right-20 w-72 h-72 rounded-full pointer-events-none"
+      style="
+        background: radial-gradient(
+          circle,
+          rgba(64, 6, 117, 0.07),
+          transparent 70%
+        );
+      "
+    ></div>
+    <div
+      class="absolute -bottom-16 -left-16 w-64 h-64 rounded-full pointer-events-none"
+      style="
+        background: radial-gradient(
+          circle,
+          rgba(137, 1, 23, 0.05),
+          transparent 70%
+        );
+      "
+    ></div>
+
+    <div class="max-w-5xl mx-auto px-6 md:px-14 relative z-10">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <div
+          class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+          style="
+            background: rgba(64, 6, 117, 0.07);
+            color: var(--color-ascent);
+            border: 1px solid rgba(64, 6, 117, 0.14);
+          "
+        >
+          ❓ Frequently Asked
+        </div>
+        <h2
+          class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+          style="color: var(--color-dark)"
+        >
+          Frequently Asked
+          <em class="not-italic" style="color: var(--color-primary)"
+            >Questions</em
+          >
+        </h2>
+        <p class="mt-5 text-gray-500 text-base max-w-xl mx-auto">
+          Can't find an answer? Use the live chat or submit a support ticket
+          below.
+        </p>
+      </div>
+
+      <!-- Category tabs -->
+      <div class="flex flex-wrap justify-center gap-2 mb-10">
+        @for (cat of faqCategories; track cat) {
+        <button
+          (click)="activeFaqCat.set(cat)"
+          class="cat-tab text-sm font-bold px-4 py-2 rounded-full"
+          [style]="activeFaqCat()===cat
+                    ? 'background:var(--color-primary);color:white;box-shadow:0 4px 14px rgba(137,1,23,0.3);'
+                    : 'background:white;color:#6b7280;border:1.5px solid #e5e7eb;'"
+        >
+          {{ cat }}
+        </button>
+        }
+      </div>
+
+      <!-- FAQ list -->
+      <div class="flex flex-col gap-3">
+        @for (faq of filteredFaqs(); track faq.question; let i = $index) {
+        <div
+          class="faq-card bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer fade-in-up"
+          [class]="openFaq()===i ? 'open' : ''"
+          [class.delay-1]="i%6===0"
+          [class.delay-2]="i%6===1"
+          [class.delay-3]="i%6===2"
+          [class.delay-4]="i%6===3"
+          [class.delay-5]="i%6===4"
+          [class.delay-6]="i%6===5"
+          (click)="toggleFaq(i)"
+        >
+          <!-- Question row -->
+          <div class="flex items-center gap-4 px-6 py-5">
+            <span
+              class="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-black shrink-0"
+              style="
+                background: rgba(137, 1, 23, 0.09);
+                color: var(--color-primary);
+              "
+            >
+              {{ (i+1).toString().padStart(2,'0') }}
+            </span>
+            <h3
+              class="flex-1 font-semibold text-sm md:text-base"
+              style="color: var(--color-dark)"
+            >
+              {{ faq.question }}
+            </h3>
+            <div class="flex items-center gap-2 shrink-0">
+              <span
+                class="hidden sm:block text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full"
+                style="
+                  background: rgba(137, 1, 23, 0.08);
+                  color: var(--color-primary);
+                "
+                >{{ faq.category }}</span
+              >
+              <span
+                class="faq-icon text-xl font-black transition-transform duration-300"
+                [class.rotated]="openFaq()===i"
+                style="color: var(--color-primary)"
+              >
+                {{ openFaq()===i ? '−' : '+' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Answer -->
+          <div
+            class="faq-body px-6"
+            [class.open]="openFaq()===i"
+            [class.pb-5]="openFaq()===i"
+          >
+            <p class="text-gray-500 text-sm leading-relaxed pl-11">
+              {{ faq.answer }}
+            </p>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- FAQ count -->
+      <p class="text-center text-gray-400 text-xs mt-6 font-semibold">
+        Showing {{ filteredFaqs().length }} of {{ faqs.length }} questions
       </p>
     </div>
-  </div>
+  </section>
 
-  <!-- Support Options -->
-  <div class="max-w-7xl mx-auto px-4 py-12 grid gap-6 md:grid-cols-3">
-    <!-- Live Chat -->
-    <div class="bg-white rounded-xl shadow p-6 hover:shadow-lg transition">
-      <div class="text-secondary text-4xl mb-4">💬</div>
-      <h3 class="text-xl font-bold mb-2">Live Chat Support</h3>
-      <p class="text-gray-600 mb-4">
-        Chat with our support executives for instant help during test hours.
+  <!-- ════════════════════════════════════════════════════════
+       MENTOR CONNECT
+  ════════════════════════════════════════════════════════ -->
+  <section class="py-20 bg-white relative overflow-hidden">
+    <div
+      class="absolute inset-0 pointer-events-none"
+      style="
+        background: radial-gradient(
+            ellipse at 0% 50%,
+            rgba(137, 1, 23, 0.04) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 100% 50%,
+            rgba(64, 6, 117, 0.04) 0%,
+            transparent 50%
+          );
+      "
+    ></div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-14 relative z-10">
+      <div class="text-center mb-14">
+        <div
+          class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+          style="
+            background: rgba(137, 1, 23, 0.07);
+            color: var(--color-primary);
+            border: 1px solid rgba(137, 1, 23, 0.14);
+          "
+        >
+          👨‍🏫 1-on-1 Doubt Clearing
+        </div>
+        <h2
+          class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+          style="color: var(--color-dark)"
+        >
+          Connect With a
+          <em class="not-italic" style="color: var(--color-primary)">Mentor</em>
+        </h2>
+        <p class="mt-5 text-gray-500 text-base max-w-xl mx-auto">
+          Book a 1-on-1 doubt clearing session with our expert faculty.
+          Available for all subjects and exam stages.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (m of mentors; track m.name; let i = $index) {
+        <div
+          class="mentor-card fade-in-up bg-white rounded-2xl overflow-hidden border border-gray-100"
+          [class]="'delay-' + (i+1)"
+          style="box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07)"
+        >
+          <!-- Top band -->
+          <div
+            class="h-20 relative flex items-end justify-center pb-0"
+            [style.background]="'linear-gradient(135deg,' + m.color + ',#2a0040)'"
+          >
+            <div
+              class="absolute inset-0"
+              style="
+                opacity: 0.06;
+                background-image: radial-gradient(
+                  circle,
+                  #fff 1px,
+                  transparent 1px
+                );
+                background-size: 18px 18px;
+              "
+            ></div>
+            <!-- Avatar overlapping -->
+            <div
+              class="w-16 h-16 rounded-full flex items-center justify-center translate-y-8 relative z-10 shadow-lg"
+              [style.background]="'linear-gradient(135deg,' + m.color + ', #2a0040)'"
+            >
+              <span class="text-white font-black text-sm">{{ m.avatar }}</span>
+            </div>
+          </div>
+
+          <div class="pt-12 px-5 pb-5 text-center">
+            <h3
+              class="font-['Playfair_Display'] font-bold text-base"
+              style="color: var(--color-dark)"
+            >
+              {{ m.name }}
+            </h3>
+            <div
+              class="text-xs font-bold uppercase tracking-widest mt-0.5"
+              [style.color]="m.color"
+            >
+              {{ m.subject }}
+            </div>
+
+            <!-- Stars + sessions -->
+            <div class="flex items-center justify-center gap-3 mt-2 mb-4">
+              <div class="flex gap-0.5">
+                @for (s of [1,2,3,4,5]; track s) {
+                <span class="text-xs" style="color: #f5a623">★</span>
+                }
+              </div>
+              <span class="text-gray-400 text-xs"
+                >{{ m.rating }} · {{ m.sessions }} sessions</span
+              >
+            </div>
+
+            <!-- Availability -->
+            <div class="flex items-center justify-center gap-2 mb-4">
+              @if (m.available) {
+              <div
+                class="avail-dot w-2 h-2 rounded-full"
+                style="background: #16a34a"
+              ></div>
+              <span class="text-xs font-bold" style="color: #15803d"
+                >Available Now</span
+              >
+              } @else {
+              <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+              <span class="text-xs font-semibold text-gray-400"
+                >Busy — Book for Later</span
+              >
+              }
+            </div>
+
+            <button
+              class="action-btn w-full text-white font-extrabold text-xs py-2.5 rounded-xl cursor-pointer border-none"
+              [style]="m.available
+                        ? 'background:linear-gradient(135deg,' + m.color + ',var(--color-dark));box-shadow:0 4px 14px rgba(137,1,23,0.25);'
+                        : 'background:#f3f4f6;color:#9ca3af;cursor:not-allowed;'"
+            >
+              {{ m.available ? '📅 Book Session' : '🔔 Get Notified' }}
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       TICKET FORM
+  ════════════════════════════════════════════════════════ -->
+  <section
+    class="py-20 relative overflow-hidden"
+    style="
+      background: linear-gradient(
+        160deg,
+        #f8f0f8 0%,
+        #f3eef8 60%,
+        #faf0f2 100%
+      );
+    "
+  >
+    <div class="max-w-3xl mx-auto px-6 md:px-14 relative z-10">
+      <div class="text-center mb-12">
+        <div
+          class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+          style="
+            background: rgba(137, 1, 23, 0.07);
+            color: var(--color-primary);
+            border: 1px solid rgba(137, 1, 23, 0.14);
+          "
+        >
+          🎫 Submit a Ticket
+        </div>
+        <h2
+          class="font-['Playfair_Display'] text-3xl md:text-4xl font-black section-title"
+          style="color: var(--color-dark)"
+        >
+          Can't Find Your
+          <em class="not-italic" style="color: var(--color-primary)"
+            >Answer?</em
+          >
+        </h2>
+        <p class="mt-4 text-gray-500 text-base">
+          Submit a detailed ticket and we'll respond within 24 hours.
+        </p>
+      </div>
+
+      @if (!ticketSent()) {
+      <form
+        (submit)="submitTicket($event)"
+        class="fade-in-up bg-white rounded-3xl p-8 border border-gray-100"
+        style="box-shadow: 0 16px 48px rgba(137, 1, 23, 0.1)"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label
+              class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+              style="color: var(--color-dark)"
+              >Full Name *</label
+            >
+            <input
+              type="text"
+              placeholder="Rahul Kumar"
+              required
+              class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+              style="color: var(--color-dark)"
+              >Email *</label
+            >
+            <input
+              type="email"
+              placeholder="rahul@email.com"
+              required
+              class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+              style="color: var(--color-dark)"
+              >Phone</label
+            >
+            <input
+              type="tel"
+              placeholder="9876543210"
+              class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+              style="color: var(--color-dark)"
+              >Issue Category *</label
+            >
+            <select
+              required
+              class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white cursor-pointer"
+              style="outline: none; color: var(--color-dark)"
+            >
+              <option value="">Select category</option>
+              @for (c of ['Admission / Enrollment','Test Series / Mock
+              Tests','Payment / Refund','Technical / Login','Study
+              Material','Mentorship / Doubt Clearing','Other']; track c) {
+              <option [value]="c">{{ c }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label
+              class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+              style="color: var(--color-dark)"
+              >Subject *</label
+            >
+            <input
+              type="text"
+              placeholder="Brief description of your issue"
+              required
+              class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white"
+            />
+          </div>
+
+          <div class="sm:col-span-2">
+            <label
+              class="block text-xs font-bold uppercase tracking-wider mb-1.5"
+              style="color: var(--color-dark)"
+              >Message *</label
+            >
+            <textarea
+              rows="4"
+              placeholder="Please describe your issue in detail. Include any error messages, screenshots info, or steps to reproduce the problem."
+              required
+              class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 text-sm bg-white resize-none"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-4 mt-6">
+          <button
+            type="submit"
+            class="action-btn w-full sm:w-auto text-white font-extrabold px-10 py-4 rounded-2xl cursor-pointer border-none"
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--color-primary),
+                var(--color-dark)
+              );
+              box-shadow: 0 6px 22px rgba(137, 1, 23, 0.35);
+            "
+          >
+            🎫 Submit Ticket
+          </button>
+          <p class="text-gray-400 text-xs text-center">
+            We respond within
+            <strong style="color: var(--color-primary)">24 hours</strong> on
+            working days
+          </p>
+        </div>
+      </form>
+      } @else {
+      <!-- Success state -->
+      <div
+        class="fade-in text-center bg-white rounded-3xl p-12 border border-gray-100"
+        style="box-shadow: 0 16px 48px rgba(137, 1, 23, 0.1)"
+      >
+        <div class="text-6xl mb-4">🎉</div>
+        <h3
+          class="font-['Playfair_Display'] text-2xl font-black mb-3"
+          style="color: var(--color-dark)"
+        >
+          Ticket Submitted!
+        </h3>
+        <p class="text-gray-500 text-base mb-6 max-w-sm mx-auto">
+          Your ticket has been received. You'll get an email confirmation
+          shortly and a response within 24 hours.
+        </p>
+        <div
+          class="inline-flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full mb-8"
+          style="
+            background: rgba(22, 163, 74, 0.08);
+            color: #15803d;
+            border: 1px solid rgba(22, 163, 74, 0.2);
+          "
+        >
+          <!-- ✅ Ticket #KN{{ (Math.random() * 100000 |
+          0).toString().padStart(5,'0') }} -->
+        </div>
+        <br />
+        <button
+          (click)="ticketSent.set(false)"
+          class="action-btn text-white font-extrabold px-8 py-3.5 rounded-full cursor-pointer border-none"
+          style="
+            background: linear-gradient(
+              135deg,
+              var(--color-primary),
+              var(--color-dark)
+            );
+          "
+        >
+          Submit Another →
+        </button>
+      </div>
+      }
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       CTA BOTTOM BANNER
+  ════════════════════════════════════════════════════════ -->
+  <section
+    class="relative py-16 overflow-hidden"
+    style="
+      background: linear-gradient(
+        135deg,
+        var(--color-dark) 0%,
+        #2a0040 50%,
+        var(--color-primary) 100%
+      );
+    "
+  >
+    <div
+      class="absolute inset-0 pointer-events-none"
+      style="
+        opacity: 0.04;
+        background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+        background-size: 24px 24px;
+      "
+    ></div>
+    <div
+      class="absolute top-0 right-0 w-80 h-80 rounded-full pointer-events-none"
+      style="
+        background: rgba(137, 1, 23, 0.2);
+        filter: blur(60px);
+        transform: translate(30%, -30%);
+      "
+    ></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-14 text-center">
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-4xl font-black text-white mb-4"
+      >
+        Still Need Help? We're
+        <em class="not-italic" style="color: #f5a623">Just a Click Away</em>
+      </h2>
+      <p class="text-white/50 text-base max-w-lg mx-auto mb-8">
+        Our team is available 9 AM – 9 PM, 7 days a week on Chat, WhatsApp, and
+        Phone.
       </p>
-      <button class="bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/80">
-        Start Chat
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button
+          (click)="openChat()"
+          class="action-btn text-dark font-extrabold px-10 py-4 rounded-full cursor-pointer border-none"
+          style="
+            background: #f5a623;
+            color: var(--color-dark);
+            box-shadow: 0 8px 28px rgba(245, 166, 35, 0.35);
+          "
+        >
+          💬 Start Live Chat
+        </button>
+        <a
+          href="tel:18001234567"
+          class="font-bold text-base px-10 py-4 rounded-full cursor-pointer no-underline flex items-center justify-center transition-all hover:bg-white/10"
+          style="
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+          "
+        >
+          📞 Call 1800-123-4567
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       FLOATING CHAT WIDGET
+  ════════════════════════════════════════════════════════ -->
+
+  <!-- FAB button -->
+  @if (!chatOpen()) {
+  <button
+    (click)="openChat()"
+    class="chat-fab fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full flex items-center justify-center text-2xl text-white cursor-pointer border-none"
+    style="
+      background: linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-dark)
+      );
+    "
+  >
+    💬
+    <!-- Unread dot -->
+    <span
+      class="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[10px] font-black flex items-center justify-center"
+      style="background: #f5a623; color: var(--color-dark)"
+      >1</span
+    >
+  </button>
+  }
+
+  <!-- Chat window -->
+  @if (chatOpen()) {
+  <div
+    class="chat-widget fixed bottom-6 right-6 z-50 w-80 md:w-96 rounded-3xl overflow-hidden"
+    style="box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25)"
+  >
+    <!-- Chat header -->
+    <div
+      class="flex items-center justify-between px-5 py-4 relative"
+      style="
+        background: linear-gradient(
+          135deg,
+          var(--color-dark),
+          var(--color-primary)
+        );
+      "
+    >
+      <div class="flex items-center gap-3">
+        <div
+          class="w-10 h-10 rounded-full flex items-center justify-center text-lg"
+          style="background: rgba(255, 255, 255, 0.15)"
+        >
+          🤖
+        </div>
+        <div>
+          <div class="font-bold text-white text-sm">KN Support Bot</div>
+          <div class="flex items-center gap-1.5">
+            <div
+              class="w-1.5 h-1.5 rounded-full"
+              style="background: #4ade80"
+            ></div>
+            <span class="text-white/60 text-[11px]">Online</span>
+          </div>
+        </div>
+      </div>
+      <button
+        (click)="chatOpen.set(false)"
+        class="text-white/60 hover:text-white text-xl cursor-pointer border-none bg-transparent transition-colors"
+      >
+        ✕
       </button>
     </div>
 
-    <!-- Call Support -->
-    <div class="bg-white rounded-xl shadow p-6 hover:shadow-lg transition">
-      <div class="text-secondary text-4xl mb-4">📞</div>
-      <h3 class="text-xl font-bold mb-2">Call Support</h3>
-      <p class="text-gray-600 mb-4">
-        Talk directly with our counselors for guidance and issue resolution.
-      </p>
-      <p class="font-semibold text-primary">
-        +91 98765 43210
-      </p>
-    </div>
-
-    <!-- Email Support -->
-    <div class="bg-white rounded-xl shadow p-6 hover:shadow-lg transition">
-      <div class="text-secondary text-4xl mb-4">📧</div>
-      <h3 class="text-xl font-bold mb-2">Email Support</h3>
-      <p class="text-gray-600 mb-4">
-        Send us your queries and get a response within 24 hours.
-      </p>
-      <p class="font-semibold text-primary">
-        support&#64;knowledgenation.in
-      </p>
-    </div>
-  </div>
-
-  <!-- FAQ Section -->
-  <div class="bg-white">
-    <div class="max-w-5xl mx-auto px-4 py-12">
-      <h2 class="text-2xl font-bold text-center mb-8">
-        Frequently Asked Questions
-      </h2>
-
-      <div class="space-y-4">
-        <div class="border rounded-lg p-4">
-          <h4 class="font-semibold">
-            How do I access my online test series?
-          </h4>
-          <p class="text-gray-600 mt-2">
-            Login to your account and navigate to the Test Series section.
-            All active tests will be available there.
-          </p>
-        </div>
-
-        <div class="border rounded-lg p-4">
-          <h4 class="font-semibold">
-            What if my test submission fails?
-          </h4>
-          <p class="text-gray-600 mt-2">
-            Immediately contact Live Chat or Call Support with your registered
-            mobile number and test details.
-          </p>
-        </div>
-
-        <div class="border rounded-lg p-4">
-          <h4 class="font-semibold">
-            Can I attempt tests on mobile?
-          </h4>
-          <p class="text-gray-600 mt-2">
-            Yes, our platform is fully optimized for mobile, tablet, and desktop.
-          </p>
+    <!-- Messages -->
+    <div
+      class="flex flex-col gap-3 px-4 py-4 overflow-y-auto bg-gray-50"
+      style="height: 280px"
+    >
+      @for (msg of chatMessages(); track trackByIndex($index)) {
+      <div
+        class="msg-bubble flex"
+        [class]="msg.from==='user' ? 'justify-end' : 'justify-start'"
+      >
+        <div
+          class="max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed"
+          [style]="msg.from==='user'
+                   ? 'background:linear-gradient(135deg,var(--color-primary),var(--color-dark));color:white;border-radius:18px 18px 4px 18px;'
+                   : 'background:white;color:var(--color-dark);border:1px solid #e5e7eb;border-radius:18px 18px 18px 4px;'"
+        >
+          {{ msg.text }}
         </div>
       </div>
+      }
     </div>
-  </div>
 
-  <!-- CTA -->
-  <div class="bg-secondary text-white">
-    <div class="max-w-7xl mx-auto px-4 py-10 text-center">
-      <h3 class="text-2xl font-bold mb-2">
-        Need Immediate Help?
-      </h3>
-      <p class="mb-4">
-        Our support team is available 7 days a week for online test assistance.
-      </p>
-      <a routerLink="/contact" class="bg-white text-secondary px-6 py-2 rounded font-semibold hover:bg-gray-100 cursor-pointer">
-        Contact Support
-      </a>
+    <!-- Chat input -->
+    <div class="flex gap-2 px-4 py-3 bg-white border-t border-gray-100">
+      <input
+        type="text"
+        placeholder="Type your question..."
+        [value]="chatInput()"
+        (input)="chatInput.set($any($event.target).value)"
+        (keydown.enter)="sendChat()"
+        class="chat-input-field flex-1 px-4 py-2.5 rounded-xl border border-gray-200 text-sm bg-gray-50"
+      />
+      <button
+        (click)="sendChat()"
+        class="w-10 h-10 rounded-xl flex items-center justify-center text-white cursor-pointer border-none shrink-0"
+        style="background: var(--color-primary)"
+      >
+        →
+      </button>
     </div>
   </div>
-</section>
+  }
+</div>
+<!-- /wrapper -->
