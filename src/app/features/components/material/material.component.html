@@ -1,0 +1,42 @@
+    <section class="py-20 px-12">
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="inline-block bg-gold/10 text-gold text-xs font-semibold px-3.5 py-1 rounded-full uppercase tracking-widest mb-3">
+          Study Material
+        </span>
+        
+        <h2 class="font-display text-display-sm font-bold text-text-dark mb-3">
+          Recommended Books
+        </h2>
+        
+        <p class="text-text-muted text-base leading-relaxed max-w-lg mx-auto mb-10">
+          Carefully curated books by subject experts for BPSC aspirants — covering every topic you need.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div *ngFor="let book of books" class="book-card">
+            <div [style.background]="book.gradient" class="w-full h-45 flex items-center justify-center text-6xl">
+              {{ book.icon }}
+            </div>
+            
+            <div class="p-5">
+              <h3 class="font-display text-lg font-bold text-text-dark mb-1">
+                {{ book.title }}
+              </h3>
+              
+              <p class="text-text-muted text-xs mb-3">
+                {{ book.author }}
+              </p>
+              
+              <div class="flex items-center justify-between">
+                <span class="font-display text-xl font-bold text-primary">
+                  {{ book.price }}
+                </span>
+                <a href="#" class="bg-green-600 text-white px-4.5 py-2 rounded-lg text-xs font-semibold hover:bg-green-700 transition-colors">
+                  Buy Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

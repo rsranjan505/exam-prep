@@ -1,0 +1,43 @@
+  <section class="py-20 px-12 bg-gray-light">
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="inline-block bg-accent/10 text-accent text-xs font-semibold px-3.5 py-1 rounded-full uppercase tracking-widest mb-3">
+          Practice Zone
+        </span>
+        
+        <h2 class="font-display text-display-sm font-bold text-text-dark mb-3">
+          Our Test Series
+        </h2>
+        
+        <p class="text-text-muted text-base leading-relaxed max-w-lg mx-auto mb-10">
+          Choose from multiple full-length tests, mock papers, and section-wise quizzes designed for BPSC aspirants.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div *ngFor="let test of tests" class="test-card">
+            <span [ngClass]="'inline-block text-xs font-semibold px-2.5 py-0.75 rounded mb-3 ' +
+              (test.badgeType === 'red' ? 'bg-primary/10 text-primary' :
+               test.badgeType === 'purple' ? 'bg-secondary/10 text-secondary' :
+               'bg-accent/10 text-accent')">
+              {{ test.badge }}
+            </span>
+            
+            <h3 class="font-display text-lg font-bold text-text-dark mb-2">
+              {{ test.title }}
+            </h3>
+            
+            <p class="text-text-muted text-sm leading-relaxed flex-grow">
+              {{ test.description }}
+            </p>
+            
+            <div class="flex gap-4 text-sm text-text-muted my-4">
+              <span>📋 {{ test.questions }}</span>
+              <span>⏱ {{ test.duration }}</span>
+            </div>
+            
+            <a href="#" class="block w-full bg-primary text-white text-center py-2.5 rounded-lg text-sm font-semibold hover:bg-red-900 transition-colors">
+              Start Test →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>

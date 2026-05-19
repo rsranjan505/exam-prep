@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CartserviceService } from '../../services/cartservice.service';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { JoinTest } from "../../components/join-test/join-test";
 
 @Component({
   selector: 'app-study-material',
-  imports: [NgClass, NgFor, JoinTest],
+  imports: [NgClass, NgFor, JoinTest, NgIf],
   templateUrl: './study-material.html',
   styleUrl: './study-material.css',
 })

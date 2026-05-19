@@ -1,41 +1,342 @@
-<section class="max-w-3xl mx-auto py-10 px-4">
-  <h2 class="text-2xl font-bold mb-2">{{ test.title }}</h2>
-  <p class="text-gray-600 mb-6">{{ test.description }}</p>
+<section class="min-h-screen bg-[#fdf8f8]">
 
-  <div *ngIf="currentQ < test.questions.length; else done">
-    <div class="bg-white shadow rounded p-5 space-y-4">
-      <p class="font-semibold">
-        Q{{ currentQ + 1 }}. {{ test.questions[currentQ].q }}
+  <!-- HERO -->
+  <div
+    class="relative overflow-hidden border-b border-white/10 bg-[linear-gradient(135deg,#3f043e_0%,#400675_55%,#890117_100%)]"
+  >
+
+    <!-- Glow -->
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_35%)]"
+    ></div>
+
+    <div
+      class="relative mx-auto max-w-5xl px-4 py-16 text-center"
+    >
+
+      <span
+        class="mb-5 inline-block rounded-full bg-[#f9b84a]/20 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-[#f9b84a]"
+      >
+        Mock Test Series
+      </span>
+
+      <h1
+        class="font-['Playfair_Display'] text-4xl font-extrabold text-white md:text-5xl"
+      >
+        {{ test.title }}
+      </h1>
+
+      <p
+        class="mx-auto mt-5 max-w-3xl text-lg leading-8 text-white/75"
+      >
+        {{ test.description }}
       </p>
 
-      <div class="flex flex-col gap-2">
-        <button
-          *ngFor="let o of test.questions[currentQ].options; let i = index"
-          (click)="selected = i"
-          [ngClass]="
-            selected === i
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 hover:bg-gray-200'
-          "
-          class="p-2 rounded transition text-left"
-        >
-          {{ o }}
-        </button>
-      </div>
-
-      <button
-        (click)="next()"
-        [disabled]="selected === null"
-        class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition mt-3"
+      <!-- Stats -->
+      <div
+        class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4"
       >
-        Next
-      </button>
+
+        <div
+          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
+        >
+          <h3
+            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
+          >
+            10
+          </h3>
+
+          <p class="mt-1 text-sm text-white/70">
+            Questions
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
+        >
+          <h3
+            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
+          >
+            15
+          </h3>
+
+          <p class="mt-1 text-sm text-white/70">
+            Minutes
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
+        >
+          <h3
+            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
+          >
+            +1
+          </h3>
+
+          <p class="mt-1 text-sm text-white/70">
+            Per Correct
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
+        >
+          <h3
+            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
+          >
+            0
+          </h3>
+
+          <p class="mt-1 text-sm text-white/70">
+            Negative Marking
+          </p>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <ng-template #done>
-    <p class="text-center text-lg font-semibold">
-      You have completed the test!
-    </p>
-  </ng-template>
+  <!-- TEST SECTION -->
+  <div class="mx-auto max-w-4xl px-4 py-14">
+
+    <!-- Progress -->
+    <div class="mb-8">
+
+      <div class="mb-3 flex items-center justify-between">
+
+        <p class="text-sm font-medium text-[#6f566d]">
+          Question {{ currentQ + 1 }} of {{ test.questions.length }}
+        </p>
+
+        <p class="text-sm font-semibold text-[#890117]">
+          {{ ((currentQ + 1) / test.questions.length) * 100  }}%
+          Completed
+        </p>
+
+      </div>
+
+      <div class="h-3 overflow-hidden rounded-full bg-[#eadfe9]">
+
+        <div
+          class="h-full rounded-full bg-[linear-gradient(90deg,#890117,#400675)] transition-all duration-300"
+          [style.width.%]="((currentQ + 1) / test.questions.length) * 100"
+        ></div>
+
+      </div>
+    </div>
+
+    <!-- QUESTIONS -->
+    <div *ngIf="currentQ < test.questions.length; else done">
+
+      <div
+        class="overflow-hidden rounded-3xl border border-[#eadfe9] bg-white shadow-xl"
+      >
+
+        <!-- Header -->
+        <div
+          class="border-b border-[#f1e7f0] bg-gradient-to-r from-[#890117]/5 to-[#400675]/5 p-6"
+        >
+
+          <div class="flex items-center justify-between gap-4">
+
+            <div>
+
+              <span
+                class="mb-3 inline-block rounded-full bg-[#890117]/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-[#890117]"
+              >
+                General Knowledge
+              </span>
+
+              <h2
+                class="font-['Playfair_Display'] text-2xl font-bold leading-snug text-[#1a0518]"
+              >
+                Q{{ currentQ + 1 }}.
+                {{ test.questions[currentQ].q }}
+              </h2>
+
+            </div>
+
+            <!-- Question Number Circle -->
+            <div
+              class="hidden h-16 w-16 items-center justify-center rounded-full bg-[linear-gradient(135deg,#890117,#400675)] text-xl font-bold text-white shadow-lg md:flex"
+            >
+              {{ currentQ + 1 }}
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Options -->
+        <div class="space-y-4 p-6">
+
+          <button
+            *ngFor="let o of test.questions[currentQ].options; let i = index"
+            (click)="selected = i"
+            class="group flex w-full items-start gap-4 rounded-2xl border p-5 text-left transition-all duration-200"
+            [ngClass]="
+              selected === i
+                ? 'border-[#890117] bg-gradient-to-r from-[#890117] to-[#400675] text-white shadow-lg'
+                : 'border-[#eadfe9] bg-white hover:-translate-y-1 hover:border-[#890117]/30 hover:bg-[#faf4f6] hover:shadow-md'
+            "
+          >
+
+            <!-- Option Circle -->
+            <div
+              class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold"
+              [ngClass]="
+                selected === i
+                  ? 'bg-white text-[#890117]'
+                  : 'bg-[#f3e8ef] text-[#890117]'
+              "
+            >
+              {{ ['A', 'B', 'C', 'D'][i] }}
+            </div>
+
+            <!-- Option Text -->
+            <div class="flex-1">
+
+              <p
+                class="text-base font-medium leading-7"
+              >
+                {{ o }}
+              </p>
+
+            </div>
+
+          </button>
+
+          <!-- Footer -->
+          <div
+            class="mt-8 flex flex-col items-center justify-between gap-4 border-t border-[#f3e8ef] pt-6 sm:flex-row"
+          >
+
+            <p class="text-sm text-[#7a5a79]">
+              Select the most appropriate answer before proceeding.
+            </p>
+
+            <button
+              (click)="next()"
+              [disabled]="selected === null"
+              class="rounded-2xl px-8 py-3 text-sm font-semibold text-white transition-all duration-200"
+              [ngClass]="
+                selected === null
+                  ? 'cursor-not-allowed bg-gray-400'
+                  : 'bg-[linear-gradient(135deg,#890117,#400675)] shadow-lg shadow-[#890117]/20 hover:scale-105 hover:shadow-xl'
+              "
+            >
+              {{
+                currentQ + 1 === test.questions.length
+                  ? 'Finish Test →'
+                  : 'Next Question →'
+              }}
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RESULT -->
+    <ng-template #done>
+
+      <div
+        class="overflow-hidden rounded-3xl border border-[#eadfe9] bg-white text-center shadow-2xl"
+      >
+
+        <!-- Top -->
+        <div
+          class="bg-[linear-gradient(135deg,#3f043e_0%,#400675_55%,#890117_100%)] px-6 py-14 text-white"
+        >
+
+          <div
+            class="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-white/10 text-5xl backdrop-blur-sm"
+          >
+            🎉
+          </div>
+
+          <h2
+            class="mt-8 font-['Playfair_Display'] text-4xl font-bold"
+          >
+            Test Completed!
+          </h2>
+
+          <p class="mx-auto mt-4 max-w-xl text-lg leading-8 text-white/75">
+            Good preparation comes from consistency, not motivation.
+            Most aspirants fail because they consume content instead of solving
+            questions regularly.
+          </p>
+
+        </div>
+
+        <!-- Bottom -->
+        <div class="p-8">
+
+          <div
+            class="mx-auto grid max-w-2xl gap-5 md:grid-cols-3"
+          >
+
+            <div
+              class="rounded-2xl bg-[#faf4f6] p-5"
+            >
+              <h3
+                class="font-['Playfair_Display'] text-3xl font-bold text-[#890117]"
+              >
+                10
+              </h3>
+
+              <p class="mt-1 text-sm text-[#6f566d]">
+                Questions Attempted
+              </p>
+            </div>
+
+            <div
+              class="rounded-2xl bg-[#f7f1fb] p-5"
+            >
+              <h3
+                class="font-['Playfair_Display'] text-3xl font-bold text-[#400675]"
+              >
+                Great
+              </h3>
+
+              <p class="mt-1 text-sm text-[#6f566d]">
+                Performance
+              </p>
+            </div>
+
+            <div
+              class="rounded-2xl bg-[#fff7e8] p-5"
+            >
+              <h3
+                class="font-['Playfair_Display'] text-3xl font-bold text-[#c8860a]"
+              >
+                Keep
+              </h3>
+
+              <p class="mt-1 text-sm text-[#6f566d]">
+                Practicing Daily
+              </p>
+            </div>
+
+          </div>
+
+          <button
+            routerLink="/test-series"
+            class="mt-10 rounded-2xl bg-[linear-gradient(135deg,#890117,#400675)] px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-[#890117]/20 transition hover:scale-105 hover:shadow-xl"
+          >
+            Explore More Tests →
+          </button>
+
+        </div>
+
+      </div>
+
+    </ng-template>
+
+  </div>
+
 </section>

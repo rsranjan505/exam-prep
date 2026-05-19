@@ -1,37 +1,250 @@
-<div class="max-w-7xl mx-auto py-10 px-4">
-  <h2 class="text-2xl font-bold text-center mb-6">Study Books</h2>
+<section class="min-h-screen bg-[#fdf8f8]">
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  <!-- HERO -->
+  <div
+    class="relative overflow-hidden border-b border-white/10 bg-[linear-gradient(135deg,#3f043e_0%,#400675_55%,#890117_100%)]"
+  >
+
+    <!-- Glow -->
     <div
-      *ngFor="let b of books"
-      class="bg-white shadow rounded-lg overflow-hidden hover:shadow-lg transition"
+      class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_35%)]"
+    ></div>
+
+    <div
+      class="relative mx-auto max-w-7xl px-4 py-20 text-center"
     >
-      <!-- Image -->
-      <img [src]="b.image" alt="book" class="h-88 w-full object-full" />
 
-      <div class="p-5">
-        <h3 class="font-bold text-lg">{{ b.name }}</h3>
-        <p class="text-sm text-gray-600">{{ b.author }}</p>
+      <span
+        class="mb-5 inline-block rounded-full bg-[#f9b84a]/20 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-[#f9b84a]"
+      >
+        BPSC Study Material
+      </span>
 
-        <div class="flex justify-between items-center mt-3">
-          <span class="font-semibold text-lg">₹{{ b.price }}</span>
+      <h1
+        class="mx-auto max-w-4xl font-['Playfair_Display'] text-4xl font-extrabold leading-tight text-white md:text-6xl"
+      >
+        Recommended Study Books
+      </h1>
 
-          <button
-            (click)="addToCart(b)"
-            [disabled]="b.added"
-            class="px-4 py-1 rounded text-white transition"
-            [ngClass]="
-              b.added
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-secondary/80 hover:bg-secondary cursor-pointer'
-            "
+      <p
+        class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/75"
+      >
+        Carefully curated books and preparation material designed by experts
+        to help BPSC aspirants build strong concepts, improve answer writing,
+        and maximize exam performance.
+      </p>
+
+      <!-- Stats -->
+      <div
+        class="mt-12 grid grid-cols-2 gap-5 md:grid-cols-4"
+      >
+
+        <div
+          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
+        >
+          <h3
+            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
           >
-            {{ b.added ? "Added" : "Add to Cart" }}
-          </button>
+            50+
+          </h3>
+
+          <p class="mt-1 text-sm text-white/70">
+            Study Books
+          </p>
         </div>
+
+        <div
+          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
+        >
+          <h3
+            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
+          >
+            12K+
+          </h3>
+
+          <p class="mt-1 text-sm text-white/70">
+            Students Served
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
+        >
+          <h3
+            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
+          >
+            98%
+          </h3>
+
+          <p class="mt-1 text-sm text-white/70">
+            Satisfaction Rate
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
+        >
+          <h3
+            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
+          >
+            24×7
+          </h3>
+
+          <p class="mt-1 text-sm text-white/70">
+            Student Support
+          </p>
+        </div>
+
       </div>
+
     </div>
   </div>
-</div>
 
+  <!-- BOOK SECTION -->
+  <div class="mx-auto max-w-7xl px-4 py-16">
+
+    <!-- Heading -->
+    <div class="mb-14 text-center">
+
+      <span
+        class="mb-4 inline-block rounded-full bg-[#400675]/10 px-5 py-2 text-xs font-semibold uppercase tracking-[2px] text-[#400675]"
+      >
+        Curated Collection
+      </span>
+
+      <h2
+        class="font-['Playfair_Display'] text-4xl font-bold text-[#1a0518]"
+      >
+        Books That Actually Matter
+      </h2>
+
+      <p
+        class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#6f566d]"
+      >
+        Most aspirants waste time collecting random PDFs and low-quality notes.
+        The real edge comes from focused preparation using trusted and structured
+        material.
+      </p>
+
+      <div
+        class="mx-auto mt-5 h-1 w-16 rounded-full bg-gradient-to-r from-[#890117] to-[#400675]"
+      ></div>
+    </div>
+
+    <!-- GRID -->
+    <div
+      class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    >
+
+      <!-- CARD -->
+      <div
+        *ngFor="let b of books"
+        class="group overflow-hidden rounded-3xl border border-[#eadfe9] bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+      >
+
+        <!-- IMAGE -->
+        <div class="relative overflow-hidden">
+
+          <img
+            [src]="b.image"
+            [alt]="b.name"
+            class="h-[24rem] w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+
+          <!-- Overlay -->
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 transition duration-300 group-hover:opacity-100"
+          ></div>
+
+          <!-- Badge -->
+          <span
+            class="absolute left-4 top-4 rounded-full bg-[#890117] px-4 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow-lg"
+          >
+            BPSC Prep
+          </span>
+
+          <!-- Floating Price -->
+          <div
+            class="absolute bottom-4 right-4 rounded-2xl bg-white/95 px-4 py-2 shadow-lg backdrop-blur-sm"
+          >
+            <span
+              class="font-['Playfair_Display'] text-xl font-bold text-[#890117]"
+            >
+              ₹{{ b.price }}
+            </span>
+          </div>
+
+        </div>
+
+        <!-- BODY -->
+        <div class="p-6">
+
+          <!-- Author -->
+          <p
+            class="mb-2 text-sm font-medium uppercase tracking-wide text-[#890117]"
+          >
+            {{ b.author }}
+          </p>
+
+          <!-- Title -->
+          <h3
+            class="line-clamp-2 font-['Playfair_Display'] text-2xl font-bold leading-snug text-[#1a0518]"
+          >
+            {{ b.name }}
+          </h3>
+
+          <!-- Description -->
+          <p
+            class="mt-4 line-clamp-3 leading-7 text-[#6f566d]"
+          >
+            High-quality exam-oriented material designed specifically for BPSC
+            aspirants to strengthen concepts, revision, and answer writing.
+          </p>
+
+          <!-- Footer -->
+          <div
+            class="mt-6 flex items-center justify-between gap-4"
+          >
+
+            <!-- Rating -->
+            <div>
+              <div class="text-[#c8860a]">
+                ★★★★★
+              </div>
+
+              <p class="mt-1 text-xs text-[#8a6b88]">
+                Trusted by aspirants
+              </p>
+            </div>
+
+            <!-- Button -->
+            <button
+              (click)="addToCart(b)"
+              [disabled]="b.added"
+              class="rounded-xl px-5 py-3 text-sm font-semibold text-white transition duration-200"
+              [ngClass]="
+                b.added
+                  ? 'cursor-not-allowed bg-gray-400'
+                  : 'bg-[linear-gradient(135deg,#890117,#400675)] shadow-lg shadow-[#890117]/20 hover:scale-105 hover:shadow-xl cursor-pointer'
+              "
+            >
+              <span *ngIf="!b.added">
+                Add to Cart →
+              </span>
+
+              <span *ngIf="b.added">
+                ✓ Added
+              </span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- CTA -->
 <app-join-test></app-join-test>
