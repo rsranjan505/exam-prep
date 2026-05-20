@@ -1,0 +1,250 @@
+/* ═══════════════════════════════════════════════════════════
+   Online Support Page — Styles
+   Knowledge Nation | Angular 19 + Tailwind CSS v4
+════════════════════════════════════════════════════════════ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  animation: fadeInUp 0.5s ease both;
+}
+.delay-1 {
+  animation-delay: 0.07s;
+}
+.delay-2 {
+  animation-delay: 0.14s;
+}
+.delay-3 {
+  animation-delay: 0.21s;
+}
+.delay-4 {
+  animation-delay: 0.28s;
+}
+.delay-5 {
+  animation-delay: 0.35s;
+}
+.delay-6 {
+  animation-delay: 0.42s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fadeIn 0.3s ease both;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, #890117, #400675);
+  margin: 10px auto 0;
+}
+
+/* ── Channel cards ──────────────────────────────────────── */
+.channel-card {
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+.channel-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--c), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.channel-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(137, 1, 23, 0.14);
+}
+.channel-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* ── FAQ ────────────────────────────────────────────────── */
+.faq-card {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.faq-card:hover {
+  box-shadow: 0 6px 24px rgba(137, 1, 23, 0.09);
+}
+.faq-card.open {
+  border-color: rgba(137, 1, 23, 0.2) !important;
+  box-shadow: 0 8px 28px rgba(137, 1, 23, 0.1);
+}
+
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+.faq-body.open {
+  max-height: 250px;
+  opacity: 1;
+}
+
+.faq-icon {
+  transition: transform 0.3s ease;
+}
+.faq-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* ── Cat tabs ────────────────────────────────────────────── */
+.cat-tab {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+.cat-tab:hover:not(.active) {
+  background: rgba(137, 1, 23, 0.07) !important;
+  color: var(--color-primary) !important;
+}
+
+/* ── Mentor card ────────────────────────────────────────── */
+.mentor-card {
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+.mentor-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #890117, #400675);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.mentor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 44px rgba(137, 1, 23, 0.14);
+}
+.mentor-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Chat widget ─────────────────────────────────────────── */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+.chat-widget {
+  animation: slideInRight 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes msgPop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.msg-bubble {
+  animation: msgPop 0.25s ease both;
+}
+
+.chat-input-field {
+  transition: border-color 0.2s ease;
+  outline: none;
+}
+.chat-input-field:focus {
+  border-color: var(--color-primary) !important;
+}
+
+/* ── Ticket form ─────────────────────────────────────────── */
+.form-input {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+.form-input:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(137, 1, 23, 0.1);
+}
+
+/* ── CTA button ─────────────────────────────────────────── */
+.action-btn {
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+.action-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.28s ease;
+}
+.action-btn:hover::after {
+  transform: translateX(0);
+}
+.action-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* ── Available pulse ─────────────────────────────────────── */
+@keyframes availPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(22, 163, 74, 0);
+  }
+}
+.avail-dot {
+  animation: availPulse 2s ease-in-out infinite;
+}
+
+/* ── Floating chat button pulse ─────────────────────────── */
+@keyframes chatBtnPulse {
+  0%,
+  100% {
+    box-shadow: 0 8px 28px rgba(137, 1, 23, 0.45);
+  }
+  50% {
+    box-shadow: 0 8px 40px rgba(137, 1, 23, 0.7);
+  }
+}
+.chat-fab {
+  animation: chatBtnPulse 2s ease-in-out infinite;
+}

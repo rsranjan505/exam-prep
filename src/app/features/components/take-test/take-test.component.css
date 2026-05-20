@@ -1,0 +1,155 @@
+/* ═══════════════════════════════════════════════════════════
+   Take Test — Quiz UI Styles
+   Knowledge Nation | Angular 19 + Tailwind CSS v4
+════════════════════════════════════════════════════════════ */
+
+/* ── Fade in ────────────────────────────────────────────── */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeIn 0.4s ease both; }
+  
+  /* ── Option cards ───────────────────────────────────────── */
+  .option-card {
+    transition: all 0.2s cubic-bezier(.34,1.56,.64,1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .option-card:hover:not(.selected):not(.disabled) {
+    border-color: rgba(137,1,23,0.35) !important;
+    background: rgba(137,1,23,0.04) !important;
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(137,1,23,0.1);
+  }
+  .option-card.selected {
+    border-color: var(--color-primary) !important;
+    background: rgba(137,1,23,0.06) !important;
+    transform: translateX(4px);
+    box-shadow: 0 4px 18px rgba(137,1,23,0.15);
+  }
+  .option-card.correct-answer {
+    border-color: #16a34a !important;
+    background: rgba(22,163,74,0.07) !important;
+  }
+  .option-card.wrong-answer {
+    border-color: #dc2626 !important;
+    background: rgba(220,38,38,0.06) !important;
+  }
+  .option-card.disabled { cursor: default; }
+  
+  /* Key badge transition */
+  .key-badge {
+    transition: all 0.2s ease;
+  }
+  .option-card.selected .key-badge {
+    background: var(--color-primary) !important;
+    color: white !important;
+    border-color: var(--color-primary) !important;
+  }
+  .option-card.correct-answer .key-badge {
+    background: #16a34a !important;
+    color: white !important;
+    border-color: #16a34a !important;
+  }
+  .option-card.wrong-answer .key-badge {
+    background: #dc2626 !important;
+    color: white !important;
+    border-color: #dc2626 !important;
+  }
+  
+  /* ── Timer urgency pulse ───────────────────────────────── */
+  @keyframes timerPulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.6; }
+  }
+  .timer-urgent { animation: timerPulse 1s ease-in-out infinite; }
+  
+  /* ── Progress bar fill ─────────────────────────────────── */
+  .progress-fill {
+    transition: width 0.5s ease;
+  }
+  
+  /* ── Question slide transition ─────────────────────────── */
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .question-slide { animation: slideIn 0.3s ease both; }
+  
+  /* ── Palette question dots ─────────────────────────────── */
+  .q-dot {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  .q-dot:hover { transform: scale(1.15); }
+  .q-dot.active-dot {
+    box-shadow: 0 0 0 3px rgba(137,1,23,0.3);
+    transform: scale(1.12);
+  }
+  
+  /* ── Nav buttons ────────────────────────────────────────── */
+  .nav-btn {
+    transition: all 0.2s ease;
+    position: relative; overflow: hidden;
+  }
+  .nav-btn::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+  .nav-btn:hover::after { transform: translateX(0); }
+  .nav-btn:hover { transform: translateY(-1px); }
+  
+  /* ── Result score ring ──────────────────────────────────── */
+  @keyframes ringFill {
+    from { stroke-dashoffset: 283; }
+  }
+  .score-ring-fill { animation: ringFill 1.2s ease 0.3s both; }
+  
+  /* ── Explanation panel ──────────────────────────────────── */
+  .explanation-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+  .explanation-panel.open {
+    max-height: 200px;
+    opacity: 1;
+  }
+  
+  /* ── Confirm dialog ─────────────────────────────────────── */
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .dialog-box { animation: scaleIn 0.25s ease both; }
+  
+  /* ── Palette drawer (mobile) ────────────────────────────── */
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+  .palette-drawer { animation: slideUp 0.3s ease both; }
+  
+  /* ── Result card ────────────────────────────────────────── */
+  @keyframes resultIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .result-card { animation: resultIn 0.5s ease 0.1s both; }
+  
+  /* ── Mark for review toggle ─────────────────────────────── */
+  .mark-btn {
+    transition: all 0.2s ease;
+  }
+  .mark-btn.marked {
+    background: rgba(64,6,117,0.12) !important;
+    color: #400675 !important;
+    border-color: rgba(64,6,117,0.3) !important;
+  }
+  

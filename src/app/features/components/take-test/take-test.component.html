@@ -1,0 +1,879 @@
+<!-- ═══════════════════════════════════════════════════════════
+     KNOWLEDGE NATION — Take Test / Quiz Interface
+     Angular 19 (Signals) | Tailwind CSS v4
+════════════════════════════════════════════════════════════ -->
+
+<!-- ══════════════════════════════════════════════════════════
+     PRE-TEST SCREEN
+══════════════════════════════════════════════════════════ -->
+@if (!testStarted()) {
+<div
+  class="min-h-screen flex items-center justify-center px-4 py-12"
+  style="
+    background: linear-gradient(160deg, #f8f0f8 0%, #f3eef8 60%, #faf0f2 100%);
+  "
+>
+  <div
+    class="fade-in bg-white rounded-3xl w-full max-w-2xl overflow-hidden"
+    style="box-shadow: 0 32px 80px rgba(137, 1, 23, 0.15)"
+  >
+    <!-- Top banner -->
+    <div
+      class="px-8 py-6 relative overflow-hidden"
+      style="background: linear-gradient(135deg, #3f043e, #2a0040, #400675)"
+    >
+      <div
+        class="absolute inset-0"
+        style="
+          opacity: 0.05;
+          background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+          background-size: 22px 22px;
+        "
+      ></div>
+      <div
+        class="absolute -top-8 -right-8 w-32 h-32 rounded-full"
+        style="background: rgba(137, 1, 23, 0.25); filter: blur(30px)"
+      ></div>
+
+      <div class="relative z-10">
+        <span
+          class="text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-3 inline-block"
+          style="
+            background: rgba(245, 166, 35, 0.18);
+            color: #f5a623;
+            border: 1px solid rgba(245, 166, 35, 0.3);
+          "
+        >
+          📋 BPSC Prelims Series
+        </span>
+        <h1 class="font-['Playfair_Display'] text-3xl font-black text-white">
+          {{ testTitle }}
+        </h1>
+        <p class="text-white/55 text-sm mt-1">{{ testSubtitle }}</p>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="px-8 py-7">
+      <h2
+        class="font-['Playfair_Display'] font-bold text-lg mb-5"
+        style="color: var(--color-dark)"
+      >
+        Test Instructions
+      </h2>
+
+      <div class="grid grid-cols-2 gap-3 mb-6">
+        @for (info of [ {icon:'❓', label:'Questions', val:'10'}, {icon:'⏱️',
+        label:'Duration', val:'120 Mins'}, {icon:'✅', label:'+ve Marks',
+        val:'+1 per correct'}, {icon:'❌', label:'-ve Marks', val:'-1/3 per
+        wrong'} ]; track info.label) {
+        <div
+          class="flex items-center gap-3 rounded-xl p-3.5 border border-gray-100"
+          style="background: rgba(137, 1, 23, 0.03)"
+        >
+          <span class="text-xl">{{ info.icon }}</span>
+          <div>
+            <div
+              class="text-gray-400 text-[10px] uppercase tracking-wider font-semibold"
+            >
+              {{ info.label }}
+            </div>
+            <div class="font-bold text-sm" style="color: var(--color-dark)">
+              {{ info.val }}
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <ul class="flex flex-col gap-2 mb-8">
+        @for (rule of [ 'Read each question carefully before selecting your
+        answer.', 'You can mark questions for review and revisit them before
+        submitting.', 'Each correct answer awards +1 mark. ⅓ mark is deducted
+        for wrong answers.', 'Click "Submit Test" only when you are done with
+        all questions.', 'The test will auto-submit when the timer reaches
+        zero.' ]; track rule) {
+        <li class="flex items-start gap-2.5 text-sm text-gray-500">
+          <span
+            class="mt-0.5 shrink-0 font-bold"
+            style="color: var(--color-primary)"
+            >›</span
+          >
+          {{ rule }}
+        </li>
+        }
+      </ul>
+
+      <button
+        (click)="startTest()"
+        class="nav-btn w-full text-white font-extrabold py-4 rounded-2xl text-base cursor-pointer border-none tracking-wide"
+        style="
+          background: linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-dark)
+          );
+          box-shadow: 0 8px 28px rgba(137, 1, 23, 0.35);
+        "
+      >
+        Start Test Now →
+      </button>
+    </div>
+  </div>
+</div>
+}
+
+<!-- ══════════════════════════════════════════════════════════
+       RESULT SCREEN
+  ══════════════════════════════════════════════════════════ -->
+@if (showResult()) {
+<div
+  class="min-h-screen py-12 px-4"
+  style="
+    background: linear-gradient(160deg, #f8f0f8 0%, #f3eef8 60%, #faf0f2 100%);
+  "
+>
+  <div class="max-w-5xl mx-auto">
+    <!-- Result header card -->
+    <div
+      class="result-card rounded-3xl overflow-hidden mb-6"
+      style="box-shadow: 0 24px 64px rgba(137, 1, 23, 0.18)"
+    >
+      <!-- Banner -->
+      <div
+        class="px-8 py-7 relative overflow-hidden"
+        style="background: linear-gradient(135deg, #3f043e, #2a0040, #400675)"
+      >
+        <div
+          class="absolute inset-0"
+          style="
+            opacity: 0.04;
+            background-image: radial-gradient(
+              circle,
+              #fff 1px,
+              transparent 1px
+            );
+            background-size: 22px 22px;
+          "
+        ></div>
+        <div
+          class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+        >
+          <div>
+            <div class="text-white/50 text-xs uppercase tracking-widest mb-1">
+              Test Completed
+            </div>
+            <h1
+              class="font-['Playfair_Display'] text-3xl font-black text-white"
+            >
+              {{ testTitle }}
+            </h1>
+            <p class="text-white/50 text-sm mt-1">{{ testSubtitle }}</p>
+          </div>
+
+          <!-- Score circle -->
+          <div class="flex flex-col items-center">
+            <div class="relative w-28 h-28">
+              <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.1)"
+                  stroke-width="8"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  fill="none"
+                  stroke="#f5a623"
+                  stroke-width="8"
+                  stroke-linecap="round"
+                  class="score-ring-fill"
+                  [attr.stroke-dasharray]="283"
+                  [attr.stroke-dashoffset]="
+                    283 - (283 * scoreResult().percent) / 100
+                  "
+                />
+              </svg>
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center"
+              >
+                <span
+                  class="font-['Playfair_Display'] text-2xl font-black text-white"
+                  >{{ scoreResult().percent }}%</span
+                >
+                <span class="text-white/50 text-[10px] uppercase tracking-wider"
+                  >Score</span
+                >
+              </div>
+            </div>
+            <div class="text-white/60 text-xs mt-2">
+              Rank #{{ scoreResult().rank }} of 25,000+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div
+        class="bg-white grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100"
+      >
+        @for (stat of [ {icon:'✅', label:'Correct', val:scoreResult().correct,
+        color:'#16a34a'}, {icon:'❌', label:'Wrong', val:scoreResult().wrong,
+        color:'#dc2626'}, {icon:'⏭️', label:'Skipped',
+        val:scoreResult().skipped, color:'#9ca3af'}, {icon:'📊', label:'Final
+        Score', val:scoreResult().score, color:'var(--color-primary)'} ]; track
+        stat.label) {
+        <div class="flex flex-col items-center py-5 gap-1">
+          <span class="text-xl">{{ stat.icon }}</span>
+          <span
+            class="font-['Playfair_Display'] text-2xl font-black"
+            [style.color]="stat.color"
+            >{{ stat.val }}</span
+          >
+          <span
+            class="text-gray-400 text-[10px] uppercase tracking-wider font-semibold"
+            >{{ stat.label }}</span
+          >
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Detailed review -->
+    <div
+      class="bg-white rounded-3xl p-6 md:p-8 mb-6"
+      style="box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07)"
+    >
+      <h2
+        class="font-['Playfair_Display'] text-xl font-black mb-6"
+        style="color: var(--color-dark)"
+      >
+        Detailed Answer Review
+      </h2>
+
+      <div class="flex flex-col gap-5">
+        @for (q of questions; track q.id; let i = $index) {
+        <div
+          class="rounded-2xl border p-5"
+          [style]="
+            isCorrect(q)
+              ? 'border-color: rgba(22,163,74,0.3); background: rgba(22,163,74,0.03);'
+              : isWrong(q)
+              ? 'border-color: rgba(220,38,38,0.3); background: rgba(220,38,38,0.03);'
+              : 'border-color: #e5e7eb; background: #fafafa;'
+          "
+        >
+          <!-- Q header -->
+          <div class="flex items-start gap-3 mb-4">
+            <span
+              class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black shrink-0 text-white"
+              [style]="
+                isCorrect(q)
+                  ? 'background:#16a34a'
+                  : isWrong(q)
+                  ? 'background:#dc2626'
+                  : 'background:#9ca3af'
+              "
+            >
+              {{ i + 1 }}
+            </span>
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <span
+                  class="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full"
+                  style="
+                    background: rgba(137, 1, 23, 0.08);
+                    color: var(--color-primary);
+                  "
+                >
+                  {{ q.subject }}
+                </span>
+                <span
+                  class="text-[10px] font-bold"
+                  [style]="
+                    isCorrect(q)
+                      ? 'color:#16a34a'
+                      : isWrong(q)
+                      ? 'color:#dc2626'
+                      : 'color:#9ca3af'
+                  "
+                >
+                  {{
+                    isCorrect(q)
+                      ? "✓ Correct"
+                      : isWrong(q)
+                      ? "✗ Wrong"
+                      : "— Skipped"
+                  }}
+                </span>
+              </div>
+              <p class="text-sm font-semibold" style="color: var(--color-dark)">
+                {{ q.question }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Options compact view -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+            @for (opt of q.options; track opt.key) {
+            <div
+              class="flex items-center gap-2 px-3 py-2 rounded-xl border text-xs"
+              [style]="
+                opt.key === q.correctKey
+                  ? 'background: rgba(22,163,74,0.08); border-color: rgba(22,163,74,0.3); color: #15803d; font-weight:700;'
+                  : opt.key === answers()[q.id] && opt.key !== q.correctKey
+                  ? 'background: rgba(220,38,38,0.07); border-color: rgba(220,38,38,0.25); color: #b91c1c;'
+                  : 'background: white; border-color: #e5e7eb; color: #6b7280;'
+              "
+            >
+              <span
+                class="w-5 h-5 rounded-full flex items-center justify-center font-black text-[10px] shrink-0"
+                [style]="
+                  opt.key === q.correctKey
+                    ? 'background: #16a34a; color:white;'
+                    : opt.key === answers()[q.id] && opt.key !== q.correctKey
+                    ? 'background: #dc2626; color:white;'
+                    : 'background: #f3f4f6; color: #9ca3af;'
+                "
+              >
+                {{ opt.key }}
+              </span>
+              {{ opt.text }}
+              @if (opt.key === q.correctKey) { <span class="ml-auto">✓</span> }
+              @if (opt.key === answers()[q.id] && opt.key !== q.correctKey) {
+              <span class="ml-auto">✗</span> }
+            </div>
+            }
+          </div>
+
+          <!-- Explanation -->
+          <div
+            class="rounded-xl p-3 text-xs leading-relaxed"
+            style="
+              background: rgba(137, 1, 23, 0.04);
+              color: #6b7280;
+              border: 1px solid rgba(137, 1, 23, 0.1);
+            "
+          >
+            <span class="font-bold" style="color: var(--color-primary)"
+              >💡 Explanation:
+            </span>
+            {{ q.explanation }}
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Restart button -->
+    <div class="text-center">
+      <button
+        (click)="restartTest()"
+        class="nav-btn text-white font-extrabold px-10 py-4 rounded-full text-base cursor-pointer border-none"
+        style="
+          background: linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-dark)
+          );
+          box-shadow: 0 8px 28px rgba(137, 1, 23, 0.35);
+        "
+      >
+        Retake Test →
+      </button>
+    </div>
+  </div>
+</div>
+}
+
+<!-- ══════════════════════════════════════════════════════════
+       MAIN TEST INTERFACE
+  ══════════════════════════════════════════════════════════ -->
+@if (testStarted() && !showResult()) {
+
+<div
+  class="min-h-screen flex flex-col"
+  style="background: linear-gradient(160deg, #f8f0f2 0%, #f3eef8 100%)"
+>
+  <!-- ── TOP BAR ─────────────────────────────────────── -->
+  <header
+    class="sticky top-0 z-50 bg-white border-b border-gray-100"
+    style="box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07)"
+  >
+    <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 flex items-center gap-4">
+      <!-- Logo -->
+      <div
+        class="font-['Playfair_Display'] text-base font-black shrink-0"
+        style="color: var(--color-dark)"
+      >
+        Knowledge<span style="color: var(--color-primary)">Nation</span>
+      </div>
+
+      <!-- Test title (desktop) -->
+      <div class="hidden md:block flex-1 mx-4">
+        <div
+          class="font-semibold text-sm truncate"
+          style="color: var(--color-dark)"
+        >
+          {{ testTitle }}
+        </div>
+        <div class="text-gray-400 text-xs">
+          Q {{ 1 }} of {{ questions.length }}
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="flex-1 hidden md:block">
+        <div class="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+          <div
+            class="progress-fill h-full rounded-full"
+            style="
+              background: linear-gradient(
+                to right,
+                var(--color-primary),
+                var(--color-ascent)
+              );
+            "
+            [style.width.%]="(answeredCount() / questions.length) * 100"
+          ></div>
+        </div>
+        <div
+          class="flex justify-between text-[10px] text-gray-400 mt-1 font-semibold"
+        >
+          <span>{{ answeredCount() }} answered</span>
+          <span>{{ unattemptedCount() }} remaining</span>
+        </div>
+      </div>
+
+      <!-- Timer -->
+      <div
+        class="shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl font-black text-base font-['Playfair_Display']"
+        [class]="timerUrgent() ? 'timer-urgent' : ''"
+        [style]="
+          timerUrgent()
+            ? 'background: rgba(220,38,38,0.1); color: #dc2626; border: 1.5px solid rgba(220,38,38,0.25);'
+            : 'background: rgba(137,1,23,0.07); color: var(--color-primary); border: 1.5px solid rgba(137,1,23,0.15);'
+        "
+      >
+        <span class="text-sm">⏱️</span>
+        {{ timeDisplay() }}
+      </div>
+
+      <!-- Palette toggle (mobile) -->
+      <button
+        (click)="togglePalette()"
+        class="md:hidden p-2 rounded-xl font-bold text-xs cursor-pointer border"
+        style="
+          background: rgba(137, 1, 23, 0.06);
+          color: var(--color-primary);
+          border-color: rgba(137, 1, 23, 0.15);
+        "
+      >
+        📋 {{ answeredCount() }}/{{ questions.length }}
+      </button>
+
+      <!-- Submit button -->
+      <button
+        (click)="confirmSubmit.set(true)"
+        class="nav-btn text-white font-extrabold text-xs px-5 py-2.5 rounded-xl cursor-pointer border-none shrink-0"
+        style="
+          background: linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-dark)
+          );
+          box-shadow: 0 4px 14px rgba(137, 1, 23, 0.3);
+        "
+      >
+        Submit Test
+      </button>
+    </div>
+  </header>
+
+  <!-- ── MAIN CONTENT ────────────────────────────────── -->
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 md:px-8 py-6 flex gap-6">
+    <!-- LEFT: Question panel -->
+    <div class="flex-1 flex flex-col gap-5">
+      <!-- Question card -->
+      <div
+        class="question-slide bg-white rounded-3xl overflow-hidden border border-gray-100"
+        style="box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07)"
+      >
+        <!-- Question header bar -->
+        <div
+          class="px-6 py-4 flex items-center justify-between border-b border-gray-50"
+        >
+          <div class="flex items-center gap-3">
+            <span
+              class="w-9 h-9 rounded-xl flex items-center justify-center font-black text-white text-sm"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  var(--color-primary),
+                  var(--color-dark)
+                );
+              "
+            >
+              {{ currentIndex() + 1 }}
+            </span>
+            <div>
+              <span
+                class="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
+                style="
+                  background: rgba(137, 1, 23, 0.08);
+                  color: var(--color-primary);
+                "
+              >
+                {{ currentQuestion().subject }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="flex items-center gap-2">
+            <!-- Mark for review -->
+            <button
+              (click)="toggleMark()"
+              class="mark-btn flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-xl cursor-pointer transition-all duration-200"
+              [class]="marked().has(currentQuestion().id) ? 'marked' : ''"
+              style="
+                background: rgba(64, 6, 117, 0.06);
+                color: #400675;
+                border: 1.5px solid rgba(64, 6, 117, 0.15);
+              "
+            >
+              {{ marked().has(currentQuestion().id) ? "🔖 Marked" : "🔖 Mark" }}
+            </button>
+
+            <!-- Clear answer -->
+            @if (answers()[currentQuestion().id]) {
+            <button
+              (click)="clearAnswer()"
+              class="text-xs font-bold px-3 py-2 rounded-xl cursor-pointer transition-all hover:opacity-80"
+              style="
+                background: rgba(220, 38, 38, 0.07);
+                color: #dc2626;
+                border: 1.5px solid rgba(220, 38, 38, 0.2);
+              "
+            >
+              ✕ Clear
+            </button>
+            }
+          </div>
+        </div>
+
+        <!-- Question text -->
+        <div class="px-6 pt-6 pb-2">
+          <p
+            class="font-semibold text-base md:text-lg leading-relaxed"
+            style="color: var(--color-dark)"
+          >
+            Q{{ currentIndex() + 1 }}. {{ currentQuestion().question }}
+          </p>
+        </div>
+
+        <!-- Options -->
+        <div class="px-6 pb-6 flex flex-col gap-3 mt-4">
+          @for (opt of currentQuestion().options; track opt.key) {
+          <div
+            class="option-card flex items-center gap-4 rounded-2xl px-5 py-4 border border-gray-100 bg-gray-50/60"
+            [class]="
+              answers()[currentQuestion().id] === opt.key ? 'selected' : ''
+            "
+            (click)="selectOption(opt.key)"
+          >
+            <!-- Key badge -->
+            <span
+              class="key-badge w-9 h-9 rounded-xl flex items-center justify-center font-black text-sm shrink-0 border"
+              style="
+                background: white;
+                color: var(--color-dark);
+                border-color: #e5e7eb;
+              "
+            >
+              {{ opt.key }}
+            </span>
+
+            <span
+              class="text-sm md:text-base font-medium flex-1"
+              style="color: var(--color-dark)"
+              >{{ opt.text }}</span
+            >
+
+            <!-- Selected indicator -->
+            @if (answers()[currentQuestion().id] === opt.key) {
+            <span class="text-sm shrink-0" style="color: var(--color-primary)"
+              >●</span
+            >
+            }
+          </div>
+          }
+        </div>
+      </div>
+
+      <!-- Navigation row -->
+      <div class="flex items-center justify-between gap-3 flex-wrap">
+        <!-- Prev -->
+        <button
+          (click)="prev()"
+          [disabled]="currentIndex() === 0"
+          class="nav-btn flex items-center gap-2 font-bold text-sm px-6 py-3 rounded-2xl cursor-pointer border-none transition-all"
+          [style]="
+            currentIndex() === 0
+              ? 'background: #f3f4f6; color: #d1d5db; cursor:not-allowed;'
+              : 'background: white; color: var(--color-dark); border: 1.5px solid #e5e7eb; box-shadow: 0 2px 8px rgba(0,0,0,0.06);'
+          "
+        >
+          ← Previous
+        </button>
+
+        <!-- Q counter (mobile) -->
+        <span class="text-sm font-semibold text-gray-400 md:hidden">
+          {{ currentIndex() + 1 }} / {{ questions.length }}
+        </span>
+
+        <!-- Next / Save & Next -->
+        <button
+          (click)="next()"
+          [disabled]="currentIndex() === questions.length - 1"
+          class="nav-btn flex items-center gap-2 font-extrabold text-sm px-6 py-3 rounded-2xl cursor-pointer border-none text-white"
+          [style]="
+            currentIndex() === questions.length - 1
+              ? 'background: #e5e7eb; color: #9ca3af; cursor:not-allowed;'
+              : 'background: linear-gradient(135deg, var(--color-primary), var(--color-dark)); box-shadow: 0 4px 14px rgba(137,1,23,0.3);'
+          "
+        >
+          Save &amp; Next →
+        </button>
+      </div>
+    </div>
+    <!-- /left panel -->
+
+    <!-- RIGHT: Question Palette (desktop) -->
+    <div class="hidden md:flex flex-col gap-4 w-72 shrink-0">
+      <!-- Legend card -->
+      <div
+        class="bg-white rounded-2xl p-4 border border-gray-100"
+        style="box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06)"
+      >
+        <div class="font-bold text-sm mb-3" style="color: var(--color-dark)">
+          Legend
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          @for (leg of [ {label:'Answered', bg:'var(--color-primary)',
+          color:'white'}, {label:'Marked', bg:'#400675', color:'white'},
+          {label:'Visited', bg:'rgba(137,1,23,0.08)',
+          color:'var(--color-primary)'}, {label:'Unattempted', bg:'#f3f4f6',
+          color:'#9ca3af'} ]; track leg.label) {
+          <div class="flex items-center gap-2">
+            <span
+              class="w-5 h-5 rounded-md shrink-0"
+              [style]="'background:' + leg.bg + '; min-width:20px;'"
+            ></span>
+            <span class="text-gray-500 font-medium">{{ leg.label }}</span>
+          </div>
+          }
+        </div>
+
+        <!-- Summary counts -->
+        <div
+          class="mt-3 pt-3 border-t border-gray-100 grid grid-cols-3 text-center gap-2 text-xs"
+        >
+          <div>
+            <div class="font-black text-lg" style="color: var(--color-primary)">
+              {{ answeredCount() }}
+            </div>
+            <div class="text-gray-400 font-medium">Done</div>
+          </div>
+          <div>
+            <div class="font-black text-lg" style="color: #400675">
+              {{ markedCount() }}
+            </div>
+            <div class="text-gray-400 font-medium">Marked</div>
+          </div>
+          <div>
+            <div class="font-black text-lg text-gray-400">
+              {{ unattemptedCount() }}
+            </div>
+            <div class="text-gray-400 font-medium">Left</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question grid palette -->
+      <div
+        class="bg-white rounded-2xl p-4 border border-gray-100 flex-1"
+        style="box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06)"
+      >
+        <div class="font-bold text-sm mb-4" style="color: var(--color-dark)">
+          Question Palette
+        </div>
+
+        <div class="grid grid-cols-5 gap-2">
+          @for (q of questions; track q.id; let i = $index) {
+          <button
+            (click)="goTo(i)"
+            class="q-dot w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs border-none"
+            [class]="currentIndex() === i ? 'active-dot' : ''"
+            [style]="statusColor(questionStatuses()[i])"
+          >
+            {{ i + 1 }}
+          </button>
+          }
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <button
+        (click)="confirmSubmit.set(true)"
+        class="nav-btn w-full text-white font-extrabold py-3.5 rounded-2xl text-sm cursor-pointer border-none"
+        style="
+          background: linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-dark)
+          );
+          box-shadow: 0 6px 20px rgba(137, 1, 23, 0.35);
+        "
+      >
+        Submit Test →
+      </button>
+    </div>
+  </main>
+</div>
+
+<!-- ── MOBILE PALETTE DRAWER ──────────────────────────── -->
+@if (showPalette()) {
+<div
+  class="fixed inset-0 z-50 md:hidden flex flex-col justify-end"
+  style="background: rgba(0, 0, 0, 0.5)"
+  (click)="closePalette()"
+>
+  <div
+    class="palette-drawer bg-white rounded-t-3xl p-5 pb-8"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="w-10 h-1 rounded-full bg-gray-200 mx-auto mb-4"></div>
+    <div class="font-bold text-base mb-4" style="color: var(--color-dark)">
+      Question Palette
+    </div>
+
+    <div class="grid grid-cols-6 gap-2 mb-5">
+      @for (q of questions; track q.id; let i = $index) {
+      <button
+        (click)="goTo(i)"
+        class="q-dot w-full aspect-square rounded-xl flex items-center justify-center font-bold text-xs border-none"
+        [class]="currentIndex() === i ? 'active-dot' : ''"
+        [style]="statusColor(questionStatuses()[i])"
+      >
+        {{ i + 1 }}
+      </button>
+      }
+    </div>
+
+    <button
+      (click)="confirmSubmit.set(true); closePalette()"
+      class="nav-btn w-full text-white font-extrabold py-3.5 rounded-2xl text-sm cursor-pointer border-none"
+      style="
+        background: linear-gradient(
+          135deg,
+          var(--color-primary),
+          var(--color-dark)
+        );
+        box-shadow: 0 6px 20px rgba(137, 1, 23, 0.35);
+      "
+    >
+      Submit Test →
+    </button>
+  </div>
+</div>
+}
+
+<!-- ── CONFIRM SUBMIT DIALOG ──────────────────────────── -->
+@if (confirmSubmit()) {
+<div
+  class="fixed inset-0 z-[60] flex items-center justify-center px-4"
+  style="background: rgba(0, 0, 0, 0.55)"
+  (click)="confirmSubmit.set(false)"
+>
+  <div
+    class="dialog-box bg-white rounded-3xl p-8 w-full max-w-sm text-center"
+    style="box-shadow: 0 32px 80px rgba(0, 0, 0, 0.25)"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="text-5xl mb-4">📋</div>
+    <h3
+      class="font-['Playfair_Display'] text-xl font-black mb-2"
+      style="color: var(--color-dark)"
+    >
+      Submit Test?
+    </h3>
+
+    <div class="grid grid-cols-3 gap-3 my-5 text-center text-sm">
+      <div
+        class="rounded-xl py-3 px-2"
+        style="background: rgba(22, 163, 74, 0.07)"
+      >
+        <div class="font-black text-xl" style="color: #16a34a">
+          {{ answeredCount() }}
+        </div>
+        <div class="text-gray-400 text-xs">Answered</div>
+      </div>
+      <div
+        class="rounded-xl py-3 px-2"
+        style="background: rgba(64, 6, 117, 0.07)"
+      >
+        <div class="font-black text-xl" style="color: #400675">
+          {{ markedCount() }}
+        </div>
+        <div class="text-gray-400 text-xs">Marked</div>
+      </div>
+      <div
+        class="rounded-xl py-3 px-2"
+        style="background: rgba(156, 163, 175, 0.1)"
+      >
+        <div class="font-black text-xl text-gray-400">
+          {{ unattemptedCount() }}
+        </div>
+        <div class="text-gray-400 text-xs">Skipped</div>
+      </div>
+    </div>
+
+    <p class="text-gray-500 text-sm mb-6">
+      You have
+      <strong style="color: var(--color-primary)"
+        >{{ unattemptedCount() }} unattempted</strong
+      >
+      questions. Are you sure you want to submit?
+    </p>
+
+    <div class="flex gap-3">
+      <button
+        (click)="confirmSubmit.set(false)"
+        class="flex-1 font-bold text-sm py-3 rounded-2xl cursor-pointer border transition-all hover:bg-gray-50"
+        style="background: white; color: #6b7280; border-color: #e5e7eb"
+      >
+        Continue Test
+      </button>
+      <button
+        (click)="submitTest()"
+        class="nav-btn flex-1 text-white font-extrabold text-sm py-3 rounded-2xl cursor-pointer border-none"
+        style="
+          background: linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-dark)
+          );
+          box-shadow: 0 4px 14px rgba(137, 1, 23, 0.3);
+        "
+      >
+        Yes, Submit
+      </button>
+    </div>
+  </div>
+</div>
+} }

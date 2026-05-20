@@ -1,0 +1,453 @@
+<!-- ════════════════════════════════════════════════════════
+     SECTION 1 — RECOMMENDED BOOKS
+════════════════════════════════════════════════════════ -->
+<section class="relative py-20 overflow-hidden bg-white">
+  <!-- Subtle bg tint -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style="
+      background: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(137, 1, 23, 0.04) 0%,
+        transparent 60%
+      );
+    "
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(137, 1, 23, 0.07);
+          color: var(--color-primary);
+          border: 1px solid rgba(137, 1, 23, 0.14);
+        "
+      >
+        📚 Study Material
+      </div>
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        Recommended
+        <em class="not-italic" style="color: var(--color-primary)">Books</em>
+      </h2>
+      <p class="mt-5 text-gray-500 text-base max-w-lg mx-auto leading-relaxed">
+        Handpicked by our expert faculty — the definitive reading list for BPSC,
+        UPSC and SSC aspirants.
+      </p>
+    </div>
+
+    <!-- Scrollable books row -->
+    <div class="books-scroll pb-2">
+      @for (book of books; track book.title; let i = $index) {
+
+      <div
+        class="book-card fade-in-up bg-white rounded-2xl border border-gray-100 overflow-hidden"
+        [class]="'delay-' + (i + 1)"
+        style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07)"
+      >
+        <!-- Cover image -->
+        <div class="book-cover relative h-48 overflow-hidden rounded-t-2xl">
+          <img
+            [src]="book.cover"
+            [alt]="book.title"
+            class="w-full h-full object-cover transition-transform duration-400"
+          />
+
+          <!-- Overlay gradient at bottom -->
+          <div
+            class="absolute inset-x-0 bottom-0 h-16"
+            style="
+              background: linear-gradient(
+                to top,
+                rgba(63, 4, 62, 0.7),
+                transparent
+              );
+            "
+          ></div>
+
+          <!-- Tag pill -->
+          <span
+            class="absolute top-3 left-3 text-[10px] font-black uppercase tracking-widest text-white px-2.5 py-1 rounded-full shadow-sm"
+            [style.background]="book.tagColor"
+          >
+            {{ book.tag }}
+          </span>
+
+          <!-- Discount badge -->
+          <span
+            class="absolute top-3 right-3 text-[10px] font-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md"
+            style="background: var(--color-primary)"
+          >
+            -{{ discountPercent(book) }}%
+          </span>
+        </div>
+
+        <!-- Book info -->
+        <div class="p-4">
+          <h3
+            class="font-['Playfair_Display'] font-bold text-sm leading-tight mb-0.5"
+            style="color: var(--color-dark)"
+          >
+            {{ book.title }}
+          </h3>
+          <p class="text-gray-400 text-xs mb-3">by {{ book.author }}</p>
+
+          <!-- Stars + reviews -->
+          <div class="flex items-center gap-1.5 mb-3">
+            <div class="flex gap-0.5">
+              @for (s of starsArray; track trackByIndex($index)) {
+              <span class="text-xs" style="color: #f5a623">★</span>
+              }
+            </div>
+            <span class="text-gray-400 text-[11px]"
+              >{{ book.rating }} ({{ book.reviews }})</span
+            >
+          </div>
+
+          <!-- Price row -->
+          <div class="flex items-center gap-2 mb-4">
+            <span
+              class="font-black text-lg"
+              style="color: var(--color-primary)"
+            >
+              ₹{{ book.price }}
+            </span>
+            <span class="text-gray-350 text-sm line-through text-gray-400"
+              >₹{{ book.originalPrice }}</span
+            >
+          </div>
+
+          <!-- Buy button -->
+          <button
+            class="buy-btn w-full text-white font-extrabold text-xs py-2.5 rounded-xl cursor-pointer border-none tracking-wide uppercase"
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--color-primary),
+                var(--color-dark)
+              );
+              box-shadow: 0 4px 14px rgba(137, 1, 23, 0.25);
+            "
+          >
+            Buy Now →
+          </button>
+        </div>
+      </div>
+
+      }
+    </div>
+
+    <!-- View all books link -->
+    <div class="text-center mt-8">
+      <a
+        href="#"
+        class="inline-flex items-center gap-2 font-bold text-sm no-underline transition-all duration-200 hover:gap-4"
+        style="color: var(--color-primary)"
+      >
+        View All Books
+        <span class="text-lg">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+       SECTION 2 — EXAM PREPARATION TIPS
+  ════════════════════════════════════════════════════════ -->
+<section
+  class="relative py-20 overflow-hidden"
+  style="
+    background: linear-gradient(160deg, #f8f0f8 0%, #f3eef8 50%, #f8f0f2 100%);
+  "
+>
+  <!-- Decorative circles -->
+  <div
+    class="absolute -top-24 -right-24 w-72 h-72 rounded-full pointer-events-none"
+    style="
+      background: radial-gradient(
+        circle,
+        rgba(64, 6, 117, 0.08) 0%,
+        transparent 70%
+      );
+    "
+  ></div>
+  <div
+    class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full pointer-events-none"
+    style="
+      background: radial-gradient(
+        circle,
+        rgba(137, 1, 23, 0.06) 0%,
+        transparent 70%
+      );
+    "
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(64, 6, 117, 0.07);
+          color: var(--color-ascent);
+          border: 1px solid rgba(64, 6, 117, 0.15);
+        "
+      >
+        💡 Pro Strategies
+      </div>
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        Exam Preparation
+        <em class="not-italic" style="color: var(--color-primary)">Tips</em>
+      </h2>
+      <p class="mt-5 text-gray-500 text-base max-w-xl mx-auto leading-relaxed">
+        Follow these battle-tested strategies from BPSC toppers to boost your
+        score and preparation quality.
+      </p>
+    </div>
+
+    <!-- Tips grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (tip of tips; track tip.title; let i = $index) {
+
+      <div
+        class="tip-card fade-in-up bg-white rounded-2xl p-7 border border-gray-100/80 group cursor-default"
+        [class]="'delay-' + (i + 1)"
+        style="box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05)"
+      >
+        <!-- Left accent line (animated via CSS) -->
+        <div class="tip-card-line" [style]="'--tip-color:' + tip.color"></div>
+
+        <!-- Big ghost number -->
+        <span class="tip-number">{{ tip.number }}</span>
+
+        <!-- Icon + number -->
+        <div class="flex items-center gap-3 mb-4 relative z-10">
+          <div
+            class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
+            [style]="
+              'background:' +
+              tip.color +
+              '14; border: 1.5px solid ' +
+              tip.color +
+              '22'
+            "
+          >
+            {{ tip.icon }}
+          </div>
+          <span
+            class="text-xs font-black uppercase tracking-widest"
+            [style.color]="tip.color"
+            >Step {{ tip.number }}</span
+          >
+        </div>
+
+        <!-- Content -->
+        <h3
+          class="font-['Playfair_Display'] text-lg font-bold mb-2 relative z-10"
+          style="color: var(--color-dark)"
+        >
+          {{ tip.title }}
+        </h3>
+        <p class="text-gray-500 text-sm leading-relaxed relative z-10">
+          {{ tip.description }}
+        </p>
+
+        <!-- Bottom colored bar on hover -->
+        <div
+          class="mt-5 h-0.5 w-0 group-hover:w-full rounded-full transition-all duration-500"
+          [style.background]="
+            'linear-gradient(to right,' + tip.color + ', transparent)'
+          "
+        ></div>
+      </div>
+
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+       SECTION 3 — TESTIMONIALS
+  ════════════════════════════════════════════════════════ -->
+<section
+  class="relative py-20 overflow-hidden"
+  style="
+    background: linear-gradient(
+      135deg,
+      var(--color-dark) 0%,
+      #2a0040 50%,
+      var(--color-ascent) 100%
+    );
+  "
+>
+  <!-- Dot grid texture -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style="
+      opacity: 0.04;
+      background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+      background-size: 26px 26px;
+    "
+  ></div>
+
+  <!-- Glow blobs -->
+  <div
+    class="absolute top-0 left-0 w-96 h-96 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+    style="background: rgba(137, 1, 23, 0.25); filter: blur(70px)"
+  ></div>
+  <div
+    class="absolute bottom-0 right-0 w-80 h-80 rounded-full translate-x-1/3 translate-y-1/3 pointer-events-none"
+    style="background: rgba(64, 6, 117, 0.3); filter: blur(60px)"
+  ></div>
+
+  <div class="max-w-5xl mx-auto px-6 md:px-12 relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(255, 255, 255, 0.1);
+          color: rgba(255, 255, 255, 0.75);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+        "
+      >
+        ⭐ Success Stories
+      </div>
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black text-white"
+      >
+        What Our <em class="not-italic" style="color: #f5a623">Students Say</em>
+      </h2>
+      <p class="mt-4 text-white/50 text-base max-w-md mx-auto">
+        Real stories from real toppers who cracked their exams with Knowledge
+        Nation.
+      </p>
+    </div>
+
+    <!-- Testimonial slider -->
+    <div class="testimonial-slider">
+      <div
+        class="testimonial-track"
+        [style.transform]="'translateX(-' + activeTestimonial() * 100 + '%)'"
+      >
+        @for (t of testimonials; track t.name; let i = $index) {
+        <div class="testimonial-slide px-2">
+          <div
+            class="rounded-3xl p-8 md:p-10 relative"
+            style="
+              background: rgba(255, 255, 255, 0.07);
+              backdrop-filter: blur(12px);
+              border: 1px solid rgba(255, 255, 255, 0.12);
+              box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+            "
+          >
+            <!-- Quote mark decoration -->
+            <div
+              class="quote-mark absolute top-4 left-6 select-none pointer-events-none"
+            >
+              "
+            </div>
+
+            <!-- Stars -->
+            <div class="flex gap-1 mb-5 relative z-10">
+              @for (s of starsArray; track trackByIndex($index)) {
+              <span style="color: #f5a623; font-size: 1.1rem">★</span>
+              }
+              <span
+                class="ml-2 text-white/40 text-xs font-semibold self-center"
+                >{{ t.year }}</span
+              >
+            </div>
+
+            <!-- Quote text -->
+            <p
+              class="text-white/85 text-lg md:text-xl leading-relaxed mb-8 font-['Playfair_Display'] italic relative z-10"
+            >
+              "{{ t.quote }}"
+            </p>
+
+            <!-- Author row -->
+            <div class="flex items-center gap-4 relative z-10">
+              <!-- Avatar with gradient ring -->
+              <div class="avatar-ring w-14 h-14 shrink-0">
+                <div class="avatar-inner w-full h-full">
+                  <span
+                    class="font-black text-sm"
+                    style="color: var(--color-primary)"
+                    >{{ t.avatar }}</span
+                  >
+                </div>
+              </div>
+
+              <div>
+                <div class="font-black text-white text-base">{{ t.name }}</div>
+                <div class="text-white/50 text-sm">{{ t.city }}</div>
+              </div>
+
+              <!-- Exam badge -->
+              <div
+                class="ml-auto px-3 py-1.5 rounded-full text-xs font-bold"
+                style="
+                  background: rgba(137, 1, 23, 0.35);
+                  border: 1px solid rgba(137, 1, 23, 0.4);
+                  color: rgba(255, 255, 255, 0.85);
+                "
+              >
+                {{ t.exam }}
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Dot nav -->
+    <div class="flex items-center justify-center gap-2.5 mt-8">
+      @for (t of testimonials; track t.name; let i = $index) {
+      <button
+        (click)="goToTestimonial(i)"
+        class="t-dot rounded-full transition-all duration-300"
+        [class]="i === activeTestimonial() ? 'active' : ''"
+        [style]="
+          i === activeTestimonial()
+            ? 'width:28px; height:8px; background: #f5a623;'
+            : 'width:8px; height:8px; background: rgba(255,255,255,0.25);'
+        "
+      ></button>
+      }
+    </div>
+
+    <!-- Trust bar -->
+    <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
+      @for (item of [ {icon:'🎓', label:'10,000+', sub:'Selections'},
+      {icon:'⭐', label:'4.9/5', sub:'Average Rating'}, {icon:'📝',
+      label:'50,000+', sub:'Tests Attempted'}, {icon:'🏅', label:'100+',
+      sub:'BPSC Toppers'} ]; track item.label) {
+      <div
+        class="flex flex-col items-center text-center rounded-2xl py-5 px-3"
+        style="
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        "
+      >
+        <span class="text-2xl mb-2">{{ item.icon }}</span>
+        <span class="font-['Playfair_Display'] text-xl font-black text-white">{{
+          item.label
+        }}</span>
+        <span
+          class="text-white/40 text-[11px] uppercase tracking-wider mt-0.5"
+          >{{ item.sub }}</span
+        >
+      </div>
+      }
+    </div>
+  </div>
+</section>

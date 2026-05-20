@@ -1,0 +1,251 @@
+/* ═══════════════════════════════════════════════════════════
+   Test Series Page — Styles
+   Knowledge Nation | Angular 19 + Tailwind CSS v4
+════════════════════════════════════════════════════════════ */
+
+/* ── Shared ─────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  animation: fadeInUp 0.55s ease both;
+}
+.delay-1 {
+  animation-delay: 0.07s;
+}
+.delay-2 {
+  animation-delay: 0.14s;
+}
+.delay-3 {
+  animation-delay: 0.21s;
+}
+.delay-4 {
+  animation-delay: 0.28s;
+}
+.delay-5 {
+  animation-delay: 0.35s;
+}
+.delay-6 {
+  animation-delay: 0.42s;
+}
+.delay-7 {
+  animation-delay: 0.49s;
+}
+.delay-8 {
+  animation-delay: 0.56s;
+}
+.delay-9 {
+  animation-delay: 0.63s;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, #890117, #400675);
+  margin: 12px auto 0;
+}
+
+/* ── Hero ───────────────────────────────────────────────── */
+@keyframes heroPulse {
+  0%,
+  100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.04) translateY(-12px);
+  }
+}
+.blob-pulse {
+  animation: heroPulse 8s ease-in-out infinite;
+}
+.blob-pulse-slow {
+  animation: heroPulse 11s ease-in-out 2s infinite;
+}
+
+/* ── Stats bar ──────────────────────────────────────────── */
+.stat-chip {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.stat-chip:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(137, 1, 23, 0.18);
+}
+
+/* ── Category filter tabs ───────────────────────────────── */
+.cat-tab {
+  transition: all 0.22s ease;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+.cat-tab:hover:not(.active) {
+  background: rgba(137, 1, 23, 0.06) !important;
+  color: var(--color-primary) !important;
+}
+
+/* ── Pricing cards ──────────────────────────────────────── */
+.plan-card {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.plan-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 64px rgba(137, 1, 23, 0.18);
+}
+.plan-card.featured {
+  transform: scale(1.04);
+  z-index: 10;
+}
+.plan-card.featured:hover {
+  transform: scale(1.04) translateY(-8px);
+}
+
+/* Shimmer on popular badge */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+.badge-shimmer {
+  background: linear-gradient(90deg, #890117, #c0392b, #890117);
+  background-size: 200% auto;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* Feature check tick */
+.plan-feature {
+  transition: transform 0.18s ease;
+}
+.plan-feature:hover {
+  transform: translateX(3px);
+}
+
+/* ── Test cards ─────────────────────────────────────────── */
+.test-card {
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+.test-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(to bottom, #890117, #400675);
+  border-radius: 0 0 2px 2px;
+  transition: height 0.35s ease;
+}
+.test-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(137, 1, 23, 0.14);
+}
+.test-card:hover::before {
+  height: 100%;
+}
+
+/* Start test button */
+.start-btn {
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+.start-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateX(-100%);
+  transition: transform 0.28s ease;
+}
+.start-btn:hover::after {
+  transform: translateX(0);
+}
+.start-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(137, 1, 23, 0.38);
+}
+
+/* FREE badge pulse */
+@keyframes freePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(26, 122, 46, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(26, 122, 46, 0);
+  }
+}
+.free-pulse {
+  animation: freePulse 2s ease-in-out infinite;
+}
+
+/* ── FAQ accordion ──────────────────────────────────────── */
+.faq-card {
+  transition: box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.faq-card:hover {
+  box-shadow: 0 8px 28px rgba(137, 1, 23, 0.09);
+}
+.faq-card.open {
+  border-color: rgba(137, 1, 23, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(137, 1, 23, 0.1);
+}
+
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease,
+    padding 0.3s ease;
+  opacity: 0;
+}
+.faq-body.open {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.faq-icon {
+  transition: transform 0.3s ease;
+}
+.faq-icon.open {
+  transform: rotate(180deg);
+}
+
+/* ── CTA button ─────────────────────────────────────────── */
+.cta-btn {
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+.cta-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.cta-btn:hover::after {
+  transform: translateX(0);
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(137, 1, 23, 0.45);
+}
