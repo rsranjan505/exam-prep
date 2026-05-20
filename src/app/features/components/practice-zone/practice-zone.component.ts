@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
-interface TestCard {
-  badge: string;
-  badgeType: 'red' | 'purple' | 'accent';
+export interface TestCard {
+  icon: string;
+  tag: string;
   title: string;
   description: string;
   questions: string;
   duration: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  difficultyColor: string;
+  popular?: boolean;
 }
 
 @Component({
@@ -18,30 +21,78 @@ interface TestCard {
 })
 export class PracticeZoneComponent {
 
-    tests: TestCard[] = [
+  readonly tests: TestCard[] = [
     {
-      badge: 'PRELIMS',
-      badgeType: 'red',
+      icon: '📋',
+      tag: 'Prelims',
       title: 'Prelims Full Test',
-      description: 'Comprehensive full-length test covering the entire BPSC Prelims syllabus in timed conditions.',
+      description:
+        'Complete full-length prelims simulation with all subjects covered as per latest BPSC pattern.',
       questions: '150 Questions',
       duration: '2 Hours',
+      difficulty: 'Hard',
+      difficultyColor: '#890117',
+      popular: true,
     },
     {
-      badge: 'CSAT',
-      badgeType: 'purple',
+      icon: '🧠',
+      tag: 'CSAT',
       title: 'CSAT Section Test',
-      description: 'Focused on reasoning, comprehension, and aptitude — essential for clearing the BPSC Prelims Paper II.',
-      questions: '100 Questions',
-      duration: '2 Hours',
+      description:
+        'Deep focus on reasoning, comprehension and mental ability — essential for clearing prelims cutoff.',
+      questions: '80 Questions',
+      duration: '1 Hour',
+      difficulty: 'Medium',
+      difficultyColor: '#400675',
     },
     {
-      badge: 'MAINS',
-      badgeType: 'accent',
+      icon: '✍️',
+      tag: 'Mains',
       title: 'Mains Answer Writing',
-      description: 'Develop your essay and answer writing skills for Mains with expert feedback and model answers.',
-      questions: 'Essay + GS',
+      description:
+        'Practice structured essay and descriptive answer writing evaluated by expert faculty members.',
+      questions: '10 Questions',
       duration: '3 Hours',
+      difficulty: 'Hard',
+      difficultyColor: '#890117',
+    },
+    {
+      icon: '📰',
+      tag: 'Current Affairs',
+      title: 'Daily Current Affairs Quiz',
+      description:
+        'Stay updated with Bihar and national current affairs through daily scored quizzes.',
+      questions: '25 Questions',
+      duration: '20 Mins',
+      difficulty: 'Easy',
+      difficultyColor: '#2a7a2a',
+    },
+    {
+      icon: '🗺️',
+      tag: 'GS Paper',
+      title: 'General Studies Mock',
+      description:
+        'Full GS mock test covering History, Geography, Polity, Economy and Science & Tech.',
+      questions: '100 Questions',
+      duration: '1.5 Hours',
+      difficulty: 'Medium',
+      difficultyColor: '#400675',
+      popular: true,
+    },
+    {
+      icon: '🔢',
+      tag: 'Aptitude',
+      title: 'Quantitative Aptitude',
+      description:
+        'Section-wise numerical ability test to sharpen your calculation speed and accuracy.',
+      questions: '50 Questions',
+      duration: '45 Mins',
+      difficulty: 'Medium',
+      difficultyColor: '#400675',
     },
   ];
+
+  trackByTitle(index: number, item: { title: string }): string {
+    return item.title;
+  }
 }
