@@ -1,342 +1,754 @@
-<section class="min-h-screen bg-[#fdf8f8]">
+<!-- ═══════════════════════════════════════════════════════════
+     KNOWLEDGE NATION — Test Series Page
+     Angular 19 | Tailwind CSS v4
+     Brand: #890117 · #410040 · #400675 · #3f043e
+════════════════════════════════════════════════════════════ -->
 
-  <!-- HERO -->
+<!-- ══════════════════════════════════════════════════════════
+     1. HERO BANNER
+══════════════════════════════════════════════════════════ -->
+<section
+  class="relative overflow-hidden"
+  style="
+    background: linear-gradient(135deg, #3f043e 0%, #2a0040 50%, #400675 100%);
+    min-height: 460px;
+    display: flex;
+    align-items: center;
+  "
+>
+  <!-- BG image low opacity -->
   <div
-    class="relative overflow-hidden border-b border-white/10 bg-[linear-gradient(135deg,#3f043e_0%,#400675_55%,#890117_100%)]"
-  >
+    class="absolute inset-0 bg-cover bg-center"
+    style="
+      background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1600&q=80');
+      opacity: 0.07;
+      mix-blend-mode: luminosity;
+    "
+  ></div>
 
-    <!-- Glow -->
-    <div
-      class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_35%)]"
-    ></div>
+  <!-- Blobs -->
+  <div
+    class="blob-pulse absolute w-[480px] h-[480px] rounded-full pointer-events-none -top-32 -right-32"
+    style="background: rgba(137, 1, 23, 0.18); filter: blur(64px)"
+  ></div>
+  <div
+    class="blob-pulse-slow absolute w-[340px] h-[340px] rounded-full pointer-events-none -bottom-24 -left-24"
+    style="background: rgba(64, 6, 117, 0.22); filter: blur(52px)"
+  ></div>
 
-    <div
-      class="relative mx-auto max-w-5xl px-4 py-16 text-center"
-    >
+  <!-- Dot grid -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style="
+      opacity: 0.04;
+      background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+      background-size: 28px 28px;
+    "
+  ></div>
 
-      <span
-        class="mb-5 inline-block rounded-full bg-[#f9b84a]/20 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-[#f9b84a]"
+  <!-- Content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-14 w-full py-20">
+    <div class="max-w-3xl">
+      <!-- Breadcrumb -->
+      <div
+        class="flex items-center gap-2 text-white/40 text-xs font-semibold uppercase tracking-widest mb-6"
       >
-        Mock Test Series
-      </span>
+        <span>Home</span><span>›</span>
+        <span style="color: #f5a623">Test Series</span>
+      </div>
+
+      <!-- Eyebrow -->
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5"
+        style="
+          background: rgba(245, 166, 35, 0.14);
+          color: #f5a623;
+          border: 1px solid rgba(245, 166, 35, 0.3);
+        "
+      >
+        📋 Practice · Evaluate · Improve
+      </div>
 
       <h1
-        class="font-['Playfair_Display'] text-4xl font-extrabold text-white md:text-5xl"
+        class="font-['Playfair_Display'] text-4xl md:text-6xl font-black text-white leading-tight mb-5"
       >
-        {{ test.title }}
+        Master Every Exam with <br />
+        <em class="not-italic" style="color: #f5a623">Smart Mock Tests</em>
       </h1>
 
-      <p
-        class="mx-auto mt-5 max-w-3xl text-lg leading-8 text-white/75"
-      >
-        {{ test.description }}
+      <p class="text-white/60 text-lg leading-relaxed max-w-2xl mb-10">
+        120+ full-length BPSC tests, CSAT papers, and section-wise quizzes — all
+        mirroring the actual exam pattern. Real-time rank among 25,000+
+        aspirants.
       </p>
 
-      <!-- Stats -->
+      <!-- Hero actions -->
+      <div class="flex flex-wrap gap-4 items-center mb-10">
+        <button
+          class="cta-btn text-white font-extrabold px-8 py-3.5 rounded-full text-sm cursor-pointer border-none"
+          style="
+            background: var(--color-primary);
+            box-shadow: 0 6px 24px rgba(137, 1, 23, 0.45);
+          "
+        >
+          Start Free Test →
+        </button>
+        <button
+          class="font-bold text-sm px-8 py-3.5 rounded-full cursor-pointer transition-all hover:bg-white/10"
+          style="
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+          "
+        >
+          View All Plans
+        </button>
+      </div>
+
+      <!-- Mini trust strip -->
       <div
-        class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4"
+        class="flex flex-wrap gap-5 text-white/45 text-xs font-semibold uppercase tracking-wider"
       >
-
-        <div
-          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
-        >
-          <h3
-            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
-          >
-            10
-          </h3>
-
-          <p class="mt-1 text-sm text-white/70">
-            Questions
-          </p>
-        </div>
-
-        <div
-          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
-        >
-          <h3
-            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
-          >
-            15
-          </h3>
-
-          <p class="mt-1 text-sm text-white/70">
-            Minutes
-          </p>
-        </div>
-
-        <div
-          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
-        >
-          <h3
-            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
-          >
-            +1
-          </h3>
-
-          <p class="mt-1 text-sm text-white/70">
-            Per Correct
-          </p>
-        </div>
-
-        <div
-          class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
-        >
-          <h3
-            class="font-['Playfair_Display'] text-3xl font-bold text-[#f9b84a]"
-          >
-            0
-          </h3>
-
-          <p class="mt-1 text-sm text-white/70">
-            Negative Marking
-          </p>
-        </div>
-
+        @for (t of ['50K+ Tests Attempted','Real-time Ranking','Hindi &
+        English','Detailed Solutions']; track t) {
+        <span class="flex items-center gap-1.5">
+          <span style="color: #f5a623">✓</span> {{ t }}
+        </span>
+        }
       </div>
     </div>
   </div>
 
-  <!-- TEST SECTION -->
-  <div class="mx-auto max-w-4xl px-4 py-14">
-
-    <!-- Progress -->
-    <div class="mb-8">
-
-      <div class="mb-3 flex items-center justify-between">
-
-        <p class="text-sm font-medium text-[#6f566d]">
-          Question {{ currentQ + 1 }} of {{ test.questions.length }}
-        </p>
-
-        <p class="text-sm font-semibold text-[#890117]">
-          {{ ((currentQ + 1) / test.questions.length) * 100  }}%
-          Completed
-        </p>
-
-      </div>
-
-      <div class="h-3 overflow-hidden rounded-full bg-[#eadfe9]">
-
-        <div
-          class="h-full rounded-full bg-[linear-gradient(90deg,#890117,#400675)] transition-all duration-300"
-          [style.width.%]="((currentQ + 1) / test.questions.length) * 100"
-        ></div>
-
+  <!-- Right decorative card (desktop) -->
+  <div
+    class="hidden xl:flex absolute right-20 top-1/2 -translate-y-1/2 flex-col gap-3 z-10"
+  >
+    @for (item of [ {icon:'📋', label:'Full Length Tests', val:'120+'},
+    {icon:'📊', label:'Avg. Score Improvement', val:'34%'}, {icon:'👥',
+    label:'Students Ranked', val:'25K+'} ]; track item.label) {
+    <div
+      class="flex items-center gap-4 rounded-2xl px-5 py-4 w-64"
+      style="
+        background: rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      "
+    >
+      <span class="text-2xl">{{ item.icon }}</span>
+      <div>
+        <div class="font-['Playfair_Display'] text-xl font-black text-white">
+          {{ item.val }}
+        </div>
+        <div class="text-white/45 text-[11px] uppercase tracking-wider">
+          {{ item.label }}
+        </div>
       </div>
     </div>
+    }
+  </div>
+</section>
 
-    <!-- QUESTIONS -->
-    <div *ngIf="currentQ < test.questions.length; else done">
+<!-- ══════════════════════════════════════════════════════════
+     2. STATS STRIP
+══════════════════════════════════════════════════════════ -->
+<div
+  class="bg-white border-b border-gray-100"
+  style="box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06)"
+>
+  <div class="max-w-7xl mx-auto px-6 md:px-14">
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100">
+      @for (s of [ {num:'120+', label:'Total Mock Tests', icon:'📋'},
+      {num:'50K+', label:'Tests Attempted', icon:'✍️'}, {num:'25K+',
+      label:'Active Students', icon:'👨‍🎓'}, {num:'4.9★', label:'Average Rating',
+      icon:'⭐'} ]; track s.label) {
+      <div class="stat-chip flex items-center gap-4 py-6 px-6 cursor-default">
+        <span class="text-2xl">{{ s.icon }}</span>
+        <div>
+          <div
+            class="font-['Playfair_Display'] text-2xl font-black"
+            style="color: var(--color-primary)"
+          >
+            {{ s.num }}
+          </div>
+          <div
+            class="text-gray-400 text-[11px] uppercase tracking-widest font-semibold"
+          >
+            {{ s.label }}
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     3. PRICING PLANS
+══════════════════════════════════════════════════════════ -->
+<section
+  class="py-20 relative overflow-hidden"
+  style="
+    background: linear-gradient(160deg, #f8f0f8 0%, #f3eef8 60%, #faf0f2 100%);
+  "
+>
+  <div
+    class="absolute -top-20 -right-20 w-72 h-72 rounded-full pointer-events-none"
+    style="
+      background: radial-gradient(
+        circle,
+        rgba(64, 6, 117, 0.07),
+        transparent 70%
+      );
+    "
+  ></div>
+
+  <div class="max-w-6xl mx-auto px-6 md:px-14 relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(137, 1, 23, 0.07);
+          color: var(--color-primary);
+          border: 1px solid rgba(137, 1, 23, 0.14);
+        "
+      >
+        💳 Simple Pricing
+      </div>
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        Choose Your
+        <em class="not-italic" style="color: var(--color-primary)">Plan</em>
+      </h2>
+      <p class="mt-5 text-gray-500 text-base max-w-lg mx-auto">
+        Start free. Upgrade when you're ready. No hidden charges — just results.
+      </p>
+    </div>
+
+    <!-- Plans grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+      @for (plan of plans; track plan.id; let i = $index) {
 
       <div
-        class="overflow-hidden rounded-3xl border border-[#eadfe9] bg-white shadow-xl"
+        class="plan-card fade-in-up rounded-3xl overflow-hidden border cursor-default"
+        [class]="[plan.popular ? 'featured' : '', 'delay-' + (i + 1)].join(' ')"
+        [style]="
+          plan.popular
+            ? 'background: linear-gradient(160deg, var(--color-dark), #2a0040, var(--color-primary)); border-color: rgba(137,1,23,0.4); box-shadow: 0 24px 64px rgba(137,1,23,0.3);'
+            : 'background: white; border-color: #e5e7eb; box-shadow: 0 4px 20px rgba(0,0,0,0.06);'
+        "
       >
-
-        <!-- Header -->
+        <!-- Card top -->
         <div
-          class="border-b border-[#f1e7f0] bg-gradient-to-r from-[#890117]/5 to-[#400675]/5 p-6"
+          class="px-7 pt-7 pb-5"
+          [style]="
+            plan.popular
+              ? 'border-bottom: 1px solid rgba(255,255,255,0.1)'
+              : 'border-bottom: 1px solid #f3f4f6'
+          "
         >
-
-          <div class="flex items-center justify-between gap-4">
-
-            <div>
-
-              <span
-                class="mb-3 inline-block rounded-full bg-[#890117]/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-[#890117]"
-              >
-                General Knowledge
-              </span>
-
-              <h2
-                class="font-['Playfair_Display'] text-2xl font-bold leading-snug text-[#1a0518]"
-              >
-                Q{{ currentQ + 1 }}.
-                {{ test.questions[currentQ].q }}
-              </h2>
-
-            </div>
-
-            <!-- Question Number Circle -->
-            <div
-              class="hidden h-16 w-16 items-center justify-center rounded-full bg-[linear-gradient(135deg,#890117,#400675)] text-xl font-bold text-white shadow-lg md:flex"
+          <!-- Tag badge -->
+          <div class="flex items-center justify-between mb-4">
+            @if (plan.popular) {
+            <span
+              class="badge-shimmer text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full"
             >
-              {{ currentQ + 1 }}
-            </div>
-
+              {{ plan.tag }}
+            </span>
+            } @else {
+            <span
+              class="text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full"
+              [style]="
+                'background:' + plan.tagColor + '18; color:' + plan.tagColor
+              "
+            >
+              {{ plan.tag }}
+            </span>
+            } @if (plan.originalPrice > 0) {
+            <span
+              class="text-xs font-black"
+              [style]="
+                plan.popular ? 'color:#f5a623' : 'color:var(--color-primary)'
+              "
+            >
+              -{{ discountPct(plan) }}% OFF
+            </span>
+            }
           </div>
 
-        </div>
+          <!-- Name -->
+          <div
+            class="font-['Playfair_Display'] text-2xl font-black mb-1"
+            [style]="plan.popular ? 'color:white' : 'color:var(--color-dark)'"
+          >
+            {{ plan.name }}
+          </div>
 
-        <!-- Options -->
-        <div class="space-y-4 p-6">
-
-          <button
-            *ngFor="let o of test.questions[currentQ].options; let i = index"
-            (click)="selected = i"
-            class="group flex w-full items-start gap-4 rounded-2xl border p-5 text-left transition-all duration-200"
-            [ngClass]="
-              selected === i
-                ? 'border-[#890117] bg-gradient-to-r from-[#890117] to-[#400675] text-white shadow-lg'
-                : 'border-[#eadfe9] bg-white hover:-translate-y-1 hover:border-[#890117]/30 hover:bg-[#faf4f6] hover:shadow-md'
+          <!-- Price -->
+          <div class="flex items-end gap-2 mt-3">
+            @if (plan.price === 0) {
+            <span
+              class="font-['Playfair_Display'] text-4xl font-black"
+              [style]="
+                plan.popular ? 'color:#f5a623' : 'color:var(--color-primary)'
+              "
+              >Free</span
+            >
+            } @else {
+            <span
+              class="font-['Playfair_Display'] text-4xl font-black"
+              [style]="
+                plan.popular ? 'color:#f5a623' : 'color:var(--color-primary)'
+              "
+            >
+              ₹{{ plan.price }}
+            </span>
+            <span
+              class="text-sm line-through mb-1"
+              [style]="
+                plan.popular ? 'color:rgba(255,255,255,0.35)' : 'color:#9ca3af'
+              "
+            >
+              ₹{{ plan.originalPrice }}
+            </span>
+            }
+          </div>
+          <div
+            class="text-xs mt-0.5"
+            [style]="
+              plan.popular ? 'color:rgba(255,255,255,0.45)' : 'color:#9ca3af'
             "
           >
-
-            <!-- Option Circle -->
-            <div
-              class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold"
-              [ngClass]="
-                selected === i
-                  ? 'bg-white text-[#890117]'
-                  : 'bg-[#f3e8ef] text-[#890117]'
-              "
-            >
-              {{ ['A', 'B', 'C', 'D'][i] }}
-            </div>
-
-            <!-- Option Text -->
-            <div class="flex-1">
-
-              <p
-                class="text-base font-medium leading-7"
-              >
-                {{ o }}
-              </p>
-
-            </div>
-
-          </button>
-
-          <!-- Footer -->
-          <div
-            class="mt-8 flex flex-col items-center justify-between gap-4 border-t border-[#f3e8ef] pt-6 sm:flex-row"
-          >
-
-            <p class="text-sm text-[#7a5a79]">
-              Select the most appropriate answer before proceeding.
-            </p>
-
-            <button
-              (click)="next()"
-              [disabled]="selected === null"
-              class="rounded-2xl px-8 py-3 text-sm font-semibold text-white transition-all duration-200"
-              [ngClass]="
-                selected === null
-                  ? 'cursor-not-allowed bg-gray-400'
-                  : 'bg-[linear-gradient(135deg,#890117,#400675)] shadow-lg shadow-[#890117]/20 hover:scale-105 hover:shadow-xl'
-              "
-            >
-              {{
-                currentQ + 1 === test.questions.length
-                  ? 'Finish Test →'
-                  : 'Next Question →'
-              }}
-            </button>
-
+            {{ plan.tests }} Tests Included
           </div>
-
         </div>
 
-      </div>
+        <!-- Features list -->
+        <div class="px-7 py-5 flex flex-col gap-3">
+          @for (f of plan.features; track f) {
+          <div
+            class="plan-feature flex items-start gap-3 text-sm"
+            [style]="
+              plan.popular ? 'color:rgba(255,255,255,0.8)' : 'color:#374151'
+            "
+          >
+            <span
+              class="mt-0.5 shrink-0 font-bold"
+              [style]="
+                plan.popular ? 'color:#f5a623' : 'color:var(--color-primary)'
+              "
+              >✓</span
+            >
+            {{ f }}
+          </div>
+          }
+        </div>
 
+        <!-- CTA -->
+        <div class="px-7 pb-7">
+          <button
+            class="start-btn w-full font-extrabold text-sm py-3.5 rounded-2xl cursor-pointer border-none tracking-wide"
+            [style]="
+              plan.popular
+                ? 'background: #f5a623; color: var(--color-dark); box-shadow: 0 4px 18px rgba(245,166,35,0.35);'
+                : 'background: linear-gradient(135deg, var(--color-primary), var(--color-dark)); color: white; box-shadow: 0 4px 14px rgba(137,1,23,0.25);'
+            "
+          >
+            {{ plan.price === 0 ? "Start Free" : "Get " + plan.name }}
+          </button>
+        </div>
+      </div>
+      }
     </div>
 
-    <!-- RESULT -->
-    <ng-template #done>
+    <!-- Money-back note -->
+    <p class="text-center text-gray-400 text-xs mt-8">
+      🔒 Secure payment · 7-day money-back guarantee · Cancel anytime
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     4. CATEGORY FILTER + TEST CARDS
+══════════════════════════════════════════════════════════ -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6 md:px-14">
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(64, 6, 117, 0.07);
+          color: var(--color-ascent);
+          border: 1px solid rgba(64, 6, 117, 0.14);
+        "
+      >
+        🧪 Browse Tests
+      </div>
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        All
+        <em class="not-italic" style="color: var(--color-primary)"
+          >Mock Tests</em
+        >
+      </h2>
+      <p class="mt-5 text-gray-500 text-base max-w-lg mx-auto">
+        Filter by category and find the perfect test for your preparation stage.
+      </p>
+    </div>
+
+    <!-- Category tabs -->
+    <div class="flex flex-wrap justify-center gap-2 mb-10">
+      @for (cat of categories; track cat) {
+      <button
+        (click)="setCategory(cat)"
+        class="cat-tab text-sm font-bold px-5 py-2.5 rounded-full transition-all duration-200"
+        [style]="
+          activeCategory() === cat
+            ? 'background: var(--color-primary); color: white; box-shadow: 0 4px 16px rgba(137,1,23,0.3);'
+            : 'background: rgba(137,1,23,0.05); color: #6b7280;'
+        "
+      >
+        {{ cat }}
+      </button>
+      }
+    </div>
+
+    <!-- Tests grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (test of filteredTests(); track trackById($index, test); let i =
+      $index) {
 
       <div
-        class="overflow-hidden rounded-3xl border border-[#eadfe9] bg-white text-center shadow-2xl"
+        class="test-card fade-in-up bg-white rounded-2xl border border-gray-100 flex flex-col"
+        [class]="'delay-' + ((i % 9) + 1)"
+        style="box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06)"
       >
-
-        <!-- Top -->
+        <!-- Card top -->
         <div
-          class="bg-[linear-gradient(135deg,#3f043e_0%,#400675_55%,#890117_100%)] px-6 py-14 text-white"
+          class="px-5 pt-5 pb-4 flex items-start justify-between border-b border-gray-50"
         >
-
-          <div
-            class="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-white/10 text-5xl backdrop-blur-sm"
-          >
-            🎉
+          <div class="flex items-center gap-3">
+            <!-- Icon circle -->
+            <div
+              class="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  rgba(137, 1, 23, 0.1),
+                  rgba(64, 6, 117, 0.1)
+                );
+              "
+            >
+              {{ test.icon }}
+            </div>
+            <div>
+              <!-- Category tag -->
+              <span
+                class="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
+                [style]="
+                  'background:' +
+                  difficultyColor[test.difficulty] +
+                  '14; color:' +
+                  difficultyColor[test.difficulty]
+                "
+              >
+                {{ test.tag }}
+              </span>
+              <h3
+                class="font-['Playfair_Display'] font-bold text-[15px] mt-0.5 leading-tight"
+                style="color: var(--color-dark)"
+              >
+                {{ test.title }}
+              </h3>
+            </div>
           </div>
 
-          <h2
-            class="mt-8 font-['Playfair_Display'] text-4xl font-bold"
-          >
-            Test Completed!
-          </h2>
+          <!-- Badges (top-right) -->
+          <div class="flex flex-col gap-1 items-end shrink-0 ml-2">
+            @if (test.free) {
+            <span
+              class="free-pulse text-[10px] font-black uppercase tracking-wider text-white px-2.5 py-1 rounded-full"
+              style="background: #1a7a2e"
+              >FREE</span
+            >
+            } @if (test.new) {
+            <span
+              class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full"
+              style="
+                background: rgba(64, 6, 117, 0.12);
+                color: var(--color-ascent);
+              "
+              >NEW</span
+            >
+            }
+          </div>
+        </div>
 
-          <p class="mx-auto mt-4 max-w-xl text-lg leading-8 text-white/75">
-            Good preparation comes from consistency, not motivation.
-            Most aspirants fail because they consume content instead of solving
-            questions regularly.
+        <!-- Card body -->
+        <div class="px-5 py-4 flex-1 flex flex-col">
+          <p class="text-gray-500 text-sm leading-relaxed mb-5 flex-1">
+            {{ test.description }}
           </p>
 
-        </div>
-
-        <!-- Bottom -->
-        <div class="p-8">
-
-          <div
-            class="mx-auto grid max-w-2xl gap-5 md:grid-cols-3"
-          >
-
-            <div
-              class="rounded-2xl bg-[#faf4f6] p-5"
+          <!-- Meta chips -->
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span
+              class="flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-50 text-gray-500"
             >
-              <h3
-                class="font-['Playfair_Display'] text-3xl font-bold text-[#890117]"
-              >
-                10
-              </h3>
-
-              <p class="mt-1 text-sm text-[#6f566d]">
-                Questions Attempted
-              </p>
-            </div>
-
-            <div
-              class="rounded-2xl bg-[#f7f1fb] p-5"
+              ❓ {{ test.questions }} Qs
+            </span>
+            <span
+              class="flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-50 text-gray-500"
             >
-              <h3
-                class="font-['Playfair_Display'] text-3xl font-bold text-[#400675]"
-              >
-                Great
-              </h3>
-
-              <p class="mt-1 text-sm text-[#6f566d]">
-                Performance
-              </p>
-            </div>
-
-            <div
-              class="rounded-2xl bg-[#fff7e8] p-5"
+              ⏱️ {{ test.duration }}
+            </span>
+            <span
+              class="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full"
+              [style]="
+                'background:' +
+                difficultyColor[test.difficulty] +
+                '12; color:' +
+                difficultyColor[test.difficulty]
+              "
             >
-              <h3
-                class="font-['Playfair_Display'] text-3xl font-bold text-[#c8860a]"
-              >
-                Keep
-              </h3>
-
-              <p class="mt-1 text-sm text-[#6f566d]">
-                Practicing Daily
-              </p>
-            </div>
-
+              {{ test.difficulty }}
+            </span>
           </div>
 
-          <button
-            routerLink="/test-series"
-            class="mt-10 rounded-2xl bg-[linear-gradient(135deg,#890117,#400675)] px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-[#890117]/20 transition hover:scale-105 hover:shadow-xl"
+          <!-- Attempts + Languages row -->
+          <div
+            class="flex items-center justify-between text-xs text-gray-400 mb-4 font-semibold"
           >
-            Explore More Tests →
+            <span>👥 {{ test.attempts }} attempts</span>
+            <div class="flex gap-1">
+              @for (lang of test.languages; track lang) {
+              <span
+                class="px-2 py-0.5 rounded text-[10px] font-bold"
+                style="
+                  background: rgba(137, 1, 23, 0.07);
+                  color: var(--color-primary);
+                "
+              >
+                {{ lang }}
+              </span>
+              }
+            </div>
+          </div>
+
+          <!-- CTA button -->
+          <button
+            class="start-btn w-full text-white font-extrabold text-sm py-3 rounded-xl cursor-pointer border-none tracking-wide"
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--color-primary),
+                var(--color-dark)
+              );
+              box-shadow: 0 4px 16px rgba(137, 1, 23, 0.25);
+            "
+             [routerLink]="['/sample-test']"
+          >
+            {{ test.free ? "Start Free Test →" : "Start Test →" }}
           </button>
-
         </div>
-
       </div>
 
-    </ng-template>
+      }
+    </div>
 
+    <!-- View more CTA -->
+    <div class="text-center mt-10">
+      <button
+        class="font-bold text-sm px-8 py-3.5 rounded-full cursor-pointer transition-all hover:opacity-90"
+        style="
+          background: rgba(137, 1, 23, 0.06);
+          color: var(--color-primary);
+          border: 1.5px solid rgba(137, 1, 23, 0.2);
+        "
+      >
+        Load More Tests →
+      </button>
+    </div>
   </div>
+</section>
 
+<!-- ══════════════════════════════════════════════════════════
+     5. HOW IT WORKS
+══════════════════════════════════════════════════════════ -->
+<section
+  class="py-20 relative overflow-hidden"
+  style="
+    background: linear-gradient(160deg, #f8f0f8 0%, #f3eef8 60%, #faf0f2 100%);
+  "
+>
+  <div class="max-w-6xl mx-auto px-6 md:px-14 relative z-10">
+    <div class="text-center mb-14">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(137, 1, 23, 0.07);
+          color: var(--color-primary);
+          border: 1px solid rgba(137, 1, 23, 0.14);
+        "
+      >
+        ⚙️ How It Works
+      </div>
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        4 Steps to
+        <em class="not-italic" style="color: var(--color-primary)"
+          >Better Scores</em
+        >
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (step of [ {num:'01', icon:'🔍', title:'Pick a Test', desc:'Browse
+      120+ tests by category, difficulty, or exam type.'}, {num:'02', icon:'✍️',
+      title:'Attempt the Test', desc:'Take the full-length test in timed,
+      exam-like conditions.'}, {num:'03', icon:'📊', title:'See Detailed
+      Analysis', desc:'View score, rank, topic-wise breakdown and compare with
+      toppers.'}, {num:'04', icon:'🔁', title:'Revise & Improve', desc:'Study
+      solutions, identify weak areas, and re-attempt to improve.'} ]; track
+      step.num; let i = $index) {
+
+      <div
+        class="relative fade-in-up bg-white rounded-2xl p-6 border border-gray-100 group cursor-default text-center"
+        [class]="'delay-' + (i + 1)"
+        style="box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05)"
+      >
+        <!-- Step number watermark -->
+        <div
+          class="absolute top-3 right-4 font-['Playfair_Display'] font-black text-5xl leading-none pointer-events-none select-none"
+          style="color: rgba(137, 1, 23, 0.05)"
+        >
+          {{ step.num }}
+        </div>
+
+        <!-- Icon orb -->
+        <div
+          class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
+          style="
+            background: rgba(137, 1, 23, 0.08);
+            border: 1.5px solid rgba(137, 1, 23, 0.15);
+          "
+        >
+          {{ step.icon }}
+        </div>
+
+        <!-- Step pill -->
+        <span
+          class="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 inline-block"
+          style="
+            background: rgba(137, 1, 23, 0.08);
+            color: var(--color-primary);
+          "
+        >
+          Step {{ step.num }}
+        </span>
+
+        <h3
+          class="font-['Playfair_Display'] font-bold text-lg mb-2"
+          style="color: var(--color-dark)"
+        >
+          {{ step.title }}
+        </h3>
+        <p class="text-gray-500 text-sm leading-relaxed">{{ step.desc }}</p>
+
+        <!-- Connector arrow (not on last) -->
+        @if (i < 3) {
+        <div
+          class="hidden lg:block absolute -right-4 top-1/2 -translate-y-1/2 z-10 text-xl"
+          style="color: rgba(137, 1, 23, 0.3)"
+        >
+          →
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     6. FAQ
+══════════════════════════════════════════════════════════ -->
+<section class="py-20 bg-white">
+  <div class="max-w-3xl mx-auto px-6 md:px-14">
+    <div class="text-center mb-12">
+      <div
+        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+        style="
+          background: rgba(64, 6, 117, 0.07);
+          color: var(--color-ascent);
+          border: 1px solid rgba(64, 6, 117, 0.14);
+        "
+      >
+        ❓ Common Questions
+      </div>
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-4xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+        Frequently Asked
+        <em class="not-italic" style="color: var(--color-primary)"
+          >Questions</em
+        >
+      </h2>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      @for (faq of faqs; track faq.question; let i = $index) {
+
+      <div
+        class="faq-card rounded-2xl border border-gray-100 overflow-hidden cursor-pointer"
+        [class]="openFaq() === i ? 'open' : ''"
+        (click)="toggleFaq(i)"
+      >
+        <!-- Question row -->
+        <div class="flex items-center justify-between px-6 py-5 gap-4">
+          <div class="flex items-center gap-3">
+            <span
+              class="text-[11px] font-black w-7 h-7 rounded-full flex items-center justify-center shrink-0"
+              style="
+                background: rgba(137, 1, 23, 0.08);
+                color: var(--color-primary);
+              "
+            >
+              {{ (i + 1).toString().padStart(2, "0") }}
+            </span>
+            <h3
+              class="font-semibold text-sm md:text-base"
+              style="color: var(--color-dark)"
+            >
+              {{ faq.question }}
+            </h3>
+          </div>
+          <span
+            class="faq-icon text-xl shrink-0 transition-transform duration-300"
+            [class]="openFaq() === i ? 'open' : ''"
+            style="color: var(--color-primary)"
+          >
+            {{ openFaq() === i ? "−" : "+" }}
+          </span>
+        </div>
+
+        <!-- Answer -->
+        <div class="faq-body px-6" [class]="openFaq() === i ? 'open pb-5' : ''">
+          <p class="text-gray-500 text-sm leading-relaxed pl-10">
+            {{ faq.answer }}
+          </p>
+        </div>
+      </div>
+
+      }
+    </div>
+  </div>
 </section>

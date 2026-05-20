@@ -16,6 +16,7 @@ import { ResultComponent } from './features/private/result/result.component';
 import { StudyMaterial } from './features/pages/study-material/study-material';
 import { Gallery } from './features/pages/gallery/gallery';
 import { OnlineSupport } from './features/pages/online-support/online-support';
+import { FreeDemoTestComponent } from './features/pages/free-demo-test/free-demo-test.component';
 
 export const routes: Routes = [
   // 🌐 Public Website
@@ -32,6 +33,8 @@ export const routes: Routes = [
       { path: 'cart', component: CartComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'checkout', component: CheckoutComponent },
+
+      { path: 'sample-test', component: FreeDemoTestComponent },
     ],
   },
 

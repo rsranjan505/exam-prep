@@ -2,22 +2,27 @@
 
 import {
   Component,
+  inject,
+  PLATFORM_ID,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JoinTest } from "../../components/join-test/join-test";
 import { WhyChooseUsComponent } from "../../components/why-choose-us/why-choose-us.component";
 import { PracticeZoneComponent } from "../../components/practice-zone/practice-zone.component";
-import { MaterialComponent } from "../../components/material/material.component";
 import { HeroSectionComponent } from "../../components/hero-section/hero-section.component";
+import { TestimonialsSectionComponent } from '../../components/testimonials-section/testimonials-section.component';
 
 
 
 
 
-interface Tip {
+export interface Tip {
   icon: string;
+  number: string;
   title: string;
   description: string;
+  color: string;
 }
 
 interface Testimonial {
@@ -32,28 +37,66 @@ interface Testimonial {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, JoinTest, WhyChooseUsComponent, PracticeZoneComponent, MaterialComponent, HeroSectionComponent],
+  imports: [CommonModule, JoinTest, WhyChooseUsComponent, PracticeZoneComponent, HeroSectionComponent, TestimonialsSectionComponent],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
 
   mobileMenuOpen = false;
 
-  tips: Tip[] = [
+  private platformId = inject(PLATFORM_ID);
+
+  activeTestimonial = signal(0);
+  private autoTimer: ReturnType<typeof setInterval> | null = null;
+
+  readonly tips: Tip[] = [
     {
       icon: '⏰',
+      number: '01',
       title: 'Time Management',
-      description: 'Plan your daily study schedule and stick to it. Break your day into focused blocks — GS, current affairs, revision.',
+      description:
+        'Plan your daily study schedule and stick to it for consistent progress. Allocate dedicated time blocks for each subject.',
+      color: '#890117',
     },
     {
-      icon: '📊',
+      icon: '📝',
+      number: '02',
       title: 'Practice Tests',
-      description: 'Attempt daily mock tests to analyse your strengths and weaknesses. Track your scores to measure real progress.',
+      description:
+        'Attempt daily mock tests to analyze your strengths and weaknesses. Review every wrong answer with detailed explanations.',
+      color: '#400675',
     },
     {
       icon: '🔁',
-      title: 'Spaced Revision',
-      description: 'Regularly revise important topics at spaced intervals. Use flashcards and short notes to retain information effectively.',
+      number: '03',
+      title: 'Regular Revision',
+      description:
+        'Regularly revise important topics using the spaced repetition technique to retain information effectively.',
+      color: '#3f043e',
+    },
+    {
+      icon: '📰',
+      number: '04',
+      title: 'Current Affairs',
+      description:
+        'Read Bihar and national news daily. Focus on government schemes, appointments, and economic updates.',
+      color: '#890117',
+    },
+    {
+      icon: '🧘',
+      number: '05',
+      title: 'Stay Consistent',
+      description:
+        'Consistency beats intensity. Study 6–8 hours daily with short breaks to keep your mind fresh and focused.',
+      color: '#400675',
+    },
+    {
+      icon: '🤝',
+      number: '06',
+      title: 'Peer Learning',
+      description:
+        'Join study groups and discuss topics with peers. Teaching others is the fastest way to solidify your knowledge.',
+      color: '#3f043e',
     },
   ];
 
