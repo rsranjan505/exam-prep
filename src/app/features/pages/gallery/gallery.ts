@@ -22,7 +22,7 @@ export interface GalleryItem {
 
 @Component({
   selector: 'app-gallery',
-  imports: [],
+  imports: [JoinTest],
   templateUrl: './gallery.html',
   styleUrl: './gallery.css',
 })
