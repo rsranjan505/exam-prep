@@ -2,8 +2,6 @@
 
 import {
   Component,
-  OnDestroy,
-  OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JoinTest } from "../../components/join-test/join-test";
@@ -41,12 +39,6 @@ export class HomeComponent {
 
   mobileMenuOpen = false;
 
-
-
-
-
-
-
   tips: Tip[] = [
     {
       icon: '⏰',
@@ -64,7 +56,6 @@ export class HomeComponent {
       description: 'Regularly revise important topics at spaced intervals. Use flashcards and short notes to retain information effectively.',
     },
   ];
-
 
     testimonials: Testimonial[] = [
     {
