@@ -277,16 +277,8 @@
        SECTION 3 — TESTIMONIALS
   ════════════════════════════════════════════════════════ -->
 <section
-  class="relative py-20 overflow-hidden"
-  style="
-    background: linear-gradient(
-      135deg,
-      var(--color-dark) 0%,
-      #2a0040 50%,
-      var(--color-ascent) 100%
-    );
-  "
->
+  class="relative py-20 overflow-hidden bg-white"
+ >
   <!-- Dot grid texture -->
   <div
     class="absolute inset-0 pointer-events-none"
@@ -312,92 +304,91 @@
     <div class="text-center mb-14">
       <div
         class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
-        style="
-          background: rgba(255, 255, 255, 0.1);
-          color: rgba(255, 255, 255, 0.75);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-        "
+
+
       >
         ⭐ Success Stories
       </div>
       <h2
-        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black text-white"
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black text-primary"
       >
         What Our <em class="not-italic" style="color: #f5a623">Students Say</em>
       </h2>
-      <p class="mt-4 text-white/50 text-base max-w-md mx-auto">
+      <p class="mt-4 text-primary/50 text-base max-w-md mx-auto">
         Real stories from real toppers who cracked their exams with Knowledge
         Nation.
       </p>
     </div>
 
     <!-- Testimonial slider -->
-    <div class="testimonial-slider">
+
+    <div class="relative overflow-hidden">
       <div
-        class="testimonial-track"
+        class="flex transition-transform duration-500 ease-out"
         [style.transform]="'translateX(-' + activeTestimonial() * 100 + '%)'"
       >
         @for (t of testimonials; track t.name; let i = $index) {
-        <div class="testimonial-slide px-2">
+
+        <!-- EACH SLIDE -->
+        <div class="min-w-full flex justify-center px-4">
+          <!-- CARD -->
           <div
-            class="rounded-3xl p-8 md:p-10 relative"
-            style="
-              background: rgba(255, 255, 255, 0.07);
-              backdrop-filter: blur(12px);
-              border: 1px solid rgba(255, 255, 255, 0.12);
-              box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
-            "
+            class="w-full max-w-4xl rounded-3xl p-8 md:p-10 relative bg-primary/30"
           >
-            <!-- Quote mark decoration -->
+            <!-- Quote -->
             <div
-              class="quote-mark absolute top-4 left-6 select-none pointer-events-none"
+              class="absolute top-2 left-6 text-7xl font-black leading-none opacity-10 text-primary pointer-events-none"
             >
-              "
+              ”
             </div>
 
             <!-- Stars -->
-            <div class="flex gap-1 mb-5 relative z-10">
+            <div class="flex items-center gap-1 mb-6 relative z-10">
               @for (s of starsArray; track trackByIndex($index)) {
-              <span style="color: #f5a623; font-size: 1.1rem">★</span>
+              <span class="text-[#f5a623] text-lg">★</span>
               }
-              <span
-                class="ml-2 text-white/40 text-xs font-semibold self-center"
-                >{{ t.year }}</span
-              >
+
+              <span class="ml-2 text-primary/40 text-xs font-semibold">
+                {{ t.year }}
+              </span>
             </div>
 
             <!-- Quote text -->
             <p
-              class="text-white/85 text-lg md:text-xl leading-relaxed mb-8 font-['Playfair_Display'] italic relative z-10"
+              class="text-primary/90 text-lg md:text-2xl leading-relaxed italic mb-10 font-['Playfair_Display'] relative z-10 text-center md:text-left"
             >
               "{{ t.quote }}"
             </p>
 
-            <!-- Author row -->
+            <!-- Bottom row -->
             <div class="flex items-center gap-4 relative z-10">
-              <!-- Avatar with gradient ring -->
-              <div class="avatar-ring w-14 h-14 shrink-0">
-                <div class="avatar-inner w-full h-full">
-                  <span
-                    class="font-black text-sm"
-                    style="color: var(--color-primary)"
-                    >{{ t.avatar }}</span
-                  >
+              <!-- Avatar -->
+              <div
+                class="w-14 h-14 rounded-full bg-primary flex items-center justify-center shrink-0"
+              >
+                <span class="font-black text-sm text-[#890117]">
+                  {{ t.avatar }}
+                </span>
+              </div>
+
+              <!-- Info -->
+              <div>
+                <div class="font-bold text-primary text-lg">
+                  {{ t.name }}
+                </div>
+
+                <div class="text-primary/50 text-sm">
+                  {{ t.city }}
                 </div>
               </div>
 
-              <div>
-                <div class="font-black text-white text-base">{{ t.name }}</div>
-                <div class="text-white/50 text-sm">{{ t.city }}</div>
-              </div>
-
-              <!-- Exam badge -->
+              <!-- Badge -->
               <div
-                class="ml-auto px-3 py-1.5 rounded-full text-xs font-bold"
+                class="ml-auto px-4 py-2 rounded-full text-xs font-bold"
                 style="
                   background: rgba(137, 1, 23, 0.35);
                   border: 1px solid rgba(137, 1, 23, 0.4);
-                  color: rgba(255, 255, 255, 0.85);
+                  color: rgba(255, 255, 255, 0.9);
                 "
               >
                 {{ t.exam }}
@@ -405,12 +396,13 @@
             </div>
           </div>
         </div>
+
         }
       </div>
     </div>
 
     <!-- Dot nav -->
-    <div class="flex items-center justify-center gap-2.5 mt-8">
+    <div class="flex items-center justify-center gap-2.5 mt-8 ">
       @for (t of testimonials; track t.name; let i = $index) {
       <button
         (click)="goToTestimonial(i)"
@@ -419,7 +411,7 @@
         [style]="
           i === activeTestimonial()
             ? 'width:28px; height:8px; background: #f5a623;'
-            : 'width:8px; height:8px; background: rgba(255,255,255,0.25);'
+            : 'width:8px; height:8px; background: rgba(137, 1, 23, 0.4);'
         "
       ></button>
       }
@@ -439,11 +431,11 @@
         "
       >
         <span class="text-2xl mb-2">{{ item.icon }}</span>
-        <span class="font-['Playfair_Display'] text-xl font-black text-white">{{
+        <span class="font-['Playfair_Display'] text-xl font-black text-primary">{{
           item.label
         }}</span>
         <span
-          class="text-white/40 text-[11px] uppercase tracking-wider mt-0.5"
+          class="text-primary/40 text-[11px] uppercase tracking-wider mt-0.5"
           >{{ item.sub }}</span
         >
       </div>
