@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CartserviceService } from '../../services/cartservice.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { JoinTest } from "../../components/join-test/join-test";
 
@@ -37,11 +36,5 @@ export class StudyMaterial {
         added: false,
       },
     ];
-  
-    constructor(private cart: CartserviceService) {}
-  
-    addToCart(book: any) {
-      this.cart.add(book);
-      book.added = true;
-    }
+
 }

@@ -50,7 +50,7 @@
 
     <!-- Test cards grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      @for (test of tests; track trackByTitle($index, test); let i = $index) {
+    @for (test of tests(); track test.id; let i = $index) {
 
       <div
         class="test-card fade-in-up bg-white rounded-2xl border border-gray-100 flex flex-col group cursor-default"
@@ -73,7 +73,7 @@
                 );
               "
             >
-              {{ test.icon }}
+
             </div>
             <div>
               <!-- Tag pill -->
@@ -81,12 +81,12 @@
                 class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
                 [style]="
                   'background:' +
-                  test.difficultyColor +
+                  getDifficultyColor(test.difficult_level) +
                   '15; color:' +
-                  test.difficultyColor
+                  getDifficultyColor(test.difficult_level)
                 "
               >
-                {{ test.tag }}
+                {{ test.tags }}
               </span>
               <h3
                 class="font-['Playfair_Display'] font-bold text-base mt-0.5"
@@ -98,13 +98,13 @@
           </div>
 
           <!-- Popular badge -->
-          @if (test.popular) {
+          <!-- @if (test.popular) {
           <span
             class="popular-badge text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shrink-0 shadow-sm"
           >
             Popular
           </span>
-          }
+          } -->
         </div>
 
         <!-- Card body -->
@@ -118,20 +118,21 @@
             class="flex items-center gap-4 mb-5 text-xs text-gray-400 font-semibold"
           >
             <span class="flex items-center gap-1.5">
-              <span class="text-base">❓</span> {{ test.questions }}
+              <span class="text-base">❓</span> {{ test.units }} Qs
             </span>
             <span class="w-px h-4 bg-gray-200"></span>
             <span class="flex items-center gap-1.5">
-              <span class="text-base">⏱️</span> {{ test.duration }}
+              <span class="text-base">⏱️</span> {{ test.duration }} mins
             </span>
             <span class="w-px h-4 bg-gray-200"></span>
-            <span class="font-bold" [style.color]="test.difficultyColor">
-              {{ test.difficulty }}
+            <span class="font-bold" [style.color]="getDifficultyColor(test.difficult_level)">
+              {{ test.difficult_level }}
             </span>
           </div>
 
           <!-- CTA Button -->
           <button
+            [routerLink]="['/test-series', test.slug]"
             class="start-btn w-full text-white font-extrabold text-sm py-3 rounded-xl cursor-pointer border-none tracking-wide"
             style="
               background: linear-gradient(
@@ -205,7 +206,7 @@
           </p>
         </div>
         <div class="flex flex-col sm:flex-row gap-3 shrink-0">
-          <button
+          <!-- <button
             class="start-btn bg-white font-extrabold text-sm px-8 py-3.5 rounded-full cursor-pointer border-none transition-all"
             style="
               color: var(--color-primary);
@@ -213,8 +214,9 @@
             "
           >
             Try Free Test
-          </button>
+          </button> -->
           <button
+            [routerLink]="['/test-series']"
             class="font-bold text-sm px-8 py-3.5 rounded-full cursor-pointer transition-all hover:bg-white/10"
             style="
               background: transparent;

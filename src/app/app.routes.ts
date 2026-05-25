@@ -5,10 +5,7 @@ import { AboutComponent } from './features/pages/about/about.component';
 import { ContactComponent } from './features/pages/contact/contact.component';
 import { AuthlayoutComponent } from './features/layouts/authlayout/authlayout.component';
 import { LoginComponent } from './features/pages/login/login.component';
-import { BooksComponent } from './features/pages/books/books.component';
 import { TestSeriesComponent } from './features/pages/test-series/test-series.component';
-import { CartComponent } from './features/pages/cart/cart.component';
-import { CheckoutComponent } from './features/pages/checkout/checkout.component';
 import { DashboardComponent } from './features/private/dashboard/dashboard.component';
 import { RegisterComponent } from './features/pages/register/register.component';
 import { TestComponent } from './features/private/test/test.component';
@@ -27,12 +24,11 @@ export const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'about', component: AboutComponent },
       { path: 'test-series', component: TestSeriesComponent },
+      {  path: 'test-series/:exam',  component: FreeDemoTestComponent },
       { path: 'study-materials', component: StudyMaterial },
       { path: 'gallery', component: Gallery },
       { path: 'online-support', component: OnlineSupport },
-      { path: 'cart', component: CartComponent },
       { path: 'contact', component: ContactComponent },
-      { path: 'checkout', component: CheckoutComponent },
 
       { path: 'sample-test', component: FreeDemoTestComponent },
     ],
