@@ -1,100 +1,426 @@
-<section class="min-h-screen bg-gray-100 py-10 px-4">
-  <div class="max-w-7xl mx-auto space-y-8">
-    <!-- Welcome Card -->
+<section class="min-h-screen bg-[#f8f5f9] px-4 py-10">
+
+  <div class="mx-auto max-w-7xl">
+
+    <!-- HERO -->
     <div
-      class="bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row justify-between items-center"
+      class="relative overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#3f043e_0%,#400675_50%,#890117_100%)] p-8 text-white shadow-2xl md:p-12"
     >
-      <div>
-        <h1 class="text-2xl font-bold">Welcome, Rajeev 👋</h1>
-        <p class="text-gray-600">
-          Keep going! You're doing great in your preparation.
+
+      <!-- GLOW -->
+      <div
+        class="absolute right-0 top-0 h-72 w-72 rounded-full bg-white/10 blur-3xl"
+      ></div>
+
+      <div class="relative z-10">
+
+        <span
+          class="inline-flex rounded-full bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-[#f9b84a]"
+        >
+          Student Dashboard
+        </span>
+
+        <h1
+          class="mt-6 font-['Playfair_Display'] text-4xl font-extrabold leading-tight md:text-6xl"
+        >
+          Welcome Back,
+          {{ user.first_name }}
+        </h1>
+
+        <p
+          class="mt-5 max-w-2xl text-lg leading-8 text-white/80"
+        >
+          Continue your BPSC preparation journey with structured tests,
+          smart analytics, and consistent practice.
         </p>
+
+        <!-- ACTIONS -->
+        <div
+          class="mt-10 flex flex-wrap gap-4"
+        >
+
+          <a
+            routerLink="/test-series"
+            class="rounded-2xl bg-white px-8 py-4 text-lg font-bold text-[#400675] shadow-xl transition duration-300 hover:-translate-y-1"
+          >
+            Start New Test
+          </a>
+
+          <a
+            routerLink="/profile"
+            class="rounded-2xl border border-white/20 bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur-xl transition hover:bg-white/20"
+          >
+            View Profile
+          </a>
+
+        </div>
+
       </div>
-      <div class="mt-4 md:mt-0">
+
+    </div>
+
+    <!-- STATS -->
+    <div
+      class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4"
+    >
+
+      <!-- CARD -->
+      <div
+        class="rounded-3xl border border-[#eadfe9] bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+      >
+
+        <div
+          class="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#890117]/10 text-3xl"
+        >
+          📝
+        </div>
+
+        <h3
+          class="mt-6 text-4xl font-bold text-[#1a0518]"
+        >
+          {{ completedTests() }}
+        </h3>
+
+        <p class="mt-2 text-[#7b6678]">
+          Tests Completed
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+      <div
+        class="rounded-3xl border border-[#eadfe9] bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+      >
+
+        <div
+          class="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#400675]/10 text-3xl"
+        >
+          🎯
+        </div>
+
+        <h3
+          class="mt-6 text-4xl font-bold text-[#1a0518]"
+        >
+          {{ accuracy() }}%
+        </h3>
+
+        <p class="mt-2 text-[#7b6678]">
+          Average Accuracy
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+      <div
+        class="rounded-3xl border border-[#eadfe9] bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+      >
+
+        <div
+          class="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#3f043e]/10 text-3xl"
+        >
+          📚
+        </div>
+
+        <h3
+          class="mt-6 text-4xl font-bold text-[#1a0518]"
+        >
+          {{ totalTests() }}
+        </h3>
+
+        <p class="mt-2 text-[#7b6678]">
+          Total Available Tests
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+      <div
+        class="rounded-3xl border border-[#eadfe9] bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+      >
+
+        <div
+          class="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#f9b84a]/20 text-3xl"
+        >
+          🏆
+        </div>
+
+        <h3
+          class="mt-6 text-4xl font-bold text-[#1a0518]"
+        >
+          #128
+        </h3>
+
+        <p class="mt-2 text-[#7b6678]">
+          Current Rank
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- PROGRESS -->
+    <div
+      class="mt-10 grid gap-8 lg:grid-cols-3"
+    >
+
+      <!-- LEFT -->
+      <div
+        class="lg:col-span-2 rounded-3xl border border-[#eadfe9] bg-white p-8 shadow-sm"
+      >
+
+        <div class="flex items-center justify-between">
+
+          <div>
+
+            <h2
+              class="font-['Playfair_Display'] text-3xl font-bold text-[#1a0518]"
+            >
+              Preparation Progress
+            </h2>
+
+            <p class="mt-2 text-[#7b6678]">
+              Track your BPSC preparation journey.
+            </p>
+
+          </div>
+
+          <span
+            class="rounded-full bg-[#890117]/10 px-5 py-2 text-sm font-semibold text-[#890117]"
+          >
+            {{ progressPercentage }}% Completed
+          </span>
+
+        </div>
+
+        <!-- BAR -->
+        <div
+          class="mt-10 h-5 overflow-hidden rounded-full bg-[#f1e8f0]"
+        >
+
+          <div
+            class="h-full rounded-full bg-gradient-to-r from-[#890117] to-[#400675] transition-all duration-500"
+            [style.width.%]="progressPercentage"
+          ></div>
+
+        </div>
+
+        <!-- DETAILS -->
+        <div
+          class="mt-8 grid gap-6 sm:grid-cols-3"
+        >
+
+          <div
+            class="rounded-2xl bg-[#fcf8fc] p-5"
+          >
+
+            <p class="text-sm text-[#8c7289]">
+              Completed
+            </p>
+
+            <h3 class="mt-2 text-3xl font-bold text-[#1a0518]">
+              {{ completedTests() }}
+            </h3>
+
+          </div>
+
+          <div
+            class="rounded-2xl bg-[#fcf8fc] p-5"
+          >
+
+            <p class="text-sm text-[#8c7289]">
+              Remaining
+            </p>
+
+            <h3 class="mt-2 text-3xl font-bold text-[#1a0518]">
+              {{ totalTests() - completedTests() }}
+            </h3>
+
+          </div>
+
+          <div
+            class="rounded-2xl bg-[#fcf8fc] p-5"
+          >
+
+            <p class="text-sm text-[#8c7289]">
+              Accuracy
+            </p>
+
+            <h3 class="mt-2 text-3xl font-bold text-[#1a0518]">
+              {{ accuracy() }}%
+            </h3>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div
+        class="rounded-3xl border border-[#eadfe9] bg-white p-8 shadow-sm"
+      >
+
+        <h2
+          class="font-['Playfair_Display'] text-3xl font-bold text-[#1a0518]"
+        >
+          Quick Start
+        </h2>
+
+        <p class="mt-2 text-[#7b6678]">
+          Jump directly into practice.
+        </p>
+
+        <div class="mt-8 space-y-5">
+
+          <a
+            routerLink="/test-series"
+            class="block rounded-2xl bg-gradient-to-r from-[#890117] to-[#400675] px-6 py-5 text-center text-lg font-bold text-white shadow-xl transition duration-300 hover:-translate-y-1"
+          >
+            🚀 Start Full Mock Test
+          </a>
+
+          <a
+            routerLink="/current-affairs"
+            class="block rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-6 py-5 text-center text-lg font-semibold text-[#1a0518] transition hover:bg-[#f8f5f9]"
+          >
+            📰 Current Affairs Quiz
+          </a>
+
+          <a
+            routerLink="/study-material"
+            class="block rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-6 py-5 text-center text-lg font-semibold text-[#1a0518] transition hover:bg-[#f8f5f9]"
+          >
+            📚 Study Material
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RECENT TESTS -->
+    <div
+      class="mt-10 rounded-3xl border border-[#eadfe9] bg-white p-8 shadow-sm"
+    >
+
+      <div
+        class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between"
+      >
+
+        <div>
+
+          <h2
+            class="font-['Playfair_Display'] text-3xl font-bold text-[#1a0518]"
+          >
+            Recent Test Activity
+          </h2>
+
+          <p class="mt-2 text-[#7b6678]">
+            Your recently completed examinations.
+          </p>
+
+        </div>
+
         <a
-          routerLink="/test-series"
-          class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition"
+          routerLink="/test-history"
+          class="rounded-2xl bg-[#f8f5f9] px-6 py-3 font-semibold text-[#1a0518] transition hover:bg-[#f1e8f0]"
         >
-          Continue Test
+          View All
         </a>
+
       </div>
+
+      <!-- TABLE -->
+      <div class="mt-8 overflow-x-auto">
+
+        <table class="min-w-full">
+
+          <thead>
+
+            <tr class="border-b border-[#f1e8f0]">
+
+              <th
+                class="pb-5 text-left text-sm font-semibold uppercase tracking-wide text-[#8c7289]"
+              >
+                Test
+              </th>
+
+              <th
+                class="pb-5 text-left text-sm font-semibold uppercase tracking-wide text-[#8c7289]"
+              >
+                Score
+              </th>
+
+              <th
+                class="pb-5 text-left text-sm font-semibold uppercase tracking-wide text-[#8c7289]"
+              >
+                Questions
+              </th>
+
+              <th
+                class="pb-5 text-left text-sm font-semibold uppercase tracking-wide text-[#8c7289]"
+              >
+                Date
+              </th>
+
+              <th
+                class="pb-5 text-left text-sm font-semibold uppercase tracking-wide text-[#8c7289]"
+              >
+                Status
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr
+              *ngFor="let test of recentTests"
+              class="border-b border-[#f8f5f9]"
+            >
+
+              <td class="py-6">
+
+                <h3 class="font-semibold text-[#1a0518]">
+                  {{ test.title }}
+                </h3>
+
+              </td>
+
+              <td class="py-6 font-bold text-[#400675]">
+                {{ test.score }}%
+              </td>
+
+              <td class="py-6 text-[#6f566d]">
+                {{ test.questions }}
+              </td>
+
+              <td class="py-6 text-[#6f566d]">
+                {{ test.date }}
+              </td>
+
+              <td class="py-6">
+
+                <span
+                  class="rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700"
+                >
+                  {{ test.status }}
+                </span>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
     </div>
 
-    <!-- Progress -->
-    <div class="bg-white rounded-2xl shadow p-6">
-      <h2 class="font-bold mb-3">Your Progress</h2>
-      <div class="w-full bg-gray-200 rounded-full h-4">
-        <div class="bg-green-600 h-4 rounded-full" style="width: 45%"></div>
-      </div>
-      <p class="text-sm mt-2 text-gray-600">4 of 9 tests completed</p>
-    </div>
-
-    <!-- Quick Actions -->
-    <div class="grid md:grid-cols-4 gap-6">
-      <div
-        class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center"
-      >
-        <h3 class="font-bold mb-2">Test Series</h3>
-        <p class="text-sm text-gray-600 mb-3">Attempt mock tests</p>
-        <a routerLink="/test-series" class="text-blue-600 font-semibold"
-          >Go →</a
-        >
-      </div>
-
-      <div
-        class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center"
-      >
-        <h3 class="font-bold mb-2">Books</h3>
-        <p class="text-sm text-gray-600 mb-3">Buy study materials</p>
-        <a routerLink="/books" class="text-blue-600 font-semibold">Shop →</a>
-      </div>
-
-      <div
-        class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center"
-      >
-        <h3 class="font-bold mb-2">Results</h3>
-        <p class="text-sm text-gray-600 mb-3">Check performance</p>
-        <a class="text-blue-600 font-semibold">View →</a>
-      </div>
-
-      <div
-        class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center"
-      >
-        <h3 class="font-bold mb-2">Profile</h3>
-        <p class="text-sm text-gray-600 mb-3">Update details</p>
-        <a class="text-blue-600 font-semibold">Edit →</a>
-      </div>
-    </div>
-
-    <!-- Enrolled Test Series -->
-    <div class="bg-white rounded-2xl shadow p-6">
-      <h2 class="font-bold mb-4">Your Test Series</h2>
-
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="border rounded-xl p-4">
-          <h3 class="font-semibold">BPSC Prelims Full Test</h3>
-          <p class="text-sm text-gray-600">Progress: 60%</p>
-          <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded text-sm">
-            Resume
-          </button>
-        </div>
-
-        <div class="border rounded-xl p-4">
-          <h3 class="font-semibold">CSAT Practice Set</h3>
-          <p class="text-sm text-gray-600">Progress: 30%</p>
-          <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded text-sm">
-            Resume
-          </button>
-        </div>
-
-        <div class="border rounded-xl p-4">
-          <h3 class="font-semibold">Mains Answer Writing</h3>
-          <p class="text-sm text-gray-600">Progress: 10%</p>
-          <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded text-sm">
-            Resume
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
+
 </section>

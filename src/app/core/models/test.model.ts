@@ -24,6 +24,7 @@ export interface Test {
     duration: string
     units: string
     total_marks: string
+    negative_marks: string
     difficult_level: string
     test_type: string
     description: string
@@ -31,6 +32,7 @@ export interface Test {
     languages: string
     created_at: string
     updated_at: string
+    questions?:[]
 
     exame_type?: ExamType
     section?: Section

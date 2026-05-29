@@ -44,12 +44,13 @@
             border: 1px solid rgba(245, 166, 35, 0.3);
           "
         >
-          📋 BPSC Prelims Series
+          📋
+          {{ currentTest?.exame_type?.name }} {{ currentTest?.tags}}
         </span>
         <h1 class="font-['Playfair_Display'] text-3xl font-black text-white">
-          {{ testTitle }}
+          {{ currentTest?.title }}
         </h1>
-        <p class="text-white/55 text-sm mt-1">{{ testSubtitle }}</p>
+        <p class="text-white/55 text-sm mt-1">{{ currentTest?.description }}</p>
       </div>
     </div>
 
@@ -63,9 +64,9 @@
       </h2>
 
       <div class="grid grid-cols-2 gap-3 mb-6">
-        @for (info of [ {icon:'❓', label:'Questions', val:'10'}, {icon:'⏱️',
-        label:'Duration', val:'120 Mins'}, {icon:'✅', label:'+ve Marks',
-        val:'+1 per correct'}, {icon:'❌', label:'-ve Marks', val:'-1/3 per
+        @for (info of [ {icon:'❓', label:'Questions', val:currentTest?.units}, {icon:'⏱️',
+        label:'Duration', val: currentTest?.duration +' Mins'}, {icon:'✅', label:'+ve Marks',
+        val:positive_marks || 2  }, {icon:'❌', label:'-ve Marks', val: currentTest?.negative_marks || '-1/3 per
         wrong'} ]; track info.label) {
         <div
           class="flex items-center gap-3 rounded-xl p-3.5 border border-gray-100"
@@ -419,10 +420,10 @@
           class="font-semibold text-sm truncate"
           style="color: var(--color-dark)"
         >
-          {{ testTitle }}
+          {{ currentTest?.title }}
         </div>
         <div class="text-gray-400 text-xs">
-          Q {{ 1 }} of {{ questions.length }}
+          Q {{ 1 }} of {{ currentTest?.questions?.length }}
         </div>
       </div>
 

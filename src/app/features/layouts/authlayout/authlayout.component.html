@@ -1,5 +1,491 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-100 w-full">
-  <div class="bg-white w-full rounded shadow">
+<div class="min-h-screen bg-[#f8f5f9] flex flex-col">
+
+  <!-- NAVBAR -->
+  <header
+    class="sticky top-0 z-50 border-b border-[#eadfe9] bg-white/95 backdrop-blur-xl"
+  >
+
+    <div
+      class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4"
+    >
+
+      <!-- LEFT -->
+      <div class="flex items-center gap-4 mobile-menu-wrapper">
+
+        <!-- MOBILE MENU BUTTON -->
+        <button
+          (click)="mobileMenuOpen.set(!mobileMenuOpen())"
+          class="flex h-11 w-11 items-center justify-center rounded-xl border border-[#eadfe9] bg-white lg:hidden"
+        >
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-[#1a0518]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+
+        </button>
+
+        <!-- LOGO -->
+        <a
+          routerLink="/"
+          class="flex items-center gap-3"
+        >
+
+          <div
+            class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#890117] to-[#400675] text-lg font-bold text-white shadow-lg"
+          >
+            B
+          </div>
+
+          <div>
+
+            <h1
+              class="font-['Playfair_Display'] text-xl font-bold text-[#1a0518] sm:text-2xl"
+            >
+              BPSC Prep
+            </h1>
+
+            <p class="hidden text-xs tracking-wide text-[#7a6578] sm:block">
+              Bihar Civil Services Platform
+            </p>
+
+          </div>
+
+        </a>
+
+      </div>
+
+      <!-- DESKTOP NAV -->
+      <nav
+        class="hidden items-center gap-4 lg:flex"
+      >
+
+        <a
+        (click)="closeMenu()"
+          routerLink="/"
+          routerLinkActive="bg-[#890117]/10 text-[#890117]"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="rounded-2xl px-5 py-3 font-medium text-[#5f4b5d] transition hover:bg-[#890117]/10"
+        >
+          Home
+        </a>
+
+         <a
+          (click)="closeMenu()"
+          routerLink="/dashboard"
+          routerLinkActive="bg-[#890117]/10 text-[#890117]"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="rounded-2xl px-5 py-3 font-medium text-[#5f4b5d] transition hover:bg-[#890117]/10 "
+        >
+          Dashboard
+        </a>
+
+        <a
+        `(click)="closeMenu()"
+          routerLink="/mock-tests"
+          routerLinkActive="bg-[#890117]/10 text-[#890117]"
+          class="rounded-2xl px-5 py-3 font-medium text-[#5f4b5d] transition hover:bg-[#890117]/10"
+        >
+          Test Series
+        </a>
+
+      </nav>
+
+      <!-- RIGHT -->
+      <div class="flex items-center gap-3">
+
+        <!-- TEST STATS -->
+        <div
+          class="hidden items-center gap-4 rounded-2xl border border-[#eadfe9] bg-white px-5 py-3 shadow-sm md:flex"
+        >
+
+          <div class="text-center">
+
+            <p class="text-[10px] uppercase tracking-wide text-[#8c7289]">
+              Completed
+            </p>
+
+            <h3 class="text-lg font-bold text-[#1a0518]">
+              {{ completedTests }}
+            </h3>
+
+          </div>
+
+          <div class="h-10 w-px bg-[#eadfe9]"></div>
+
+          <div class="text-center">
+
+            <p class="text-[10px] uppercase tracking-wide text-[#8c7289]">
+              Total
+            </p>
+
+            <h3 class="text-lg font-bold text-[#890117]">
+              {{ totalTests }}
+            </h3>
+
+          </div>
+
+        </div>
+
+        <!-- PROFILE -->
+        <div class="relative profile-menu-wrapper">
+
+          <button
+            (click)="profileMenuOpen.set(!profileMenuOpen())"
+            class="flex items-center gap-3 rounded-2xl border border-[#eadfe9] bg-white px-3 py-2 transition hover:shadow-lg"
+          >
+
+            <!-- AVATAR -->
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[#890117] to-[#400675] text-sm font-bold text-white"
+            >
+              {{ user?.first_name?.charAt(0) }}{{ user?.last_name?.charAt(0) }}
+            </div>
+
+            <!-- USER INFO -->
+            <div class="hidden text-left md:block">
+
+              <p class="text-sm font-semibold text-[#1a0518]">
+                {{ user?.first_name }}
+              </p>
+
+              <p class="text-xs text-[#7b6678]">
+                Student
+              </p>
+
+            </div>
+
+            <!-- ARROW -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="hidden h-5 w-5 text-[#7b6678] md:block"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+
+          </button>
+
+          <!-- DROPDOWN -->
+          <div
+            *ngIf="profileMenuOpen()"
+            class="absolute right-0 top-full mt-3 w-72 overflow-hidden rounded-3xl border border-[#eadfe9] bg-white shadow-2xl"
+          >
+
+            <!-- USER -->
+            <div
+              class="border-b border-[#f1e8f0] bg-[#faf7fb] p-5"
+            >
+
+              <h3
+                class="font-semibold text-[#1a0518]"
+              >
+                {{ user?.first_name }} {{ user?.last_name }}
+              </h3>
+
+              <p class="mt-1 text-sm text-[#7b6678]">
+                {{ user?.email }}
+              </p>
+
+            </div>
+
+            <!-- MOBILE STATS -->
+            <div
+              class="grid grid-cols-2 border-b border-[#f1e8f0] md:hidden"
+            >
+
+              <div class="p-5 text-center">
+
+                <p class="text-xs uppercase tracking-wide text-[#8c7289]">
+                  Completed
+                </p>
+
+                <h3 class="mt-1 text-2xl font-bold text-[#1a0518]">
+                  {{ completedTests }}
+                </h3>
+
+              </div>
+
+              <div class="border-l border-[#f1e8f0] p-5 text-center">
+
+                <p class="text-xs uppercase tracking-wide text-[#8c7289]">
+                  Total
+                </p>
+
+                <h3 class="mt-1 text-2xl font-bold text-[#890117]">
+                  {{ totalTests }}
+                </h3>
+
+              </div>
+
+            </div>
+
+            <!-- MENU -->
+            <div class="p-3">
+
+              <a
+                (click)="closeMenu()"
+                routerLink="/profile"
+                class="flex items-center gap-3 rounded-2xl px-4 py-3 text-[#1a0518] transition hover:bg-[#f8f5f9]"
+              >
+
+                <!-- <span>👤</span> -->
+
+                <span>My Profile</span>
+
+              </a>
+
+               <a
+                (click)="closeMenu()"
+                routerLink="/active-plan"
+                class="flex items-center gap-3 rounded-2xl px-4 py-3 text-[#1a0518] transition hover:bg-[#f8f5f9]"
+              >
+
+                <!-- <span>👤</span> -->
+
+                <span>Plan</span>
+
+              </a>
+
+              <button
+                (click)="closeMenu()"
+                (click)="logout()"
+                class="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-red-600 transition hover:bg-red-50"
+              >
+
+                <!-- <span>🚪</span> -->
+
+                <span>Logout</span>
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div
+      *ngIf="mobileMenuOpen()"
+      class="border-t border-[#eadfe9] bg-white lg:hidden"
+    >
+
+      <div class="space-y-2 px-4 py-5">
+
+        <a
+         (click)="closeMenu()"
+          routerLink="/"
+          class="block rounded-2xl px-4 py-4 font-medium text-[#1a0518] transition hover:bg-[#f8f5f9]"
+        >
+          Home
+        </a>
+
+         <a
+          (click)="closeMenu()"
+          routerLink="/dashboard"
+          class="block rounded-2xl px-4 py-4 font-medium text-[#1a0518] transition hover:bg-[#f8f5f9]"
+        >
+          Dashboard
+        </a>
+
+        <a
+          (click)="closeMenu()"
+          routerLink="/mock-tests"
+          class="block rounded-2xl px-4 py-4 font-medium text-[#1a0518] transition hover:bg-[#f8f5f9]"
+        >
+          Test Series
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- MAIN -->
+  <main class="flex-1">
     <router-outlet></router-outlet>
-  </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer
+    class="mt-16 border-t border-[#eadfe9] bg-white"
+  >
+
+    <div
+      class="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4"
+    >
+
+      <!-- BRAND -->
+      <div>
+
+        <h2
+          class="font-['Playfair_Display'] text-3xl font-bold text-[#1a0518]"
+        >
+          BPSC Prep
+        </h2>
+
+        <p class="mt-4 leading-7 text-[#6f566d]">
+          Bihar’s modern learning platform for serious BPSC aspirants.
+          Structured preparation, expert mentorship, and smart practice systems.
+        </p>
+
+      </div>
+
+      <!-- LINKS -->
+      <div>
+
+        <h3
+          class="mb-5 text-lg font-bold text-[#1a0518]"
+        >
+          Quick Links
+        </h3>
+
+        <div class="space-y-3">
+
+          <a
+            routerLink="/"
+            class="block text-[#6f566d] transition hover:text-[#890117]"
+          >
+            Home
+          </a>
+
+          <a
+            routerLink="/about-us"
+            class="block text-[#6f566d] transition hover:text-[#890117]"
+          >
+            About Us
+          </a>
+
+          <a
+            routerLink="/contact-us"
+            class="block text-[#6f566d] transition hover:text-[#890117]"
+          >
+            Contact
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- COURSES -->
+      <div>
+
+        <h3
+          class="mb-5 text-lg font-bold text-[#1a0518]"
+        >
+          Preparation
+        </h3>
+
+        <div class="space-y-3">
+
+          <a
+            routerLink="/mock-tests"
+            class="block text-[#6f566d] transition hover:text-[#890117]"
+          >
+            Test Series
+          </a>
+
+          <a
+            routerLink="/current-affairs"
+            class="block text-[#6f566d] transition hover:text-[#890117]"
+          >
+            Current Affairs
+          </a>
+
+          <a
+            routerLink="/study-material"
+            class="block text-[#6f566d] transition hover:text-[#890117]"
+          >
+            Study Material
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- CONTACT -->
+      <div>
+
+        <h3
+          class="mb-5 text-lg font-bold text-[#1a0518]"
+        >
+          Contact
+        </h3>
+
+        <div class="space-y-3 text-[#6f566d]">
+
+          <p>Patna, Bihar</p>
+
+          <p>support&#64;bpscprep.com</p>
+
+          <p>+91 9876543210</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div
+      class="border-t border-[#eadfe9]"
+    >
+
+      <div
+        class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-[#7b6678] md:flex-row"
+      >
+
+        <p>
+          © 2026 BPSC Prep. All rights reserved.
+        </p>
+
+        <div class="flex items-center gap-6">
+
+          <a
+            routerLink="/privacy-policy"
+            class="transition hover:text-[#890117]"
+          >
+            Privacy Policy
+          </a>
+
+          <a
+            routerLink="/terms"
+            class="transition hover:text-[#890117]"
+          >
+            Terms
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
 </div>
+
+

@@ -1,0 +1,183 @@
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6 md:px-14">
+    <!-- Header -->
+    <div class="text-center mb-10">
+
+      <h2
+        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        style="color: var(--color-dark)"
+      >
+
+        <em class="not-italic" style="color: var(--color-primary)"
+          > Tests Series</em
+        >
+      </h2>
+
+    </div>
+
+    <!-- Tests grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (test of allTests(); track trackById($index, test); let i =
+      $index) {
+
+      <div
+        class="test-card fade-in-up bg-white rounded-2xl border border-gray-100 flex flex-col"
+        [class]="'delay-' + ((i % 9) + 1)"
+        style="box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06)"
+      >
+        <!-- Card top -->
+        <div
+          class="px-5 pt-5 pb-4 flex items-start justify-between border-b border-gray-50"
+        >
+          <div class="flex items-center gap-3">
+            <!-- Icon circle -->
+            <div
+              class="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  rgba(137, 1, 23, 0.1),
+                  rgba(64, 6, 117, 0.1)
+                );
+              "
+            >
+             📝
+            </div>
+            <div>
+              <!-- Category tag -->
+              <span
+                class="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
+                [style]="
+                  'background:' +
+                  getDifficultyColor(test.difficult_level) +
+                  '14; color:' +
+                  getDifficultyColor(test.difficult_level)
+                "
+              >
+                {{ test.tags }}
+              </span>
+              <h3
+                class="font-['Playfair_Display'] font-bold text-[15px] mt-0.5 leading-tight"
+                style="color: var(--color-dark)"
+              >
+                {{ test.title }}
+              </h3>
+            </div>
+          </div>
+
+          <!-- Badges (top-right) -->
+          <div class="flex flex-col gap-1 items-end shrink-0 ml-2">
+            @if (test.test_type == 'free') {
+            <span
+              class="free-pulse text-[10px] font-black uppercase tracking-wider text-white px-2.5 py-1 rounded-full"
+              style="background: #1a7a2e"
+              >FREE</span
+            >
+            } @if (test.test_type == 'new') {
+            <span
+              class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full"
+              style="
+                background: rgba(64, 6, 117, 0.12);
+                color: var(--color-ascent);
+              "
+              >NEW</span
+            >
+            }
+          </div>
+        </div>
+
+        <!-- Card body -->
+        <div class="px-5 py-4 flex-1 flex flex-col">
+          <p class="text-gray-500 text-sm leading-relaxed mb-5 flex-1">
+            {{ test.description }}
+          </p>
+
+          <!-- Meta chips -->
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span
+              class="flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-50 text-gray-500"
+            >
+              ❓ {{ test.units }} Qs
+            </span>
+            <span
+              class="flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-50 text-gray-500"
+            >
+              ⏱️ {{ test.duration }} mins
+            </span>
+            <span
+              class="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full"
+              [style]="
+                'background:' +
+                getDifficultyColor(test.difficult_level) +
+                '12; color:' +
+                getDifficultyColor(test.difficult_level)
+              "
+            >
+              {{ test.difficult_level }}
+            </span>
+          </div>
+
+          <!-- Attempts + Languages row -->
+          <div
+            class="flex items-center justify-between text-xs text-gray-400 mb-4 font-semibold"
+          >
+            <span>👥 {{ test.attempts || 0}} attempts</span>
+            <div class="flex gap-1">
+               @if (test.languages == 'both') {
+                 <span
+                  class="px-2 py-0.5 rounded text-[10px] font-bold"
+                  style="
+                    background: rgba(137, 1, 23, 0.07);
+                    color: var(--color-primary);
+                  "
+                  >
+                    Hindi
+                </span>
+                <span
+                  class="px-2 py-0.5 rounded text-[10px] font-bold"
+                  style="
+                    background: rgba(137, 1, 23, 0.07);
+                    color: var(--color-primary);
+                  "
+                  >
+                    English
+                </span>
+               }
+               @else {
+                <span
+                  class="px-2 py-0.5 rounded text-[10px] font-bold"
+                  style="
+                    background: rgba(137, 1, 23, 0.07);
+                    color: var(--color-primary);
+                  "
+                >
+                {{ test.languages | titlecase }}
+              </span>
+               }
+            </div>
+          </div>
+
+          <!-- CTA button -->
+          <button
+            [routerLink]="['/test', test.slug]"
+            class="start-btn w-full text-white font-extrabold text-sm py-3 rounded-xl cursor-pointer border-none tracking-wide"
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--color-primary),
+                var(--color-dark)
+              );
+              box-shadow: 0 4px 16px rgba(137, 1, 23, 0.25);
+            "
+
+          >
+            {{ test.test_type == 'free' ? "Start Free Test →" : "Start Test →" }}
+          </button>
+        </div>
+      </div>
+
+      }
+    </div>
+
+  </div>
+</section>

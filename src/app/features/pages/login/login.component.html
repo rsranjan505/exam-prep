@@ -16,37 +16,56 @@
     </div>
 
     <!-- Form -->
-    <form (ngSubmit)="login()" class="space-y-5">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-5">
       <div>
         <label class="block text-white/90 font-semibold mb-1">Email</label>
         <input
           type="email"
-          [(ngModel)]="email"
+          formControlName="email"
           name="email"
           placeholder="you@example.com"
           required
           class="w-full border border-white/40 bg-white/20 p-3 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/70"
         />
+        <p *ngIf="email.touched && email.errors" class="text-xs text-red-600 mt-1">
+            <span *ngIf="email.errors['required']">Email is required</span>
+            <span *ngIf="email.errors['email']">Invalid email format</span>
+          </p>
       </div>
 
       <div>
         <label class="block text-white/90 font-semibold mb-1">Password</label>
         <input
           type="password"
-          [(ngModel)]="password"
+         formControlName="password"
           name="password"
           placeholder="********"
           required
           class="w-full border border-white/40 bg-white/20 p-3 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/70"
         />
+        <p *ngIf="password.touched && password.errors" class="text-xs text-red-600 mt-1">
+            <span *ngIf="password.errors['required']">Password is required</span>
+            <span *ngIf="password.errors['minlength']">
+              Minimum 6 characters required
+            </span>
+          </p>
       </div>
 
       <button
         type="submit"
-        class="w-full bg-white text-blue-700 font-bold py-3 rounded-xl hover:bg-white/90 transition"
+        [disabled]="loginForm.invalid || loading()"
+        class="w-full bg-white text-blue-700 font-bold py-3 rounded-xl hover:bg-white/90 transition cursor-pointer"
       >
-        Login
+        {{ loading() ? 'Signing in...' : 'Sign In' }}
       </button>
+
+      <!-- Server Error -->
+      <div
+        *ngIf="serverError()"
+        class="bg-red-500/20 border border-red-400 text-red-100 text-sm px-4 py-3 rounded-xl mt-3 animate-pulse"
+      >
+        {{ serverError() }}
+      </div>
     </form>
 
     <!-- Links -->

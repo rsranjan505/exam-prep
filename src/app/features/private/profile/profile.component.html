@@ -1,0 +1,352 @@
+<section class="min-h-screen bg-white px-4 py-16">
+
+  <div class="mx-auto max-w-7xl">
+
+    <!-- HEADER -->
+    <div class="mb-12 text-center">
+
+      <span
+        class="mb-4 inline-block rounded-full bg-[#890117]/10 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-[#890117]"
+      >
+        Student Profile
+      </span>
+
+      <h1
+        class="font-['Playfair_Display'] text-5xl font-extrabold text-[#1a0518]"
+      >
+        My Profile
+      </h1>
+
+      <p
+        class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[#6f566d]"
+      >
+        Manage your account information, personal details,
+        and preparation profile from one secure place.
+      </p>
+
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-3">
+
+      <!-- SIDEBAR -->
+      <div
+        class="overflow-hidden rounded-3xl border border-[#eadfe9] bg-white p-8 shadow-xl"
+      >
+
+        <div class="text-center">
+
+          <!-- AVATAR -->
+          <div
+            class="mx-auto flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-[#890117] to-[#400675] text-4xl font-bold text-white shadow-[0_20px_60px_rgba(64,6,117,0.35)]"
+          >
+            {{
+              profileForm.value.first_name?.charAt(0)
+            }}{{
+              profileForm.value.last_name?.charAt(0)
+            }}
+          </div>
+
+          <h2
+            class="mt-6 font-['Playfair_Display'] text-3xl font-bold text-[#1a0518]"
+          >
+            {{ profileForm.value.first_name }}
+            {{ profileForm.value.last_name }}
+          </h2>
+
+          <p class="mt-2 text-[#6f566d]">
+            {{ profileForm.value.email }}
+          </p>
+
+          <div class="mt-6">
+
+            <span
+              *ngIf="profileForm.value.is_active"
+              class="rounded-full bg-green-100 px-4 py-2 text-sm font-medium text-green-700"
+            >
+              Active Account
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- INFO BOXES -->
+        <div class="mt-10 space-y-5">
+
+          <div
+            class="rounded-2xl border border-[#f1e8f0] bg-[#fcf8fc] p-4"
+          >
+            <p class="text-xs uppercase tracking-wider text-[#8c7289]">
+              Mobile Number
+            </p>
+
+            <p class="mt-1 font-semibold text-[#1a0518]">
+              {{ profileForm.value.mobile }}
+            </p>
+          </div>
+
+          <div
+            class="rounded-2xl border border-[#f1e8f0] bg-[#fcf8fc] p-4"
+          >
+            <p class="text-xs uppercase tracking-wider text-[#8c7289]">
+              Location
+            </p>
+
+            <p class="mt-1 font-semibold text-[#1a0518]">
+              {{ profileForm.value.city_id }},
+              {{ profileForm.value.state_id }}
+            </p>
+          </div>
+
+          <div
+            class="rounded-2xl border border-[#f1e8f0] bg-[#fcf8fc] p-4"
+          >
+            <p class="text-xs uppercase tracking-wider text-[#8c7289]">
+              Pincode
+            </p>
+
+            <p class="mt-1 font-semibold text-[#1a0518]">
+              {{ profileForm.value.pincode }}
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- PROFILE FORM -->
+      <div
+        class="lg:col-span-2 rounded-3xl border border-[#eadfe9] bg-white p-8 shadow-xl"
+      >
+
+        <!-- TOP -->
+        <div class="mb-8 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+
+          <div>
+
+            <h2
+              class="font-['Playfair_Display'] text-3xl font-bold text-[#1a0518]"
+            >
+              Personal Information
+            </h2>
+
+            <p class="mt-2 text-[#7b6678]">
+              Update your personal details and profile information.
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            (click)="toggleEdit()"
+            class="rounded-2xl bg-gradient-to-r from-[#890117] to-[#400675] px-6 py-3 font-semibold text-white shadow-lg transition duration-300 hover:-translate-y-1"
+          >
+            {{ editMode() ? 'Cancel Edit' : 'Edit Profile' }}
+          </button>
+
+        </div>
+
+        <!-- SUCCESS -->
+        <div
+          *ngIf="successMessage()"
+          class="mb-6 rounded-2xl border border-green-200 bg-green-50 px-5 py-4 text-green-700"
+        >
+          {{ successMessage() }}
+        </div>
+
+        <!-- ERROR -->
+        <div
+          *ngIf="errorMessage()"
+          class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-red-700"
+        >
+          {{ errorMessage() }}
+        </div>
+
+        <!-- FORM -->
+        <form
+          [formGroup]="profileForm"
+          (ngSubmit)="updateProfile()"
+          class="grid gap-6 md:grid-cols-2"
+        >
+
+          <!-- FIRST NAME -->
+          <div>
+
+            <label
+              class="mb-2 block text-sm font-semibold text-[#4e344c]"
+            >
+              First Name
+            </label>
+
+            <input
+              type="text"
+              formControlName="first_name"
+              placeholder="Enter first name"
+              class="w-full rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-5 py-4 text-[#1a0518] outline-none transition focus:border-[#890117] focus:ring-4 focus:ring-[#890117]/10"
+            />
+
+            <p
+              *ngIf="first_name?.touched && first_name?.invalid"
+              class="mt-2 text-sm text-red-500"
+            >
+              First name is required
+            </p>
+
+          </div>
+
+          <!-- LAST NAME -->
+          <div>
+
+            <label
+              class="mb-2 block text-sm font-semibold text-[#4e344c]"
+            >
+              Last Name
+            </label>
+
+            <input
+              type="text"
+              formControlName="last_name"
+              placeholder="Enter last name"
+              class="w-full rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-5 py-4 text-[#1a0518] outline-none transition focus:border-[#890117] focus:ring-4 focus:ring-[#890117]/10"
+            />
+
+          </div>
+
+          <!-- EMAIL -->
+          <div>
+
+            <label
+              class="mb-2 block text-sm font-semibold text-[#4e344c]"
+            >
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Enter email address"
+              class="w-full rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-5 py-4 text-[#1a0518] outline-none transition focus:border-[#890117] focus:ring-4 focus:ring-[#890117]/10"
+            />
+
+            <p
+              *ngIf="email?.touched && email?.invalid"
+              class="mt-2 text-sm text-red-500"
+            >
+              Invalid email address
+            </p>
+
+          </div>
+
+          <!-- MOBILE -->
+          <div>
+
+            <label
+              class="mb-2 block text-sm font-semibold text-[#4e344c]"
+            >
+              Mobile Number
+            </label>
+
+            <input
+              type="text"
+              formControlName="mobile"
+              placeholder="Enter mobile number"
+              class="w-full rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-5 py-4 text-[#1a0518] outline-none transition focus:border-[#890117] focus:ring-4 focus:ring-[#890117]/10"
+            />
+
+          </div>
+
+          <!-- ADDRESS -->
+          <div class="md:col-span-2">
+
+            <label
+              class="mb-2 block text-sm font-semibold text-[#4e344c]"
+            >
+              Address
+            </label>
+
+            <textarea
+              rows="4"
+              formControlName="address"
+              placeholder="Enter your address"
+              class="w-full rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-5 py-4 text-[#1a0518] outline-none transition focus:border-[#890117] focus:ring-4 focus:ring-[#890117]/10"
+            ></textarea>
+
+          </div>
+
+          <!-- STATE -->
+          <div>
+
+            <label
+              class="mb-2 block text-sm font-semibold text-[#4e344c]"
+            >
+              State
+            </label>
+
+            <input
+              type="text"
+              formControlName="state_id"
+              placeholder="Enter state"
+              class="w-full rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-5 py-4 text-[#1a0518] outline-none transition focus:border-[#890117] focus:ring-4 focus:ring-[#890117]/10"
+            />
+
+          </div>
+
+          <!-- CITY -->
+          <div>
+
+            <label
+              class="mb-2 block text-sm font-semibold text-[#4e344c]"
+            >
+              City
+            </label>
+
+            <input
+              type="text"
+              formControlName="city_id"
+              placeholder="Enter city"
+              class="w-full rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-5 py-4 text-[#1a0518] outline-none transition focus:border-[#890117] focus:ring-4 focus:ring-[#890117]/10"
+            />
+
+          </div>
+
+          <!-- PINCODE -->
+          <div>
+
+            <label
+              class="mb-2 block text-sm font-semibold text-[#4e344c]"
+            >
+              Pincode
+            </label>
+
+            <input
+              type="text"
+              formControlName="pincode"
+              placeholder="Enter pincode"
+              class="w-full rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-5 py-4 text-[#1a0518] outline-none transition focus:border-[#890117] focus:ring-4 focus:ring-[#890117]/10"
+            />
+
+          </div>
+
+          <!-- SAVE BUTTON -->
+          <div class="md:col-span-2">
+
+            <button
+              *ngIf="editMode()"
+              type="submit"
+              [disabled]="loading()"
+              class="w-full rounded-2xl bg-gradient-to-r from-[#890117] to-[#400675] px-6 py-4 text-lg font-bold text-white shadow-xl transition duration-300 hover:-translate-y-1"
+            >
+              {{ loading() ? 'Updating Profile...' : 'Save Changes' }}
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

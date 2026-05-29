@@ -14,6 +14,7 @@ import { StudyMaterial } from './features/pages/study-material/study-material';
 import { Gallery } from './features/pages/gallery/gallery';
 import { OnlineSupport } from './features/pages/online-support/online-support';
 import { FreeDemoTestComponent } from './features/pages/free-demo-test/free-demo-test.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   // 🌐 Public Website
@@ -31,6 +32,8 @@ export const routes: Routes = [
       { path: 'contact', component: ContactComponent },
 
       { path: 'sample-test', component: FreeDemoTestComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: RegisterComponent },
     ],
   },
 
@@ -39,11 +42,54 @@ export const routes: Routes = [
     path: '',
     component: AuthlayoutComponent,
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'signup', component: RegisterComponent },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'test', component: TestComponent },
+     {
+        path: 'profile',
+        canActivate: [authGuard],
+        loadComponent: () =>
+            import('./features/private/profile/profile.component')
+            .then(m => m.ProfileComponent)
+      },
+      // { path: 'dashboard', component: DashboardComponent },
+      {
+        path: 'dashboard',
+        canActivate: [authGuard],
+        loadComponent: () =>
+            import('./features/private/dashboard/dashboard.component')
+            .then(m => m.DashboardComponent)
+      },
+      // { path: 'test', component: TestComponent },
       { path: 'result', component: ResultComponent },
+
+      {
+        path: 'mock-tests',
+        canActivate: [authGuard],
+        loadComponent: () =>
+            import('./features/private/mock-test/mock-test.component')
+            .then(m => m.MockTestComponent)
+      },
+      {
+        path: 'purchase-plan',
+        canActivate: [authGuard],
+        loadComponent: () =>
+            import('./features/private/plan-purchase/plan-purchase.component')
+            .then(m => m.PlanPurchaseComponent)
+      },
+
+      {
+        path: 'test/:slug',
+        canActivate: [authGuard],
+        loadComponent: () =>
+            import('./features/private/test/test.component')
+            .then(m => m.TestComponent)
+      },
+
+      {
+        path: 'active-plan',
+        canActivate: [authGuard],
+        loadComponent: () =>
+            import('./features/private/active-plan/active-plan.component')
+            .then(m => m.ActivePlanComponent)
+      },
 
       // later: register, otp, forgot-password
     ],

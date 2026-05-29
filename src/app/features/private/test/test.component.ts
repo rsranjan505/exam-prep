@@ -2,10 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { McqService } from '../../services/mcq.service';
 import { Router } from '@angular/router';
 import { NgFor } from '@angular/common';
+import { TakeTestComponent } from '../../components/take-test/take-test.component';
 
 @Component({
   selector: 'app-test',
-  imports: [NgFor],
+  imports: [TakeTestComponent],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css',
 })

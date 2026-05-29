@@ -1,4 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   Component,
   OnDestroy,
@@ -8,6 +9,8 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { TestService } from '../../services/test.service';
+import { Test } from 'src/app/core/models/test.model';
 
 export interface Option {
   key: string;
@@ -32,12 +35,22 @@ type QuestionStatus = 'unattempted' | 'answered' | 'marked' | 'visited';
   styleUrl: './take-test.component.css',
 })
 export class TakeTestComponent implements OnInit, OnDestroy {
+
   private platformId = inject(PLATFORM_ID);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  urlSlug = signal('');
+
+  private testService = inject(TestService);
+
+  currentTest: Test | null = null;
+
 
   /* ── Test meta ─────────────────────────────────── */
   readonly testTitle = 'BPSC Prelims Full Test';
   readonly testSubtitle = '50 full-length tests · Timed & Evaluated';
   readonly totalTime = 120 * 60; // 120 minutes in seconds
+  readonly positive_marks = parseInt(this.currentTest?.units || '0') / parseInt(this.currentTest?.duration || '0')
 
   /* ── State ─────────────────────────────────────── */
   currentIndex = signal(0);
@@ -262,7 +275,20 @@ export class TakeTestComponent implements OnInit, OnDestroy {
   });
 
   /* ── Lifecycle ─────────────────────────────────── */
-  ngOnInit(): void {}
+  ngOnInit(): void {
+     if (isPlatformBrowser(this.platformId)) {
+      this.urlSlug.set(this.route.snapshot.paramMap.get('slug') || '');
+    }
+    if(this.urlSlug() != null){
+      this.testService.getTestBySlug(this.urlSlug()).subscribe((test : Test) => {
+       this.currentTest = test
+      });
+
+      console.log(this.currentTest);
+    }
+
+
+  }
 
   ngOnDestroy(): void {
     this.clearTimer();

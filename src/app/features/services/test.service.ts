@@ -70,6 +70,20 @@ export class TestService {
         return this.tests().find(test => test.id === id)
     }
 
+    getTestBySlug(slug: string): Observable<Test>{
+
+      const url  = environment.apiBaseUrl + '/get-test-slag/' + slug
+      return this.api
+            .get<ApiResponse<Test>>(url)
+            .pipe(
+
+                map((response) => {
+                    const test = response?.data || []
+                    return test
+                })
+            )
+    }
+
     /**
      * CLEAR CACHE
      */

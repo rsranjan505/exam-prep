@@ -95,15 +95,72 @@
     </div>
 
     <!-- Right Actions -->
-    <div class="flex items-center gap-3">
-      <!-- Login Button -->
-      <a
-        routerLink="/login"
-        class="hidden rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl md:block"
-      >
-        Login
-      </a>
 
+    <div class="flex items-center gap-3">
+
+      @if (user$ | async; as user) {
+        <!-- USER ICON -->
+        <div class="relative">
+          <button
+            (click)="toggleAuthMenu($event)"
+            class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300 transition"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 text-gray-800"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 12a4 4 0 100-8 4 4 0 000 8z"
+              />
+
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 20a8 8 0 0116 0"
+              />
+            </svg>
+          </button>
+
+          <!-- DROPDOWN -->
+          @if (isAuthMenuOpen()) {
+            <div
+              class="absolute right-0 mt-3 w-48 bg-white rounded-md shadow-lg z-50 overflow-hidden animate-fade-in"
+            >
+              <a routerLink="/dashboard" (click)="closeMenu()" class="block px-4 py-2 text-sm hover:bg-gray-100">
+                Dashboard
+              </a>
+
+
+
+              <div class="border-t"></div>
+
+              <button
+                (click)="logout()"
+                class="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100"
+              >
+                Logout
+              </button>
+            </div>
+          }
+        </div>
+
+      }
+
+       @if (!auth.isLoggedIn()) {
+      <!-- Login Button -->
+        <a
+          routerLink="/login"
+          class="hidden rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl md:block"
+        >
+          Login
+        </a>
+      }
       <!-- Mobile Toggle -->
       <button
         (click)="open = !open"
@@ -219,13 +276,15 @@
       </div>
 
       <!-- Mobile Login -->
-      <a
-        routerLink="/login"
-        (click)="closeMenu()"
-        class="mt-3 block rounded-xl bg-primary px-4 py-3 text-center font-bold text-white shadow-md"
-      >
-        Login
-      </a>
+        @if (!auth.isLoggedIn()) {
+          <a
+            routerLink="/login"
+            (click)="closeMenu()"
+            class="mt-3 block rounded-xl bg-primary px-4 py-3 text-center font-bold text-white shadow-md"
+          >
+            Login
+          </a>
+        }
     </div>
   </div>
 </nav>

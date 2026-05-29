@@ -11,34 +11,98 @@
       <p class="text-white/90">Start your BPSC preparation today</p>
     </div>
 
-    <form class="space-y-4">
-      <input
-        placeholder="Full Name"
-        class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40"
-      />
+    <div>
+         <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
 
-      <input
-        placeholder="Email"
-        class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40"
-      />
+          <!-- First + Last Name -->
 
-      <input
-        placeholder="Mobile Number"
-        class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40"
-      />
+              <div>
+              <input type="text" formControlName="first_name" placeholder="First Name" class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40" />
+              <p *ngIf="f.first_name.touched && f.first_name.errors" class="error text-red-500">
+                  First name is required
+              </p>
+              </div>
 
-      <input
-        type="password"
-        placeholder="Password"
-        class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40"
-      />
+              <div>
+              <input type="text" formControlName="last_name" placeholder="Last Name" class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40" />
+              <p *ngIf="f.last_name.touched && f.last_name.errors" class="error text-red-500">
+                  Last name is required
+              </p>
+              </div>
 
-      <button
-        class="w-full bg-white text-blue-700 font-bold py-3 rounded-xl hover:bg-white/90 transition"
-      >
-        Sign Up
-      </button>
-    </form>
+
+          <!-- Email + Mobile -->
+
+              <div>
+              <input type="email" formControlName="email" placeholder="Email" class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40" />
+              <p *ngIf="f.email.touched && f.email.errors" class="error text-red-500">
+                  <span *ngIf="f.email.errors['required']">Email is required</span>
+                  <span *ngIf="f.email.errors['email']">Invalid email</span>
+              </p>
+              </div>
+
+              <div>
+              <input type="text" formControlName="mobile" placeholder="Mobile Number" class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40" />
+              <p *ngIf="f.mobile.touched && f.mobile.errors" class="error text-red-500">
+                  <span *ngIf="f.mobile.errors['required']">Mobile is required</span>
+                  <span *ngIf="f.mobile.errors['pattern']">Enter valid 10-digit mobile</span>
+              </p>
+              </div>
+
+
+
+
+            <!-- State / Pincode -->
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <select formControlName="state_id" class="w-full p-3 rounded-xl bg-white/20 placeholder-white/60 border border-white/40 text-black">
+
+                        <option [value]="" class="text-gray-400">
+                            {{ locationService.isLoadingStates() ? 'Loading states...' : 'Select state' }}
+                        </option>
+                            @for (state of states(); track state.id) {
+                                <option [value]="state.id">{{ state.name }}</option>
+                            }
+                    </select>
+                    <p *ngIf="f.state_id.touched && f.state_id.errors" class="error text-red-500">Select state</p>
+                </div>
+                <div>
+                <input type="text" formControlName="pincode" placeholder="Pincode" class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40" />
+                <p *ngIf="f.pincode.touched && f.pincode.errors" class="error text-red-500">
+                    <span *ngIf="f.pincode.errors['required']">Required</span>
+                    <span *ngIf="f.pincode.errors['pattern']">Invalid pincode</span>
+                </p>
+                </div>
+
+            </div>
+
+          <!-- Password -->
+
+              <div>
+                <input type="password" formControlName="password" placeholder="Password" class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40" />
+                <p *ngIf="f.password.touched && f.password.errors" class="error text-red-500">
+                    <span *ngIf="f.password.errors['required']">Required</span>
+                    <span *ngIf="f.password.errors['minlength']">Min 6 chars</span>
+                </p>
+              </div>
+
+              <div>
+                <input type="password" formControlName="confirmed" placeholder="Confirm Password" class="w-full p-3 rounded-xl bg-white/20 text-white placeholder-white/60 border border-white/40" />
+                <p *ngIf="f.confirmed.touched && form.errors?.['passwordMismatch']" class="error text-red-500">
+                    Passwords do not match
+                </p>
+              </div>
+            <!-- Submit -->
+            <button
+                type="submit"
+                [disabled]="form.invalid || loading()"
+                class="w-full bg-primary text-white py-2.5 rounded-lg hover:bg-red-900 transition cursor-pointer"
+            >
+                {{ loading() ? 'Creating...' : 'Create Account' }}
+            </button>
+
+        </form>
+    </div>
 
     <p class="text-center text-white/90 text-sm">
       Already have an account?
