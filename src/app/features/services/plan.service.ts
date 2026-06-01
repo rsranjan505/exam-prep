@@ -108,7 +108,7 @@ export class PlanService {
 
     return this.api
       .get<any>(
-        `${this.baseUrl}/my-active-plan`,
+        `${this.baseUrl}/get-plan-user`,
         token || ''
       )
       .pipe(

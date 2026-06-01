@@ -167,9 +167,9 @@
             <h1
               class="font-['Playfair_Display'] text-3xl font-black text-white"
             >
-              {{ testTitle }}
+              {{ currentTest?.title }}
             </h1>
-            <p class="text-white/50 text-sm mt-1">{{ testSubtitle }}</p>
+            <p class="text-white/50 text-sm mt-1">{{ currentTest?.description }}</p>
           </div>
 
           <!-- Score circle -->
@@ -212,7 +212,7 @@
               </div>
             </div>
             <div class="text-white/60 text-xs mt-2">
-              Rank #{{ scoreResult().rank }} of 25,000+
+              Rank #{{ scoreResult().rank }} of 500+
             </div>
           </div>
         </div>
@@ -257,7 +257,7 @@
       </h2>
 
       <div class="flex flex-col gap-5">
-        @for (q of questions; track q.id; let i = $index) {
+        @for (q of questions(); track q.id; let i = $index) {
         <div
           class="rounded-2xl border p-5"
           [style]="
@@ -268,7 +268,7 @@
               : 'border-color: #e5e7eb; background: #fafafa;'
           "
         >
-          <!-- Q header -->
+
           <div class="flex items-start gap-3 mb-4">
             <span
               class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black shrink-0 text-white"
@@ -291,7 +291,7 @@
                     color: var(--color-primary);
                   "
                 >
-                  {{ q.subject }}
+                  {{ q.section?.name }}
                 </span>
                 <span
                   class="text-[10px] font-bold"
@@ -423,7 +423,7 @@
           {{ currentTest?.title }}
         </div>
         <div class="text-gray-400 text-xs">
-          Q {{ 1 }} of {{ currentTest?.questions?.length }}
+          Q {{ currentIndex() + 1 }} of {{ currentTest?.questions?.length }}
         </div>
       </div>
 
@@ -439,7 +439,7 @@
                 var(--color-ascent)
               );
             "
-            [style.width.%]="(answeredCount() / questions.length) * 100"
+            [style.width.%]="(answeredCount() / questions().length) * 100"
           ></div>
         </div>
         <div
@@ -474,7 +474,7 @@
           border-color: rgba(137, 1, 23, 0.15);
         "
       >
-        📋 {{ answeredCount() }}/{{ questions.length }}
+        📋 {{ answeredCount() }}/{{ questions().length }}
       </button>
 
       <!-- Submit button -->
@@ -495,7 +495,6 @@
     </div>
   </header>
 
-  <!-- ── MAIN CONTENT ────────────────────────────────── -->
   <main class="flex-1 max-w-7xl mx-auto w-full px-4 md:px-8 py-6 flex gap-6">
     <!-- LEFT: Question panel -->
     <div class="flex-1 flex flex-col gap-5">
@@ -521,17 +520,7 @@
             >
               {{ currentIndex() + 1 }}
             </span>
-            <div>
-              <span
-                class="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
-                style="
-                  background: rgba(137, 1, 23, 0.08);
-                  color: var(--color-primary);
-                "
-              >
-                {{ currentQuestion().subject }}
-              </span>
-            </div>
+
           </div>
 
           <!-- Action buttons -->
@@ -567,7 +556,7 @@
           </div>
         </div>
 
-        <!-- Question text -->
+
         <div class="px-6 pt-6 pb-2">
           <p
             class="font-semibold text-base md:text-lg leading-relaxed"
@@ -577,9 +566,8 @@
           </p>
         </div>
 
-        <!-- Options -->
         <div class="px-6 pb-6 flex flex-col gap-3 mt-4">
-          @for (opt of currentQuestion().options; track opt.key) {
+          @for (opt of optionList(); track opt.key) {
           <div
             class="option-card flex items-center gap-4 rounded-2xl px-5 py-4 border border-gray-100 bg-gray-50/60"
             [class]="
@@ -587,7 +575,7 @@
             "
             (click)="selectOption(opt.key)"
           >
-            <!-- Key badge -->
+
             <span
               class="key-badge w-9 h-9 rounded-xl flex items-center justify-center font-black text-sm shrink-0 border"
               style="
@@ -634,16 +622,16 @@
 
         <!-- Q counter (mobile) -->
         <span class="text-sm font-semibold text-gray-400 md:hidden">
-          {{ currentIndex() + 1 }} / {{ questions.length }}
+          {{ currentIndex() + 1 }} / {{ questions().length }}
         </span>
 
         <!-- Next / Save & Next -->
         <button
           (click)="next()"
-          [disabled]="currentIndex() === questions.length - 1"
+          [disabled]="currentIndex() === questions().length - 1"
           class="nav-btn flex items-center gap-2 font-extrabold text-sm px-6 py-3 rounded-2xl cursor-pointer border-none text-white"
           [style]="
-            currentIndex() === questions.length - 1
+            currentIndex() === questions().length - 1
               ? 'background: #e5e7eb; color: #9ca3af; cursor:not-allowed;'
               : 'background: linear-gradient(135deg, var(--color-primary), var(--color-dark)); box-shadow: 0 4px 14px rgba(137,1,23,0.3);'
           "
@@ -652,9 +640,9 @@
         </button>
       </div>
     </div>
-    <!-- /left panel -->
 
-    <!-- RIGHT: Question Palette (desktop) -->
+
+
     <div class="hidden md:flex flex-col gap-4 w-72 shrink-0">
       <!-- Legend card -->
       <div
@@ -715,7 +703,7 @@
         </div>
 
         <div class="grid grid-cols-5 gap-2">
-          @for (q of questions; track q.id; let i = $index) {
+          @for (q of questions(); track q.id; let i = $index) {
           <button
             (click)="goTo(i)"
             class="q-dot w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs border-none"
@@ -764,7 +752,7 @@
     </div>
 
     <div class="grid grid-cols-6 gap-2 mb-5">
-      @for (q of questions; track q.id; let i = $index) {
+      @for (q of questions(); track q.id; let i = $index) {
       <button
         (click)="goTo(i)"
         class="q-dot w-full aspect-square rounded-xl flex items-center justify-center font-bold text-xs border-none"

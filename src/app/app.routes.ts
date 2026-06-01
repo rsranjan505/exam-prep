@@ -9,7 +9,6 @@ import { TestSeriesComponent } from './features/pages/test-series/test-series.co
 import { DashboardComponent } from './features/private/dashboard/dashboard.component';
 import { RegisterComponent } from './features/pages/register/register.component';
 import { TestComponent } from './features/private/test/test.component';
-import { ResultComponent } from './features/private/result/result.component';
 import { StudyMaterial } from './features/pages/study-material/study-material';
 import { Gallery } from './features/pages/gallery/gallery';
 import { OnlineSupport } from './features/pages/online-support/online-support';
@@ -58,8 +57,6 @@ export const routes: Routes = [
             .then(m => m.DashboardComponent)
       },
       // { path: 'test', component: TestComponent },
-      { path: 'result', component: ResultComponent },
-
       {
         path: 'mock-tests',
         canActivate: [authGuard],

@@ -17,14 +17,14 @@ export interface Option {
   text: string;
 }
 
-export interface Question {
-  id: number;
-  subject: string;
-  question: string;
-  options: Option[];
-  correctKey: string;
-  explanation: string;
-}
+// export interface Question {
+//   id: number;
+//   subject: string;
+//   question: string;
+//   options: Option[];
+//   correct: string;
+//   explanation: string;
+// }
 
 type QuestionStatus = 'unattempted' | 'answered' | 'marked' | 'visited';
 
@@ -44,12 +44,15 @@ export class TakeTestComponent implements OnInit, OnDestroy {
   private testService = inject(TestService);
 
   currentTest: Test | null = null;
-
+  questions = signal<any[]>([]);
 
   /* ── Test meta ─────────────────────────────────── */
-  readonly testTitle = 'BPSC Prelims Full Test';
+  readonly testTitle = this.currentTest?.title;
   readonly testSubtitle = '50 full-length tests · Timed & Evaluated';
-  readonly totalTime = 120 * 60; // 120 minutes in seconds
+  // readonly totalTime = parseInt(this.currentTest?.duration || '0') * 60; // in seconds
+  totalTime = computed(() =>
+    Number(this.currentTest?.duration || 0) * 60
+  );
   readonly positive_marks = parseInt(this.currentTest?.units || '0') / parseInt(this.currentTest?.duration || '0')
 
   /* ── State ─────────────────────────────────────── */
@@ -57,7 +60,7 @@ export class TakeTestComponent implements OnInit, OnDestroy {
   answers = signal<Record<number, string>>({});
   marked = signal<Set<number>>(new Set());
   visited = signal<Set<number>>(new Set([0]));
-  timeLeft = signal(this.totalTime);
+  timeLeft = signal(0);
   testStarted = signal(false);
   testSubmitted = signal(false);
   showPalette = signal(false);
@@ -66,170 +69,33 @@ export class TakeTestComponent implements OnInit, OnDestroy {
 
   private timer: ReturnType<typeof setInterval> | null = null;
 
-  /* ── Questions ─────────────────────────────────── */
-  readonly questions: Question[] = [
-    {
-      id: 1,
-      subject: 'Geography',
-      question: 'What is the capital of Bihar?',
-      options: [
-        { key: 'A', text: 'Patna' },
-        { key: 'B', text: 'Gaya' },
-        { key: 'C', text: 'Bhagalpur' },
-        { key: 'D', text: 'Muzaffarpur' },
-      ],
-      correctKey: 'A',
-      explanation:
-        'Patna is the capital and largest city of Bihar. It is situated on the southern bank of the Ganges River.',
-    },
-    {
-      id: 2,
-      subject: 'History',
-      question:
-        'Which ancient city, near modern-day Patna, served as the capital of the Maurya Empire?',
-      options: [
-        { key: 'A', text: 'Vaishali' },
-        { key: 'B', text: 'Rajgir' },
-        { key: 'C', text: 'Pataliputra' },
-        { key: 'D', text: 'Nalanda' },
-      ],
-      correctKey: 'C',
-      explanation:
-        'Pataliputra (modern Patna) was the capital of the Maurya Empire under Chandragupta Maurya and later Ashoka.',
-    },
-    {
-      id: 3,
-      subject: 'Polity',
-      question:
-        'The concept of "Basic Structure" of the Constitution was propounded in which landmark case?',
-      options: [
-        { key: 'A', text: 'Golaknath Case (1967)' },
-        { key: 'B', text: 'Kesavananda Bharati Case (1973)' },
-        { key: 'C', text: 'Minerva Mills Case (1980)' },
-        { key: 'D', text: 'Maneka Gandhi Case (1978)' },
-      ],
-      correctKey: 'B',
-      explanation:
-        "The Basic Structure doctrine was established in Kesavananda Bharati v. State of Kerala (1973), limiting Parliament's power to amend the Constitution.",
-    },
-    {
-      id: 4,
-      subject: 'Economy',
-      question:
-        'Which Five Year Plan focused on "Garibi Hatao" (Remove Poverty) as its primary slogan?',
-      options: [
-        { key: 'A', text: 'Third Five Year Plan' },
-        { key: 'B', text: 'Fourth Five Year Plan' },
-        { key: 'C', text: 'Fifth Five Year Plan' },
-        { key: 'D', text: 'Sixth Five Year Plan' },
-      ],
-      correctKey: 'C',
-      explanation:
-        '"Garibi Hatao" was the slogan of the Fifth Five Year Plan (1974–79), formulated under Indira Gandhi\'s government.',
-    },
-    {
-      id: 5,
-      subject: 'Science',
-      question:
-        'Which gas is primarily responsible for the greenhouse effect on Earth?',
-      options: [
-        { key: 'A', text: 'Oxygen (O₂)' },
-        { key: 'B', text: 'Nitrogen (N₂)' },
-        { key: 'C', text: 'Carbon Dioxide (CO₂)' },
-        { key: 'D', text: 'Argon (Ar)' },
-      ],
-      correctKey: 'C',
-      explanation:
-        'Carbon Dioxide (CO₂) is the primary greenhouse gas responsible for global warming. It traps heat from escaping the atmosphere.',
-    },
-    {
-      id: 6,
-      subject: 'Bihar GK',
-      question:
-        'Which famous Buddhist university, a UNESCO World Heritage Site, is located in Bihar?',
-      options: [
-        { key: 'A', text: 'Takshashila University' },
-        { key: 'B', text: 'Nalanda University' },
-        { key: 'C', text: 'Vikramashila University' },
-        { key: 'D', text: 'Vallabhi University' },
-      ],
-      correctKey: 'B',
-      explanation:
-        'Nalanda Mahavihara in Bihar is a UNESCO World Heritage Site. It was one of the greatest centres of learning in the ancient world (5th–12th century CE).',
-    },
-    {
-      id: 7,
-      subject: 'History',
-      question:
-        'The First Battle of Panipat (1526) was fought between Babur and:',
-      options: [
-        { key: 'A', text: 'Rana Sanga of Mewar' },
-        { key: 'B', text: 'Hemu' },
-        { key: 'C', text: 'Ibrahim Lodi of Delhi Sultanate' },
-        { key: 'D', text: 'Sher Shah Suri' },
-      ],
-      correctKey: 'C',
-      explanation:
-        'Babur defeated Ibrahim Lodi, the last ruler of the Delhi Sultanate, at the First Battle of Panipat on April 21, 1526, establishing the Mughal Empire.',
-    },
-    {
-      id: 8,
-      subject: 'Polity',
-      question:
-        'Which Article of the Indian Constitution deals with the Right to Equality?',
-      options: [
-        { key: 'A', text: 'Articles 12–18' },
-        { key: 'B', text: 'Articles 14–18' },
-        { key: 'C', text: 'Articles 19–22' },
-        { key: 'D', text: 'Articles 23–24' },
-      ],
-      correctKey: 'B',
-      explanation:
-        'Articles 14 to 18 deal with the Right to Equality: equality before law, prohibition of discrimination, equality of opportunity, abolition of untouchability, and abolition of titles.',
-    },
-    {
-      id: 9,
-      subject: 'Geography',
-      question: 'The Ganges River enters Bihar from which state?',
-      options: [
-        { key: 'A', text: 'Uttar Pradesh' },
-        { key: 'B', text: 'Jharkhand' },
-        { key: 'C', text: 'West Bengal' },
-        { key: 'D', text: 'Madhya Pradesh' },
-      ],
-      correctKey: 'A',
-      explanation:
-        'The Ganges enters Bihar from Uttar Pradesh at Chausa (Buxar district) and flows eastward through Bihar before entering West Bengal.',
-    },
-    {
-      id: 10,
-      subject: 'Economy',
-      question: 'Which institution is known as the "Central Bank" of India?',
-      options: [
-        { key: 'A', text: 'State Bank of India' },
-        { key: 'B', text: 'NABARD' },
-        { key: 'C', text: 'Reserve Bank of India' },
-        { key: 'D', text: 'SEBI' },
-      ],
-      correctKey: 'C',
-      explanation:
-        'The Reserve Bank of India (RBI), established in 1935, is the central bank and regulatory body responsible for monetary policy and banking regulation in India.',
-    },
-  ];
-
   /* ── Computed ───────────────────────────────────── */
-  currentQuestion = computed(() => this.questions[this.currentIndex()]);
+  currentQuestion = computed(() =>
+    this.questions()[this.currentIndex()]
+  );
+
 
   questionStatuses = computed(() => {
     const ans = this.answers();
     const mrk = this.marked();
     const vis = this.visited();
-    return this.questions.map((q) => {
+    return this.questions().map((q) => {
       if (mrk.has(q.id)) return 'marked' as QuestionStatus;
       if (ans[q.id]) return 'answered' as QuestionStatus;
       if (vis.has(q.id)) return 'visited' as QuestionStatus;
       return 'unattempted' as QuestionStatus;
     });
+  });
+
+  optionList = computed(() => {
+    const q = this.currentQuestion();
+
+    return [
+      { key: 'a', text: q?.option_a },
+      { key: 'b', text: q?.option_b },
+      { key: 'c', text: q?.option_c },
+      { key: 'd', text: q?.option_d }
+    ];
   });
 
   answeredCount = computed(() => Object.keys(this.answers()).length);
@@ -250,27 +116,41 @@ export class TakeTestComponent implements OnInit, OnDestroy {
   timerUrgent = computed(() => this.timeLeft() <= 300); // last 5 mins
 
   scoreResult = computed(() => {
-    const ans = this.answers();
-    let correct = 0,
-      wrong = 0;
-    this.questions.forEach((q) => {
-      if (ans[q.id]) {
-        if (ans[q.id] === q.correctKey) correct++;
-        else wrong++;
+    const answers = this.answers();
+
+    let correct = 0;
+    let wrong = 0;
+
+    this.questions().forEach((q) => {
+      const answer = answers[q.id];
+
+      if (!answer) return;
+
+      if (answer === q.correct) {
+        correct++;
+      } else {
+        wrong++;
       }
     });
+
+    const total = this.questions().length;
+    const skipped = total - correct - wrong;
+
+
     const score = correct - wrong / 3;
-    const total = this.questions.length;
+    // const total = this.questions.length;
     const percent = Math.round((correct / total) * 100);
     const rank = Math.floor(Math.random() * 900) + 100; // simulated
-    return {
+     return {
       correct,
       wrong,
-      skipped: total - correct - wrong,
-      score: score.toFixed(2),
+      skipped,
       total,
-      percent,
-      rank,
+      score: (correct - wrong / 3).toFixed(2),
+      percent: total
+        ? Math.round((correct / total) * 100)
+        : 0,
+      rank: Math.floor(Math.random() * 900) + 100,
     };
   });
 
@@ -282,6 +162,13 @@ export class TakeTestComponent implements OnInit, OnDestroy {
     if(this.urlSlug() != null){
       this.testService.getTestBySlug(this.urlSlug()).subscribe((test : Test) => {
        this.currentTest = test
+
+        this.questions.set(test.questions || []);
+
+         this.timeLeft.set(
+            Number(test.duration || 0) * 60
+          );
+
       });
 
       console.log(this.currentTest);
@@ -289,6 +176,8 @@ export class TakeTestComponent implements OnInit, OnDestroy {
 
 
   }
+
+
 
   ngOnDestroy(): void {
     this.clearTimer();
@@ -324,9 +213,9 @@ export class TakeTestComponent implements OnInit, OnDestroy {
   }
 
   goTo(i: number): void {
-    if (i < 0 || i >= this.questions.length) return;
+    if (i < 0 || i >= this.questions().length) return;
     this.currentIndex.set(i);
-    this.visited.update((s) => new Set([...s, this.questions[i].id]));
+    this.visited.update((s) => new Set([...s, this.questions()[i].id]));
     this.showPalette.set(false);
   }
 
@@ -335,13 +224,20 @@ export class TakeTestComponent implements OnInit, OnDestroy {
   }
 
   next(): void {
-    if (this.currentIndex() < this.questions.length - 1) {
+    if (this.currentIndex() < this.questions().length - 1) {
       this.goTo(this.currentIndex() + 1);
     }
   }
 
   submitTest(): void {
-    this.confirmSubmit.set(false);
+
+    this.testService.saveAttemptTest({
+      test_id: this.currentTest?.id || 0,
+      score: this.scoreResult().score
+    }).subscribe(() => {
+      this.confirmSubmit.set(true);
+    });
+
     this.testSubmitted.set(true);
     this.showResult.set(true);
     this.clearTimer();
@@ -352,7 +248,7 @@ export class TakeTestComponent implements OnInit, OnDestroy {
     this.answers.set({});
     this.marked.set(new Set());
     this.visited.set(new Set([0]));
-    this.timeLeft.set(this.totalTime);
+    this.timeLeft.set(this.totalTime());
     this.testStarted.set(false);
     this.testSubmitted.set(false);
     this.showResult.set(false);
@@ -372,13 +268,13 @@ export class TakeTestComponent implements OnInit, OnDestroy {
     return map[status];
   }
 
-  isCorrect(q: Question): boolean {
-    return this.answers()[q.id] === q.correctKey;
+  isCorrect(q: any): boolean {
+    return this.answers()[q.id] === q.correct;
   }
 
-  isWrong(q: Question): boolean {
+  isWrong(q: any): boolean {
     const a = this.answers()[q.id];
-    return !!a && a !== q.correctKey;
+    return !!a && a !== q.correct;
   }
 
   private startTimer(): void {

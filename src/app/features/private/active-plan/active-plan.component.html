@@ -44,7 +44,7 @@
               <h1
                 class="font-['Playfair_Display'] text-4xl md:text-6xl font-black mt-3"
               >
-                {{ activePlan().exam_name }}
+                {{ activePlan()?.plan.exam_name }}
               </h1>
 
               <p class="text-white/80 mt-4 text-sm md:text-base max-w-2xl">
@@ -63,7 +63,7 @@
                   </p>
 
                   <h4 class="font-black text-lg mt-1">
-                    {{ activePlan().expiry_date }}
+                    {{ activePlan()?.end_date }}
                   </h4>
                 </div>
 
@@ -91,7 +91,7 @@
               </p>
 
               <h2 class="text-6xl font-black mt-2">
-                <!-- {{ activePlan.total_tests }} -->
+                {{ activePlan()?.plan.total_tests }}
               </h2>
 
               <p class="text-sm text-white/70 mt-2">
@@ -103,138 +103,6 @@
           </div>
 
         </div>
-
-      </div>
-
-    </div>
-
-    <!-- STATS -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-
-      <!-- Completed -->
-      <div
-        class="bg-white rounded-3xl p-6 border border-gray-100"
-        style="box-shadow: 0 4px 20px rgba(0,0,0,0.04)"
-      >
-
-        <p class="text-xs uppercase text-gray-400 font-black">
-          Completed Tests
-        </p>
-
-        <h3
-          class="text-4xl font-black mt-3"
-          style="color: var(--color-primary)"
-        >
-          {{ completedTests }}
-        </h3>
-
-      </div>
-
-      <!-- Remaining -->
-      <div
-        class="bg-white rounded-3xl p-6 border border-gray-100"
-        style="box-shadow: 0 4px 20px rgba(0,0,0,0.04)"
-      >
-
-        <p class="text-xs uppercase text-gray-400 font-black">
-          Remaining
-        </p>
-
-        <h3
-          class="text-4xl font-black mt-3"
-          style="color: var(--color-primary)"
-        >
-          <!-- {{ activePlan().total_tests - completedTests }} -->
-        </h3>
-
-      </div>
-
-      <!-- Accuracy -->
-      <div
-        class="bg-white rounded-3xl p-6 border border-gray-100"
-        style="box-shadow: 0 4px 20px rgba(0,0,0,0.04)"
-      >
-
-        <p class="text-xs uppercase text-gray-400 font-black">
-          Accuracy
-        </p>
-
-        <h3
-          class="text-4xl font-black mt-3"
-          style="color: var(--color-primary)"
-        >
-          <!-- {{ accuracy }}% -->
-        </h3>
-
-      </div>
-
-      <!-- Rank -->
-      <div
-        class="bg-white rounded-3xl p-6 border border-gray-100"
-        style="box-shadow: 0 4px 20px rgba(0,0,0,0.04)"
-      >
-
-        <p class="text-xs uppercase text-gray-400 font-black">
-          Rank Estimate
-        </p>
-
-        <h3
-          class="text-4xl font-black mt-3"
-          style="color: var(--color-primary)"
-        >
-          #{{ rank }}
-        </h3>
-
-      </div>
-
-    </div>
-
-    <!-- PROGRESS -->
-    <div
-      class="bg-white rounded-[32px] p-8 border border-gray-100 mb-10"
-      style="box-shadow: 0 6px 28px rgba(0,0,0,0.05)"
-    >
-
-      <div class="flex items-center justify-between mb-5">
-
-        <div>
-          <h3
-            class="font-['Playfair_Display'] text-3xl font-black"
-            style="color: var(--color-dark)"
-          >
-            Learning Progress
-          </h3>
-
-          <p class="text-gray-500 text-sm mt-1">
-            Track your preparation consistency
-          </p>
-        </div>
-
-        <span
-          class="text-lg font-black"
-          style="color: var(--color-primary)"
-        >
-          {{ progress }}%
-        </span>
-
-      </div>
-
-      <!-- BAR -->
-      <div
-        class="w-full h-5 rounded-full overflow-hidden bg-gray-100"
-      >
-
-        <div
-          class="h-full rounded-full transition-all duration-500"
-          [style.width.%]="progress"
-          style="
-            background: linear-gradient(
-              135deg,
-              var(--color-primary),
-              var(--color-dark)
-            );
-          "
-        ></div>
 
       </div>
 
@@ -264,7 +132,7 @@
         </div>
 
         <button
-          routerLink="/dashboard/tests"
+          routerLink="/mock-tests"
           class="px-8 py-4 rounded-2xl text-white font-black transition-all duration-300 hover:scale-[1.02]"
           style="
             background: linear-gradient(
@@ -283,31 +151,29 @@
       <!-- FEATURES -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-      @for (feature of activePlan()?.features; track feature) {
+      @for (feature of activePlan()?.plan.features; track feature) {
 
-        <div
-          class="flex items-start gap-4 p-5 rounded-3xl border border-gray-100"
-        >
+            <div
+              class="flex items-start gap-3 rounded-2xl border border-gray-100 p-4"
+            >
 
-          <div
-            class="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-            style="
-              background: rgba(137,1,23,0.08);
-              color: var(--color-primary);
-            "
-          >
-            ✓
-          </div>
+              <div
+                class="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
+                style="
+                  background: rgba(137, 1, 23, 0.08);
+                  color: var(--color-primary);
+                "
+              >
+                ✓
+              </div>
 
-          <div>
-            <p class="font-bold text-gray-700">
-              {{ feature }}
-            </p>
-          </div>
+              <p class="text-sm font-semibold text-gray-600">
+                {{ feature }}
+              </p>
 
-        </div>
+            </div>
 
-        }
+            }
 
       </div>
 

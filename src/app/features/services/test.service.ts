@@ -5,6 +5,7 @@ import { ApiService } from '../api-service'
 import { ApiResponse } from 'src/app/core/models/api-response.model'
 import { environment } from 'src/environments/environment'
 import { Test } from 'src/app/core/models/test.model'
+import { StorageService } from './storage.service'
 
 
 @Injectable({
@@ -12,7 +13,10 @@ import { Test } from 'src/app/core/models/test.model'
 })
 export class TestService {
 
-    private api = inject(ApiService)
+  private api = inject(ApiService);
+  private storage = inject(StorageService);
+
+  private baseUrl = environment.apiBaseUrl;
 
     /**
      * GLOBAL STATE
@@ -21,10 +25,14 @@ export class TestService {
     loading = signal<boolean>(false)
     loaded = signal<boolean>(false)
 
+    getToken(): string | null {
+      return this.storage.get('token');
+    }
+
     /**
      * API URL
      */
-    private endpoint = environment.apiBaseUrl + '/getTests'
+    private endpoint = this.baseUrl + '/getTests'
 
     /**
      * FETCH TESTS
@@ -90,5 +98,21 @@ export class TestService {
     clearTests(): void {
         this.tests.set([])
         this.loaded.set(false)
+    }
+
+
+
+    saveAttemptTest(data: {
+        test_id: number;
+        score: any;
+      }) {
+            const token = this.getToken();
+
+            return this.api.post<any>(
+              `${this.baseUrl}/submit-attempt`,
+              data,
+              token || ''
+            );
+
     }
 }

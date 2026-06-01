@@ -88,51 +88,50 @@ export class AuthService {
 
   async updateProfile(data: any): Promise<any> {
 
-  try {
+    try {
 
-    const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
 
 
-    const response: any = await firstValueFrom(
-      this.api.post(
-        `${this.baseUrl}/update-profile`,
-        data,
-        token || ''
-      )
-    );
-
-    console.log('Update profile response:', response.data);
-
-    // VALID RESPONSE CHECK
-    if (response && response.data) {
-
-      // KEEP EXISTING TOKEN
-      const currentToken =
-        response.data.token || token;
-
-      this.setSession(
-        response.data,
-        currentToken || ''
+      const response: any = await firstValueFrom(
+        this.api.post(
+          `${this.baseUrl}/update-profile`,
+          data,
+          token || ''
+        )
       );
 
+      console.log('Update profile response:', response.data);
+
+      // VALID RESPONSE CHECK
+      if (response && response.data) {
+
+        // KEEP EXISTING TOKEN
+        const currentToken =
+          response.data.token || token;
+
+        this.setSession(
+          response.data,
+          currentToken || ''
+        );
+
+      }
+
+      return response;
+
+    } catch (error: any) {
+
+      console.error('Profile update failed:', error);
+
+      return {
+        success: false,
+        message:
+          error?.error?.message ||
+          'Profile update failed',
+        errors:
+          error?.error?.errors || null
+      };
+
     }
-
-    return response;
-
-  } catch (error: any) {
-
-    console.error('Profile update failed:', error);
-
-    return {
-      success: false,
-      message:
-        error?.error?.message ||
-        'Profile update failed',
-      errors:
-        error?.error?.errors || null
-    };
-
   }
-
-}
 }

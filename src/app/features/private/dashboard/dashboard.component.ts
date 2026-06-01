@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DashboardService } from '../../services/dashboard';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,38 +11,63 @@ import { RouterLink } from '@angular/router';
 })
 export class DashboardComponent {
 
-  user = {
-    first_name: 'Rajeev'
+  dashboardService = inject(DashboardService);
+  dashboardData: any = {
+    user: {},
+    active_plan: {},
+    attempts: {}
   };
 
-  completedTests = signal(24);
-  totalTests = signal(56);
+  completedTests = signal(0);
+  totalTests = signal(0);
+  accuracy = signal(0);
+  recentTests = signal<any[]>([]);
 
-  accuracy = signal(78);
+  ngOnInit(): void {
 
-  recentTests = [
-    {
-      title: 'BPSC Prelims Mock Test 12',
-      score: 82,
-      questions: 150,
-      date: '26 May 2026',
-      status: 'Completed'
-    },
-    {
-      title: 'Indian Polity Practice Set',
-      score: 74,
-      questions: 100,
-      date: '24 May 2026',
-      status: 'Completed'
-    },
-    {
-      title: 'History Full Length Test',
-      score: 69,
-      questions: 120,
-      date: '22 May 2026',
-      status: 'Completed'
-    }
-  ];
+      this.dashboardService.getDashboardData().subscribe(data => {
+        this.dashboardData = data;
+        console.log('Dashboard Data:', data);
+        this.completedTests.set(data.attempts_count);
+        this.totalTests.set(data.active_plan.total_tests);
+        // this.accuracy.set(data.attempts.accuracy);
+
+        this.recentTests.set(data.attempts);
+      });
+
+  }
+
+
+
+  // user = {
+  //   first_name: 'Rajeev'
+  // };
+
+
+
+  // recentTests = [
+  //   {
+  //     title: 'BPSC Prelims Mock Test 12',
+  //     score: 82,
+  //     questions: 150,
+  //     date: '26 May 2026',
+  //     status: 'Completed'
+  //   },
+  //   {
+  //     title: 'Indian Polity Practice Set',
+  //     score: 74,
+  //     questions: 100,
+  //     date: '24 May 2026',
+  //     status: 'Completed'
+  //   },
+  //   {
+  //     title: 'History Full Length Test',
+  //     score: 69,
+  //     questions: 120,
+  //     date: '22 May 2026',
+  //     status: 'Completed'
+  //   }
+  // ];
 
   upcomingTests = [
     {
