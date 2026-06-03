@@ -5,6 +5,8 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { LocationService } from '../../services/location.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,9 +17,18 @@ import {
 export class ProfileComponent {
 
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private locationService = inject(LocationService);
+  user = this.authService.getUser();
 
   loading = signal(false);
   editMode = signal(false);
+
+  states: any[] = [];
+  cities: any[] = [];
+
+  loadingStates = signal(false);
+  loadingCities = signal(false);
 
   successMessage = signal('');
   errorMessage = signal('');
@@ -38,7 +49,7 @@ export class ProfileComponent {
 
     // MOCK DATA
     // Replace with API response
-    const user = {
+    const user = this.authService.getUser() || {
       first_name: 'Rajeev',
       last_name: 'Ranjan',
       email: 'rajeev@example.com',
@@ -50,10 +61,18 @@ export class ProfileComponent {
       is_active: true
     };
 
-    this.profileForm.patchValue(user);
+    this.profileForm.patchValue(user as any);
 
     // initially readonly
     this.profileForm.disable();
+
+    this.loadStates();
+
+    const stateId = this.profileForm.get('state_id')?.value;
+
+    if (stateId) {
+      this.loadCities(parseInt(stateId));
+    }
   }
 
   toggleEdit() {
@@ -67,7 +86,7 @@ export class ProfileComponent {
     }
   }
 
-  updateProfile() {
+  async updateProfile() {
 
     this.successMessage.set('');
     this.errorMessage.set('');
@@ -79,19 +98,38 @@ export class ProfileComponent {
 
     this.loading.set(true);
 
-    // FAKE API DELAY
-    setTimeout(() => {
+    try {
+
+      const res = await this.authService.updateProfile(
+        this.profileForm.value
+      );
 
       this.loading.set(false);
 
-      // simulate success
-      this.successMessage.set('Profile updated successfully.');
+      if (res?.success === false) {
+        this.errorMessage.set(
+          res.message || 'Failed to update profile.'
+        );
+        return;
+      }
+
+      this.successMessage.set(
+        res?.message || 'Profile updated successfully.'
+      );
 
       this.editMode.set(false);
-
       this.profileForm.disable();
 
-    }, 1500);
+    } catch (error: any) {
+
+      this.loading.set(false);
+
+      this.errorMessage.set(
+        error?.message || 'Failed to update profile.'
+      );
+
+      console.error(error);
+    }
   }
 
   get first_name() {
@@ -112,5 +150,52 @@ export class ProfileComponent {
 
   get pincode() {
     return this.profileForm.get('pincode');
+  }
+
+  //
+
+
+  loadStates() {
+    this.loadingStates.set(true);
+
+    this.locationService.getStates().then(states => {
+      this.states = states;
+      this.loadingStates.set(false);
+    }).catch(error => {
+      console.error('Error loading states:', error);
+      this.loadingStates.set(false);
+    });
+  }
+
+  loadCities(stateId: number) {
+
+    this.locationService.getCitiesByState(stateId).then(cities => {
+      this.cities = cities;
+    }).catch(error => {
+      console.error('Error loading cities:', error);
+    });
+  }
+
+  onStateChange(event: Event) {
+
+    const stateId = +(event.target as HTMLSelectElement).value;
+
+    this.profileForm.patchValue({
+      city_id: null
+    });
+
+    this.cities = [];
+
+    if (!stateId) return;
+
+    this.loadingCities.set(true);
+
+    this.locationService.getCitiesByState(stateId).then(cities => {
+      this.cities = cities;
+      this.loadingCities.set(false);
+    }).catch(error => {
+      console.error('Error loading cities:', error);
+      this.loadingCities.set(false);
+    });
   }
 }

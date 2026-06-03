@@ -85,7 +85,7 @@
             </p>
           </div>
 
-          <div
+          <!-- <div
             class="rounded-2xl border border-[#f1e8f0] bg-[#fcf8fc] p-4"
           >
             <p class="text-xs uppercase tracking-wider text-[#8c7289]">
@@ -96,7 +96,7 @@
               {{ profileForm.value.city_id }},
               {{ profileForm.value.state_id }}
             </p>
-          </div>
+          </div> -->
 
           <div
             class="rounded-2xl border border-[#f1e8f0] bg-[#fcf8fc] p-4"
@@ -282,12 +282,23 @@
               State
             </label>
 
-            <input
-              type="text"
+
+            <select
               formControlName="state_id"
-              placeholder="Enter state"
+              (change)="onStateChange($event)"
               class="w-full rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-5 py-4 text-[#1a0518] outline-none transition focus:border-[#890117] focus:ring-4 focus:ring-[#890117]/10"
-            />
+            >
+              <option value="">
+                Select State
+              </option>
+
+              <option
+                *ngFor="let state of states"
+                [value]="state.id"
+              >
+                {{ state.name }}
+              </option>
+            </select>
 
           </div>
 
@@ -300,12 +311,21 @@
               City
             </label>
 
-            <input
-              type="text"
+           <select
               formControlName="city_id"
-              placeholder="Enter city"
               class="w-full rounded-2xl border border-[#eadfe9] bg-[#fcf8fc] px-5 py-4 text-[#1a0518] outline-none transition focus:border-[#890117] focus:ring-4 focus:ring-[#890117]/10"
-            />
+            >
+              <option value="">
+                Select City
+              </option>
+
+              <option
+                *ngFor="let city of cities"
+                [value]="city.id"
+              >
+                {{ city.name }}
+              </option>
+            </select>
 
           </div>
 

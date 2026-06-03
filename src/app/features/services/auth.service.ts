@@ -87,12 +87,9 @@ export class AuthService {
   }
 
   async updateProfile(data: any): Promise<any> {
-
     try {
 
       const token = localStorage.getItem('token');
-
-
       const response: any = await firstValueFrom(
         this.api.post(
           `${this.baseUrl}/update-profile`,
@@ -100,9 +97,7 @@ export class AuthService {
           token || ''
         )
       );
-
       console.log('Update profile response:', response.data);
-
       // VALID RESPONSE CHECK
       if (response && response.data) {
 
@@ -116,7 +111,6 @@ export class AuthService {
         );
 
       }
-
       return response;
 
     } catch (error: any) {

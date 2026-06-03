@@ -11,6 +11,8 @@ import {
 } from '@angular/core';
 import { TestService } from '../../services/test.service';
 import { Test } from 'src/app/core/models/test.model';
+import { AuthService } from '../../services/auth.service';
+import { PlanService } from '../../services/plan.service';
 
 export interface Option {
   key: string;
@@ -42,6 +44,8 @@ export class TakeTestComponent implements OnInit, OnDestroy {
   urlSlug = signal('');
 
   private testService = inject(TestService);
+  private authService = inject(AuthService);
+  private planService = inject(PlanService);
 
   currentTest: Test | null = null;
   questions = signal<any[]>([]);
@@ -171,11 +175,34 @@ export class TakeTestComponent implements OnInit, OnDestroy {
 
       });
 
+      this.authService.user$.subscribe(user => {
+        if(!user){
+          this.router.navigate(['/login']);
+        }
+        else{
+          this.loadActivePlan();
+        }
+      })
+
       console.log(this.currentTest);
     }
 
-
   }
+
+    loadActivePlan(): void {
+
+      this.planService.getMyActivePlan().subscribe({
+        next: (data: any) => {
+          if (!data) {
+            this.router.navigate(['/purchase-plan']);
+            return;
+          }
+        },
+        error: (error: any) => {
+          console.error('Error fetching active plan:', error);
+        }
+      });
+    }
 
 
 
@@ -185,6 +212,8 @@ export class TakeTestComponent implements OnInit, OnDestroy {
 
   /* ── Actions ───────────────────────────────────── */
   startTest(): void {
+
+
     this.testStarted.set(true);
     this.startTimer();
   }

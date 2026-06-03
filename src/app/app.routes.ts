@@ -33,6 +33,10 @@ export const routes: Routes = [
       { path: 'sample-test', component: FreeDemoTestComponent },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: RegisterComponent },
+
+      { path: 'privacy-policy', loadComponent: () => import('./features/pages/privacy-policy/privacy-policy.component').then(m => m.PrivacyPolicyComponent) },
+      { path: 'refund-policy', loadComponent: () => import('./features/pages/refund-policy/refund-policy.component').then(m => m.RefundPolicyComponent) },
+      { path: 'terms-condition', loadComponent: () => import('./features/pages/terms-condition/terms-condition.component').then(m => m.TermsConditionComponent) },
     ],
   },
 
@@ -92,5 +96,7 @@ export const routes: Routes = [
     ],
   },
 
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'not-found' },
+  { path: 'not-found', loadComponent: () => import('./features/pages/not-found/not-found.component').then(m => m.NotFoundComponent) },
+  { path: 'coming-soon', loadComponent: () => import('./features/pages/coming-soon/coming-soon.component').then(m => m.ComingSoonComponent) },
 ];

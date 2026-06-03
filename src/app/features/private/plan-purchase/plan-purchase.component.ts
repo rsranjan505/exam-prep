@@ -57,7 +57,7 @@ export class PlanPurchaseComponent {
           currency: order.currency,
           name: 'Dreaho Test Series',
           description: `${this.selectedPlan.exam_name} Plan Purchase`,
-          image: 'assets/logo.png',
+          image: 'localhost:4200/assets/logo.png',
           order_id: order.id,
           theme: {
             color: '#890117'
@@ -86,14 +86,15 @@ export class PlanPurchaseComponent {
                 console.log('Payment order', order);
 
                 // STEP 3:
-                // UPDATE USER PLAN
-
                 this.planService.purchasePlan({plan_id:this.selectedPlan.id, payment_id:order.id, amount:order.amount/100}).subscribe();
 
-                // alert('Plan Purchased Successfully');
+                // STEP 4:
+                // REDIRECT TO DASHBOARD
+                setTimeout(() => {
+                  window.location.href = '/active-plan';
+                }, 1000);
 
               },
-
               error: (err) => {
 
                 console.error('Verification Failed', err);
