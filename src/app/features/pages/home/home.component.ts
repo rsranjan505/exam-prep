@@ -12,6 +12,7 @@ import { WhyChooseUsComponent } from "../../components/why-choose-us/why-choose-
 import { PracticeZoneComponent } from "../../components/practice-zone/practice-zone.component";
 import { HeroSectionComponent } from "../../components/hero-section/hero-section.component";
 import { TestimonialsSectionComponent } from '../../components/testimonials-section/testimonials-section.component';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 
 
@@ -42,9 +43,37 @@ interface Testimonial {
 })
 export class HomeComponent {
 
+  private seo = inject(SeoService);
   mobileMenuOpen = false;
 
   private platformId = inject(PLATFORM_ID);
+
+  ngOnInit() {
+    this.seo.updateMetaTags({
+      title: 'Knowledge Nation - Best Online Test Series Platform',
+      description: 'Join thousands of aspirants preparing for SSC, Railway, Banking, UPSC, Bihar Police and other competitive exams.',
+      keywords: 'ssc test series,railway mock test,banking mock test,bpsc online test,bihar police test series'
+    });
+
+     // Optional JSON-LD (LocalBusiness)
+    this.seo.addJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: 'Knowledge Nation',
+      url: 'https://www.knowledgenation.in/',
+      logo: 'https://www.knowledgenation.in/assets/logo.png',
+      email: 'support@knowledgenation.in',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Patna, Bihar',
+        addressCountry: 'India',
+      },
+      sameAs: [
+        'https://www.facebook.com/knowledgenation',
+        'https://www.instagram.com/knowledgenation',
+      ],
+    });
+  }
 
   activeTestimonial = signal(0);
   private autoTimer: ReturnType<typeof setInterval> | null = null;
@@ -102,7 +131,7 @@ export class HomeComponent {
 
     testimonials: Testimonial[] = [
     {
-      quote: 'BPSC Prep Portal completely transformed my preparation. The structured test series and expert mentorship helped me score in the top 5% of Prelims.',
+      quote: 'Knowledge Nation Portal completely transformed my preparation. The structured test series and expert mentorship helped me score in the top 5% of Prelims.',
       stars: 5,
       initials: 'AS',
       name: 'Anjali Singh',

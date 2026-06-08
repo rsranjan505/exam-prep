@@ -19,27 +19,14 @@ export class MockTestComponent {
     loading = this.testService.loading
 
     ngOnInit(): void {
-        this.testService.fetchTests().subscribe((res) => {
-
-          console.log('API DATA:', res)
-
+      this.testService.fetchUserTests().subscribe((res) => {
           console.log('SIGNAL DATA:', this.allTests())
       })
-
-
-      // icon: '📝',
     }
 
 
   openFaq = signal<number | null>(null);
 
-
-
-  // readonly difficultyColor: Record<Difficulty, string> = {
-  //   Easy: '#1a7a2e',
-  //   Medium: '#400675',
-  //   Hard: '#890117',
-  // };
 
     getDifficultyColor(difficulty?: string): string {
 

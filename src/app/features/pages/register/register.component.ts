@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { City, LocationService, State } from '../../services/location.service';
 import { ToastService } from '../../services/toast.service';
 import { CommonModule, NgIf } from '@angular/common';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 
 function passwordMatch(control: AbstractControl): ValidationErrors | null {
@@ -21,6 +22,8 @@ function passwordMatch(control: AbstractControl): ValidationErrors | null {
 })
 export class RegisterComponent {
 
+  private seo = inject(SeoService);
+
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
@@ -35,6 +38,12 @@ export class RegisterComponent {
       this.router.navigate(['/home']);
     }
     await this.loadStates();
+
+      this.seo.updateMetaTags({
+        title: 'Sign Up - Knowledge Nation',
+        description: 'Create an account to access our platform and start your competitive exam preparation journey. Sign up today and unlock the power of knowledge!',
+        keywords: 'sign up knowledge nation,user account,competitive exam preparation,track progress,manage test series'
+      });
 
     }
 

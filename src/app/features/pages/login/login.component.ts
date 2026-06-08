@@ -3,6 +3,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,8 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private auth = inject(AuthService);
+
+  private seo = inject(SeoService);
 
   loading = signal(false);
   // ✅ ADD THIS
@@ -29,6 +32,32 @@ export class LoginComponent {
     if(this.auth.isLoggedIn()) {
       this.router.navigate(['/']);
     }
+
+     this.seo.updateMetaTags({
+      title: 'Login - Knowledge Nation',
+      description: 'Access your Knowledge Nation account to track your progress, manage your test series, and stay updated with the latest resources for competitive exam preparation.',
+      keywords: 'login knowledge nation,user account,competitive exam preparation,track progress,manage test series'
+    });
+
+
+     // Optional JSON-LD (LocalBusiness)
+    this.seo.addJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: 'Knowledge Nation',
+      url: 'https://www.knowledgenation.in/login',
+      logo: 'https://www.knowledgenation.in/assets/logo.png',
+      email: 'support@knowledgenation.in',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Patna, Bihar',
+        addressCountry: 'India',
+      },
+      sameAs: [
+        'https://www.facebook.com/knowledgenation',
+        'https://www.instagram.com/knowledgenation',
+      ],
+    });
   }
 
 

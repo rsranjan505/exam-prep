@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { JoinTest } from "../../components/join-test/join-test";
 import { NgFor } from '@angular/common';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 @Component({
   selector: 'app-about',
@@ -10,6 +11,35 @@ import { NgFor } from '@angular/common';
 })
 export class AboutComponent {
 
+    private seo = inject(SeoService);
+  ngOnInit() {
+
+
+    this.seo.updateMetaTags({
+      title: 'About Us - Knowledge Nation',
+      description: 'Learn about Knowledge Nation, our mission to empower aspirants with quality test series and resources for competitive exam success.',
+      keywords: 'about knowledge nation,our mission,competitive exam preparation,online test series platform'
+    });
+
+     // Optional JSON-LD (LocalBusiness)
+    this.seo.addJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: 'Knowledge Nation',
+      url: 'https://www.knowledgenation.in/about',
+      logo: 'https://www.knowledgenation.in/assets/logo.png',
+      email: 'support@knowledgenation.in',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Patna, Bihar',
+        addressCountry: 'India',
+      },
+      sameAs: [
+        'https://www.facebook.com/knowledgenation',
+        'https://www.instagram.com/knowledgenation',
+      ],
+    });
+  }
     stats = [
     {
       number: '12K+',

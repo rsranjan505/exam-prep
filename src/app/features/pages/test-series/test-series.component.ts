@@ -1,6 +1,8 @@
-import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { NgClass, NgFor, NgIf, TitleCasePipe } from '@angular/common';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { SeoService } from 'src/app/core/services/seo.service';
+import { TestService } from '../../services/test.service';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard';
 export type Category =
@@ -36,11 +38,50 @@ export interface FAQ {
 
 @Component({
   selector: 'app-test-series',
-  imports: [ RouterLink],
+  imports: [ RouterLink, TitleCasePipe],
   templateUrl: './test-series.component.html',
   styleUrl: './test-series.component.css',
 })
 export class TestSeriesComponent {
+
+  private seo = inject(SeoService);
+  private testService = inject(TestService);
+
+      allTests = this.testService.tests
+
+  ngOnInit() {
+
+
+    this.testService.fetchTests().subscribe((res) => {
+          console.log('SIGNAL DATA:', this.allTests())
+      })
+
+
+    this.seo.updateMetaTags({
+      title: ' Test Series - Online Mock Tests for  Prelims & Mains',
+      description: 'Join our comprehensive BPSC test series with full-length mock tests, sectional quizzes, and CSAT practice to ace your BPSC exam preparation.',
+      keywords: ' test series,online mock tests,BPSC prelims test,BPSC mains test,CSAT practice,Knowledge Nationaration'
+    });
+     // Optional JSON-LD (LocalBusiness)
+    this.seo.addJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: 'Knowledge Nation',
+      url: 'https://www.knowledgenation.in/test-series',
+      logo: 'https://www.knowledgenation.in/assets/logo.png',
+      email: 'support@knowledgenation.in',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Patna, Bihar',
+        addressCountry: 'India',
+      },
+      sameAs: [
+        'https://www.facebook.com/knowledgenation',
+        'https://www.instagram.com/knowledgenation',
+      ],
+    });
+  }
+
   activeCategory = signal<Category>('All');
   openFaq = signal<number | null>(null);
 
@@ -53,154 +94,25 @@ export class TestSeriesComponent {
     'Sectional',
   ];
 
-  readonly difficultyColor: Record<Difficulty, string> = {
-    Easy: '#1a7a2e',
-    Medium: '#400675',
-    Hard: '#890117',
-  };
 
+  getDifficultyColor(difficulty?: string): string {
 
+      switch ((difficulty || '').toLowerCase()) {
 
-  readonly allTests: Test[] = [
-    {
-      id: 1,
-      category: 'Prelims',
-      icon: '📋',
-      tag: 'Prelims',
-      title: 'BPSC 69th Prelims Full Test 1',
-      description:
-        'Complete simulation of BPSC 69th prelims with all GS topics as per latest pattern and syllabus.',
-      questions: 150,
-      duration: '2 hrs',
-      difficulty: 'Hard',
-      attempts: '18,400',
-      languages: ['Hindi', 'English'],
-      free: false,
-      new: true,
-    },
-    {
-      id: 2,
-      category: 'CSAT',
-      icon: '🧠',
-      tag: 'CSAT',
-      title: 'CSAT Paper II — Reasoning Booster',
-      description:
-        'Focused test on logical reasoning, comprehension, and mental ability for BPSC CSAT paper.',
-      questions: 100,
-      duration: '2 hrs',
-      difficulty: 'Medium',
-      attempts: '12,200',
-      languages: ['Hindi', 'English'],
-      free: true,
-    },
-    {
-      id: 3,
-      category: 'Mains',
-      icon: '✍️',
-      tag: 'Mains',
-      title: 'General Studies Mains Paper I',
-      description:
-        'Descriptive test covering Indian History, Culture, Geography and Bihar-specific GS topics.',
-      questions: 20,
-      duration: '3 hrs',
-      difficulty: 'Hard',
-      attempts: '6,800',
-      languages: ['Hindi'],
-      free: false,
-    },
-    {
-      id: 4,
-      category: 'Current Affairs',
-      icon: '📰',
-      tag: 'Current Affairs',
-      title: 'Bihar Monthly Current Affairs — Jan 2025',
-      description:
-        'Complete monthly current affairs quiz covering Bihar government schemes, appointments, and events.',
-      questions: 50,
-      duration: '40 mins',
-      difficulty: 'Medium',
-      attempts: '22,000',
-      languages: ['Hindi', 'English'],
-      free: true,
-      new: true,
-    },
-    {
-      id: 5,
-      category: 'Sectional',
-      icon: '🗺️',
-      tag: 'Sectional',
-      title: 'Indian Geography — Complete Test',
-      description:
-        'Section-wise deep dive into Physical, Economic and Human Geography of India and Bihar.',
-      questions: 75,
-      duration: '1 hr',
-      difficulty: 'Medium',
-      attempts: '9,500',
-      languages: ['Hindi', 'English'],
-      free: false,
-    },
-    {
-      id: 6,
-      category: 'Prelims',
-      icon: '📜',
-      tag: 'Prelims',
-      title: 'Indian Polity & Constitution Test',
-      description:
-        'Comprehensive test on Indian Constitution, Parliament, Judiciary, and Governance structures.',
-      questions: 100,
-      duration: '1.5 hrs',
-      difficulty: 'Hard',
-      attempts: '14,300',
-      languages: ['Hindi', 'English'],
-      free: false,
-    },
-    {
-      id: 7,
-      category: 'Sectional',
-      icon: '🔢',
-      tag: 'Sectional',
-      title: 'Quantitative Aptitude Sprint',
-      description:
-        'Fast-paced numerical ability test to sharpen calculation speed and accuracy for CSAT.',
-      questions: 50,
-      duration: '45 mins',
-      difficulty: 'Easy',
-      attempts: '8,100',
-      languages: ['Hindi', 'English'],
-      free: true,
-    },
-    {
-      id: 8,
-      category: 'Current Affairs',
-      icon: '🌐',
-      tag: 'Current Affairs',
-      title: 'National Affairs Weekly Quiz',
-      description:
-        'Weekly national current affairs covering economy, politics, science, and international events.',
-      questions: 25,
-      duration: '20 mins',
-      difficulty: 'Easy',
-      attempts: '30,000',
-      languages: ['Hindi', 'English'],
-      free: true,
-      new: true,
-    },
-    {
-      id: 9,
-      category: 'Mains',
-      icon: '📝',
-      tag: 'Mains',
-      title: 'Essay Writing Practice Test',
-      description:
-        'Structured essay writing practice with model answers evaluated by expert faculty.',
-      questions: 3,
-      duration: '3 hrs',
-      difficulty: 'Hard',
-      attempts: '4,200',
-      languages: ['Hindi'],
-      free: false,
-    },
-  ];
+          case 'low':
+              return '#1a7a2e'
+
+          case 'medium':
+              return '#400675'
+
+          case 'high':
+              return '#890117'
+
+          default:
+              return '#6b7280'
+      }
+  }
+
 
   readonly faqs: FAQ[] = [
     {
@@ -237,12 +149,15 @@ export class TestSeriesComponent {
 
   filteredTests = computed(() => {
     const cat = this.activeCategory();
+    const tests = this.allTests(); // get array value from signal
+
     return cat === 'All'
-      ? this.allTests
-      : this.allTests.filter((t) => t.category === cat);
+      ? tests
+      : tests.filter(t => t.tags === cat);
   });
 
   setCategory(cat: Category): void {
+    console.log('Setting category to', cat);
     this.activeCategory.set(cat);
   }
 

@@ -20,7 +20,7 @@ export class MaterialComponent {
     {
       icon: '📚',
       title: 'BPSC General Studies',
-      author: 'Expert Faculty, BPSC Prep Portal',
+      author: 'Expert Faculty, Knowledge Nation Portal',
       price: '₹299',
       gradient: 'linear-gradient(135deg, #890117, #400675)',
     },

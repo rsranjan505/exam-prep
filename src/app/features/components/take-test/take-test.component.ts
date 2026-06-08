@@ -160,9 +160,11 @@ export class TakeTestComponent implements OnInit, OnDestroy {
 
   /* ── Lifecycle ─────────────────────────────────── */
   ngOnInit(): void {
-     if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId)) {
       this.urlSlug.set(this.route.snapshot.paramMap.get('slug') || '');
     }
+
+    console.log('slug', this.urlSlug());
     if(this.urlSlug() != null){
       this.testService.getTestBySlug(this.urlSlug()).subscribe((test : Test) => {
        this.currentTest = test
@@ -172,6 +174,9 @@ export class TakeTestComponent implements OnInit, OnDestroy {
          this.timeLeft.set(
             Number(test.duration || 0) * 60
           );
+
+
+      console.log(this.currentTest);
 
       });
 
@@ -184,7 +189,6 @@ export class TakeTestComponent implements OnInit, OnDestroy {
         }
       })
 
-      console.log(this.currentTest);
     }
 
   }

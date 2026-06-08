@@ -1,15 +1,17 @@
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-hero-section',
-  imports: [NgFor, CommonModule],
+  imports: [NgFor, CommonModule, RouterLink],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css',
 })
 export class HeroSectionComponent implements OnInit, OnDestroy {
 
-  
+
   currentSlide = 0;
 
   autoSlideInterval: any;

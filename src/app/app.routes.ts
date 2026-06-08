@@ -24,7 +24,7 @@ export const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'about', component: AboutComponent },
       { path: 'test-series', component: TestSeriesComponent },
-      {  path: 'test-series/:exam',  component: FreeDemoTestComponent },
+      {  path: 'test-series/:slug',  component: FreeDemoTestComponent },
       { path: 'study-materials', component: StudyMaterial },
       { path: 'gallery', component: Gallery },
       { path: 'online-support', component: OnlineSupport },

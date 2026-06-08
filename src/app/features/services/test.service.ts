@@ -33,6 +33,7 @@ export class TestService {
      * API URL
      */
     private endpoint = this.baseUrl + '/getTests'
+    private userTestsEndpoint = this.baseUrl + '/get-user-tests'
 
     /**
      * FETCH TESTS
@@ -49,7 +50,7 @@ export class TestService {
         this.loading.set(true)
 
         return this.api
-            .get<ApiResponse<Test[]>>(this.endpoint)
+            .get<ApiResponse<Test[]>>(this.endpoint, this.getToken() || '')
             .pipe(
 
                 map((response) => {
@@ -70,6 +71,42 @@ export class TestService {
                 })
             )
     }
+
+
+    fetchUserTests(forceRefresh: boolean = false): Observable<Test[]> {
+
+        /**
+         * Prevent duplicate API calls
+         */
+        if (this.loaded() && !forceRefresh) {
+            return of(this.tests())
+        }
+
+        this.loading.set(true)
+
+        return this.api
+            .get<ApiResponse<Test[]>>(this.userTestsEndpoint, this.getToken() || '')
+            .pipe(
+
+                map((response) => {
+
+                    /**
+                     * Because your API response is nested badly:
+                     * response.data.data
+                     */
+                    const tests = response?.data || []
+
+                    this.tests.set(tests)
+
+                    this.loaded.set(true)
+
+                    this.loading.set(false)
+
+                    return tests
+                })
+            )
+    }
+
 
     /**
      * GET SINGLE TEST
