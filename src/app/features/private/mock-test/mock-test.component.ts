@@ -25,7 +25,7 @@ export class MockTestComponent {
     }
 
 
-  openFaq = signal<number | null>(null);
+openFaq = signal<number | null>(null);
 
 
     getDifficultyColor(difficulty?: string): string {
