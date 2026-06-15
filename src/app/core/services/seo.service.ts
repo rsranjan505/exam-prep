@@ -33,7 +33,7 @@ export class SeoService {
         this.meta.updateTag({ name: 'description', content: description });
         this.meta.updateTag({ name: 'keywords', content: keywords });
         this.meta.updateTag({ name: 'robots', content: 'index, follow' });
-        this.meta.updateTag({ name: 'author', content: 'Dreaho' });
+        this.meta.updateTag({ name: 'author', content: 'Knowledge Nation' });
 
         // Open Graph
         this.meta.updateTag({ property: 'og:title', content: title });

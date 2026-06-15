@@ -55,7 +55,7 @@ export class PlanPurchaseComponent {
 
           amount: order.amount,
           currency: order.currency,
-          name: 'Dreaho Test Series',
+          name: 'Knowledge Nation Test Series',
           description: `${this.selectedPlan.exam_name} Plan Purchase`,
           image: 'localhost:4200/assets/logo.png',
           order_id: order.id,
