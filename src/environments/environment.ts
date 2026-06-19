@@ -5,6 +5,7 @@ export const environment = {
     // BaseUrl : 'http://localhost:8000/',
     BaseUrl : 'https://admin.knowledgenation.in',
     // razorpayKey: 'rzp_test_Slk2uJEGcp6sZ4' // Replace with your actual Razorpay key
-    razorpayKey: 'rzp_live_SzXlycBXYC6Q72' // Replace with your actual Razorpay key
+    razorpayKey: 'rzp_live_SzXlycBXYC6Q72', // Replace with your actual Razorpay key
+    googleClientId: '476260034498-f6611f88rqu4h4sqfu6pku7stto7rg7n.apps.googleusercontent.com'
 };
 

@@ -49,6 +49,22 @@ export class AuthService {
     );
   }
 
+  googleLogin(credential: string): Observable<void> {
+    return this.api.post<any>(`${this.baseUrl}/auth/google`, { credential }).pipe(
+      tap(res => {
+        const user = res?.data;
+        const token = res?.data?.login_token;
+
+        if (!user || !token) {
+          throw new Error('Invalid Google login response structure');
+        }
+
+        this.setSession(user, token);
+      }),
+      tap(() => {})
+    );
+  }
+
   register(data: any): Observable<User> {
     return this.api.post<any>(`${this.baseUrl}/register`, data).pipe(
       map(res => {

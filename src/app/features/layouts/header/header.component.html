@@ -98,7 +98,7 @@
 
     <div class="flex items-center gap-3">
 
-      @if (user$ | async; as user) {
+      @if (user()) {
         <!-- USER ICON -->
         <div class="relative">
           <button
@@ -135,9 +135,6 @@
               <a routerLink="/dashboard" (click)="closeMenu()" class="block px-4 py-2 text-sm hover:bg-gray-100">
                 Dashboard
               </a>
-
-
-
               <div class="border-t"></div>
 
               <button
@@ -152,7 +149,7 @@
 
       }
 
-       @if (!auth.isLoggedIn()) {
+      @if (!user()) {
       <!-- Login Button -->
         <a
           routerLink="/login"

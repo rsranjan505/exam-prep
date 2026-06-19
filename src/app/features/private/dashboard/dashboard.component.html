@@ -24,7 +24,7 @@
           class="mt-6 font-['Playfair_Display'] text-4xl font-extrabold leading-tight md:text-6xl"
         >
           Welcome Back,
-          {{ dashboardData.user.first_name }}
+          {{ dashboardData?.user?.first_name || 'Student' }}!
         </h1>
 
         <p
@@ -147,7 +147,7 @@
         <h3
           class="mt-6 text-4xl font-bold text-[#1a0518]"
         >
-          #{{ dashboardData.rank }}
+          #{{ dashboardData?.rank || 0 }}
         </h3>
 
         <p class="mt-2 text-[#7b6678]">
@@ -187,7 +187,7 @@
           <span
             class="rounded-full bg-[#890117]/10 px-5 py-2 text-sm font-semibold text-[#890117]"
           >
-            {{ progressPercentage }}% Completed
+            {{ progressPercentage || 0 }}% Completed
           </span>
 
         </div>
@@ -318,8 +318,16 @@
 
     </div>
 
+    @if (loading()) {
+
+        <div class="mt-10 rounded-3xl bg-white p-10 text-center">
+          Loading dashboard...
+        </div>
+
+      }
+
     <!-- RECENT TESTS -->
-     @if (dashboardData.active_plan) {
+     @else if (dashboardData.active_plan) {
     <div
       class="mt-10 rounded-3xl border border-[#eadfe9] bg-white p-8 shadow-sm"
     >
@@ -443,71 +451,71 @@
     }
     @else {
 
-  <div
-    class="mt-10 overflow-hidden rounded-3xl border border-[#f3d7d7] bg-gradient-to-r from-[#fff8f8] to-[#fffdfd] p-10 shadow-sm"
-  >
-    <div class="flex flex-col items-center text-center">
-
-      <!-- Icon -->
       <div
-        class="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#fff0f0]"
+        class="mt-10 overflow-hidden rounded-3xl border border-[#f3d7d7] bg-gradient-to-r from-[#fff8f8] to-[#fffdfd] p-10 shadow-sm"
       >
-        <svg
-          class="h-10 w-10 text-red-500"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 8v4m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"
-          />
-        </svg>
+        <div class="flex flex-col items-center text-center">
+
+          <!-- Icon -->
+          <div
+            class="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#fff0f0]"
+          >
+            <svg
+              class="h-10 w-10 text-red-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"
+              />
+            </svg>
+          </div>
+
+          <h2
+            class="font-['Playfair_Display'] text-3xl font-bold text-[#1a0518]"
+          >
+            No Active Plan Found
+          </h2>
+
+          <p class="mt-4 max-w-2xl text-lg text-[#7b6678]">
+            Your subscription plan is not active. Activate a plan to access mock
+            tests, study materials, performance analytics, rankings, and premium
+            learning content.
+          </p>
+
+          <div
+            class="mt-8 flex flex-col gap-4 sm:flex-row"
+          >
+            <a
+              routerLink="/purchase-plan"
+              class="rounded-2xl bg-primary px-8 py-4 font-semibold text-white transition hover:bg-[#520a95]"
+            >
+              Activate Plan
+            </a>
+
+            <a
+              routerLink="/contact-us"
+              class="rounded-2xl border border-[#eadfe9] bg-white px-8 py-4 font-semibold text-[#400675] transition hover:bg-[#f8f5f9]"
+            >
+              Contact Support
+            </a>
+          </div>
+
+          <div
+            class="mt-8 rounded-2xl bg-[#faf7fb] px-6 py-4 text-sm text-[#7b6678]"
+          >
+            Access to tests, rankings, reports, and premium content requires an
+            active subscription.
+          </div>
+
+        </div>
       </div>
 
-      <h2
-        class="font-['Playfair_Display'] text-3xl font-bold text-[#1a0518]"
-      >
-        No Active Plan Found
-      </h2>
-
-      <p class="mt-4 max-w-2xl text-lg text-[#7b6678]">
-        Your subscription plan is not active. Activate a plan to access mock
-        tests, study materials, performance analytics, rankings, and premium
-        learning content.
-      </p>
-
-      <div
-        class="mt-8 flex flex-col gap-4 sm:flex-row"
-      >
-        <a
-          routerLink="/purchase-plan"
-          class="rounded-2xl bg-[#400675] px-8 py-4 font-semibold text-white transition hover:bg-[#520a95]"
-        >
-          Activate Plan
-        </a>
-
-        <a
-          routerLink="/contact-us"
-          class="rounded-2xl border border-[#eadfe9] bg-white px-8 py-4 font-semibold text-[#400675] transition hover:bg-[#f8f5f9]"
-        >
-          Contact Support
-        </a>
-      </div>
-
-      <div
-        class="mt-8 rounded-2xl bg-[#faf7fb] px-6 py-4 text-sm text-[#7b6678]"
-      >
-        Access to tests, rankings, reports, and premium content requires an
-        active subscription.
-      </div>
-
-    </div>
-  </div>
-
-}
+    }
     <!-- RECENT TESTS -->
 
   </div>

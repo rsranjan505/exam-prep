@@ -1,13 +1,14 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { HeaderMenuService } from '../../services/header-menu.service';
 import { MenuItem } from 'src/app/core/models/menu.model';
 import { AuthService } from '../../services/auth.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-header',
-  imports: [NgIf, RouterLink, RouterLinkActive, NgFor, AsyncPipe],
+  imports: [NgIf, RouterLink, RouterLinkActive, NgFor],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -19,7 +20,10 @@ export class HeaderComponent {
 
     router = inject(Router);
     auth = inject(AuthService);
-    user$ = this.auth.user$;
+
+    user = toSignal(this.auth.user$, {
+      initialValue: null
+    });
 
     isAuthMenuOpen = signal(false);
 
@@ -37,7 +41,7 @@ export class HeaderComponent {
     logout() {
       this.auth.logout();
       this.closeMenu();
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     }
 
 

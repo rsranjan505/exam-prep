@@ -12,30 +12,31 @@ import { DashboardService } from '../../services/dashboard';
 export class DashboardComponent {
 
   dashboardService = inject(DashboardService);
-  dashboardData: any = {
-    user: {},
-    active_plan: {},
-    attempts: {}
-  };
+  dashboardData: any = null;
 
   completedTests = signal(0);
   totalTests = signal(0);
   accuracy = signal(0);
   recentTests = signal<any[]>([]);
 
-  ngOnInit(): void {
+loading = signal(true);
 
-      this.dashboardService.getDashboardData().subscribe(data => {
-        this.dashboardData = data;
-        console.log('Dashboard Data:', data);
-        this.completedTests.set(data.attempts_count);
-        this.totalTests.set(data.active_plan.total_tests);
-        // this.accuracy.set(data.attempts.accuracy);
+ngOnInit(): void {
+  this.dashboardService.getDashboardData().subscribe({
+    next: (data) => {
+      this.dashboardData = data;
 
-        this.recentTests.set(data.attempts);
-      });
+      this.completedTests.set(data?.attempts_count ?? 0);
+      this.totalTests.set(data?.active_plan?.total_tests ?? 0);
+      this.recentTests.set(data?.attempts ?? []);
 
-  }
+      this.loading.set(false);
+    },
+    error: () => {
+      this.loading.set(false);
+    }
+  });
+}
 
 
 
