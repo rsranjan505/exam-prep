@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,8 @@ export class LoginComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
     remember: [false]
   });
+
+  private googleInitialized = false;
 
   ngOnInit(): void {
     if(this.auth.isLoggedIn()) {
@@ -128,5 +131,43 @@ export class LoginComponent {
     } else {
       this.loading.set(false);
     }
+  }
+
+  loginWithGoogle() {
+    if (!environment.googleClientId || environment.googleClientId === 'YOUR_GOOGLE_CLIENT_ID_APP') {
+      this.serverError.set('Google login is not configured yet.');
+      return;
+    }
+
+    const win = window as any;
+    if (!win.google?.accounts?.id) {
+      this.serverError.set('Google sign-in is not available. Please try again.');
+      return;
+    }
+
+    if (!this.googleInitialized) {
+      win.google.accounts.id.initialize({
+        client_id: environment.googleClientId,
+        callback: (response: any) => this.handleGoogleCredential(response.credential),
+      });
+      this.googleInitialized = true;
+    }
+
+    win.google.accounts.id.prompt();
+  }
+
+  private handleGoogleCredential(credential: string) {
+    this.loading.set(true);
+    this.auth.googleLogin(credential).subscribe({
+      next: () => {
+        this.loading.set(false);
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.loading.set(false);
+        this.serverError.set(err.error?.message || 'Google login failed. Please try again.');
+        console.error(err);
+      },
+    });
   }
 }

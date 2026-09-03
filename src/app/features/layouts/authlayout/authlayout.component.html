@@ -6,7 +6,7 @@
   >
 
     <div
-      class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4"
+      class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3"
     >
 
       <!-- LEFT -->
@@ -15,7 +15,7 @@
         <!-- MOBILE MENU BUTTON -->
         <button
           (click)="mobileMenuOpen.set(!mobileMenuOpen())"
-          class="flex h-11 w-11 items-center justify-center rounded-xl border border-[#eadfe9] bg-white lg:hidden"
+          class="flex h-9 w-9 items-center justify-center rounded-lg border border-[#eadfe9] bg-white lg:hidden"
         >
 
           <svg
@@ -42,7 +42,7 @@
         >
 
           <div
-            class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#890117] to-[#400675] text-lg font-bold text-white shadow-lg"
+            class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#890117] to-[#400675] text-sm font-bold text-white shadow-lg md:h-11 md:w-11 md:rounded-2xl md:text-lg"
           >
             KN
           </div>
@@ -50,7 +50,7 @@
           <div>
 
             <h1
-              class="font-['Playfair_Display'] text-xl font-bold text-[#1a0518] sm:text-2xl"
+              class="font-['Playfair_Display'] text-base font-bold text-[#1a0518] sm:text-xl md:text-2xl"
             >
               Knowledge Nation
             </h1>
@@ -67,7 +67,7 @@
 
       <!-- DESKTOP NAV -->
       <nav
-        class="hidden items-center gap-4 lg:flex"
+        class="hidden items-center gap-2 lg:flex"
       >
 
         <a
@@ -75,26 +75,26 @@
           routerLink="/"
           routerLinkActive="bg-[#890117]/10 text-[#890117]"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="rounded-2xl px-5 py-3 font-medium text-[#5f4b5d] transition hover:bg-[#890117]/10"
+          class="rounded-xl px-4 py-2 text-sm font-medium text-[#5f4b5d] transition hover:bg-[#890117]/10"
         >
           Home
         </a>
 
          <a
-          (click)="closeMenu()"
-          routerLink="/dashboard"
-          routerLinkActive="bg-[#890117]/10 text-[#890117]"
-          [routerLinkActiveOptions]="{ exact: true }"
-          class="rounded-2xl px-5 py-3 font-medium text-[#5f4b5d] transition hover:bg-[#890117]/10 "
+           (click)="closeMenu()"
+           routerLink="/dashboard"
+           routerLinkActive="bg-[#890117]/10 text-[#890117]"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="rounded-xl px-4 py-2 text-sm font-medium text-[#5f4b5d] transition hover:bg-[#890117]/10 "
         >
           Dashboard
         </a>
 
         <a
-        `(click)="closeMenu()"
+        (click)="closeMenu()"
           routerLink="/mock-tests"
           routerLinkActive="bg-[#890117]/10 text-[#890117]"
-          class="rounded-2xl px-5 py-3 font-medium text-[#5f4b5d] transition hover:bg-[#890117]/10"
+          class="rounded-xl px-4 py-2 text-sm font-medium text-[#5f4b5d] transition hover:bg-[#890117]/10"
         >
           Test Series
         </a>
@@ -102,52 +102,19 @@
       </nav>
 
       <!-- RIGHT -->
-      <div class="flex items-center gap-3">
-
-        <!-- TEST STATS -->
-        <!-- <div
-          class="hidden items-center gap-4 rounded-2xl border border-[#eadfe9] bg-white px-5 py-3 shadow-sm md:flex"
-        >
-
-          <div class="text-center">
-
-            <p class="text-[10px] uppercase tracking-wide text-[#8c7289]">
-              Completed
-            </p>
-
-            <h3 class="text-lg font-bold text-[#1a0518]">
-              {{ completedTests }}
-            </h3>
-
-          </div>
-
-          <div class="h-10 w-px bg-[#eadfe9]"></div>
-
-          <div class="text-center">
-
-            <p class="text-[10px] uppercase tracking-wide text-[#8c7289]">
-              Total
-            </p>
-
-            <h3 class="text-lg font-bold text-[#890117]">
-              {{ totalTests }}
-            </h3>
-
-          </div>
-
-        </div> -->
+      <div class="flex items-center gap-2">
 
         <!-- PROFILE -->
         <div class="relative profile-menu-wrapper">
 
           <button
             (click)="profileMenuOpen.set(!profileMenuOpen())"
-            class="flex items-center gap-3 rounded-2xl border border-[#eadfe9] bg-white px-3 py-2 transition hover:shadow-lg"
+            class="flex items-center gap-2 rounded-xl border border-[#eadfe9] bg-white px-2 py-1.5 transition hover:shadow-lg md:rounded-2xl md:px-3 md:py-2"
           >
 
             <!-- AVATAR -->
             <div
-              class="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[#890117] to-[#400675] text-sm font-bold text-white"
+              class="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#890117] to-[#400675] text-[10px] font-bold text-white md:h-11 md:w-11 md:text-sm"
             >
               {{ user?.first_name?.charAt(0) }}{{ user?.last_name?.charAt(0) }}
             </div>
@@ -155,11 +122,11 @@
             <!-- USER INFO -->
             <div class="hidden text-left md:block">
 
-              <p class="text-sm font-semibold text-[#1a0518]">
+              <p class="text-xs font-semibold text-[#1a0518] md:text-sm">
                 {{ user?.first_name }}
               </p>
 
-              <p class="text-xs text-[#7b6678]">
+              <p class="text-[10px] text-[#7b6678] md:text-xs">
                 Student
               </p>
 
@@ -168,7 +135,7 @@
             <!-- ARROW -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="hidden h-5 w-5 text-[#7b6678] md:block"
+              class="hidden h-4 w-4 text-[#7b6678] md:block md:h-5 md:w-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -292,12 +259,12 @@
       class="border-t border-[#eadfe9] bg-white lg:hidden"
     >
 
-      <div class="space-y-2 px-4 py-5">
+      <div class="space-y-1 px-4 py-4">
 
         <a
          (click)="closeMenu()"
           routerLink="/"
-          class="block rounded-2xl px-4 py-4 font-medium text-[#1a0518] transition hover:bg-[#f8f5f9]"
+          class="block rounded-xl px-3 py-3 text-sm font-medium text-[#1a0518] transition hover:bg-[#f8f5f9]"
         >
           Home
         </a>
@@ -305,7 +272,7 @@
          <a
           (click)="closeMenu()"
           routerLink="/dashboard"
-          class="block rounded-2xl px-4 py-4 font-medium text-[#1a0518] transition hover:bg-[#f8f5f9]"
+          class="block rounded-xl px-3 py-3 text-sm font-medium text-[#1a0518] transition hover:bg-[#f8f5f9]"
         >
           Dashboard
         </a>
@@ -313,7 +280,7 @@
         <a
           (click)="closeMenu()"
           routerLink="/mock-tests"
-          class="block rounded-2xl px-4 py-4 font-medium text-[#1a0518] transition hover:bg-[#f8f5f9]"
+          class="block rounded-xl px-3 py-3 text-sm font-medium text-[#1a0518] transition hover:bg-[#f8f5f9]"
         >
           Test Series
         </a>
@@ -447,7 +414,7 @@
 
           <p>Patna, Bihar</p>
 
-          <p>support&#64;dreaho.com</p>
+          <p>support&#64;knowledgenation.in</p>
 
           <p>+91 70004857557</p>
 

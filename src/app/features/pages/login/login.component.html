@@ -3,7 +3,7 @@
 >
   <!-- Glass Card -->
   <div
-    class="bg-white/30 backdrop-blur-xl rounded-3xl shadow-2xl max-w-md w-full p-10 space-y-8 animate-card"
+    class="bg-white/30 backdrop-blur-xl rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-6 animate-card md:rounded-3xl md:p-10 md:space-y-8"
   >
     <!-- Header -->
     <div class="text-center">
@@ -54,7 +54,7 @@
       <button
         type="submit"
         [disabled]="loginForm.invalid || loading()"
-        class="w-full bg-white text-blue-700 font-bold py-3 rounded-xl hover:bg-white/90 transition cursor-pointer"
+        class="w-full bg-white text-blue-700 font-bold py-2.5 rounded-xl hover:bg-white/90 transition cursor-pointer md:py-3"
       >
         {{ loading() ? 'Signing in...' : 'Sign In' }}
       </button>
@@ -84,18 +84,19 @@
     </div>
 
     <!-- Social Buttons -->
-    <!-- <div class="flex gap-4 justify-center">
+    <div class="flex gap-4 justify-center">
       <button
+        (click)="loginWithGoogle()"
         class="flex items-center gap-2 bg-red-600 text-white px-5 py-2 rounded-xl hover:bg-red-700 transition shadow-lg"
       >
         <i class="fab fa-google"></i> Google
       </button>
 
-      <button
+      <!-- <button
         class="flex items-center gap-2 bg-blue-800 text-white px-5 py-2 rounded-xl hover:bg-blue-900 transition shadow-lg"
       >
         <i class="fab fa-facebook-f"></i> Facebook
-      </button>
-    </div> -->
+      </button> -->
+    </div>
   </div>
 </section>
