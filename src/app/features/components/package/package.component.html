@@ -55,7 +55,7 @@
       >
         <!-- Card top -->
         <div
-          class="px-7 pt-7 pb-5"
+          class="px-5 pt-5 pb-4 md:px-7 md:pt-7 md:pb-5"
           [style]="
             plan.popular
               ? 'border-bottom: 1px solid rgba(255,255,255,0.1)'
@@ -139,7 +139,7 @@
         </div>
 
         <!-- Features list -->
-        <div class="px-7 py-5 flex flex-col gap-3">
+        <div class="px-5 py-4 flex flex-col gap-3 md:px-7 md:py-5">
           @for (f of plan.features; track f) {
           <div
             class="plan-feature flex items-start gap-3 text-sm"
@@ -160,9 +160,9 @@
         </div>
 
         <!-- CTA -->
-        <div class="px-7 pb-7">
+        <div class="px-5 pb-5 md:px-7 md:pb-7">
           <button
-            class="start-btn w-full font-extrabold text-sm py-3.5 rounded-2xl cursor-pointer border-none tracking-wide"
+            class="start-btn w-full font-extrabold text-xs py-3 rounded-xl cursor-pointer border-none tracking-wide md:text-sm md:py-3.5 md:rounded-2xl"
             [style]="
               plan.popular
                 ? 'background: #f5a623; color: var(--color-dark); box-shadow: 0 4px 18px rgba(245,166,35,0.35);'

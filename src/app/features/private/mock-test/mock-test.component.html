@@ -1,15 +1,15 @@
-<section class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-6 md:px-14">
+<section class="py-14 bg-white md:py-20">
+  <div class="max-w-7xl mx-auto px-4 md:px-14">
     <!-- Header -->
-    <div class="text-center mb-10">
+    <div class="text-center mb-8 md:mb-10">
 
       <h2
-        class="font-['Playfair_Display'] text-3xl md:text-5xl font-black section-title"
+        class="font-['Playfair_Display'] text-2xl md:text-5xl font-black section-title"
         style="color: var(--color-dark)"
       >
 
         <em class="not-italic" style="color: var(--color-primary)"
-          > Tests Series</em
+          >Mock Tests</em
         >
       </h2>
 
@@ -17,7 +17,7 @@
 
     @if (allTests().length > 0 ) {
     <!-- Tests grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
       @for (test of allTests(); track trackById($index, test); let i =
       $index) {
 
@@ -28,12 +28,12 @@
       >
         <!-- Card top -->
         <div
-          class="px-5 pt-5 pb-4 flex items-start justify-between border-b border-gray-50"
+          class="px-4 pt-4 pb-3 flex items-start justify-between border-b border-gray-50 md:px-5 md:pt-5 md:pb-4"
         >
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2 md:gap-3">
             <!-- Icon circle -->
             <div
-              class="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0"
+              class="w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0 md:w-11 md:h-11 md:text-xl"
               style="
                 background: linear-gradient(
                   135deg,
@@ -47,7 +47,7 @@
             <div>
               <!-- Category tag -->
               <span
-                class="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
+                class="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full md:px-2.5 md:py-1"
                 [style]="
                   'background:' +
                   getDifficultyColor(test.difficult_level) +
@@ -58,7 +58,7 @@
                 {{ test.tags }}
               </span>
               <h3
-                class="font-['Playfair_Display'] font-bold text-[15px] mt-0.5 leading-tight"
+                class="font-['Playfair_Display'] font-bold text-sm mt-0.5 leading-tight md:text-[15px]"
                 style="color: var(--color-dark)"
               >
                 {{ test.title }}
@@ -67,16 +67,16 @@
           </div>
 
           <!-- Badges (top-right) -->
-          <div class="flex flex-col gap-1 items-end shrink-0 ml-2">
+          <div class="flex flex-col gap-1 items-end shrink-0 ml-1 md:ml-2">
             @if (test.test_type == 'free') {
             <span
-              class="free-pulse text-[10px] font-black uppercase tracking-wider text-white px-2.5 py-1 rounded-full"
+              class="free-pulse text-[10px] font-black uppercase tracking-wider text-white px-2 py-0.5 rounded-full md:px-2.5 md:py-1"
               style="background: #1a7a2e"
               >FREE</span
             >
             } @if (test.test_type == 'new') {
             <span
-              class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full"
+              class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full md:px-2.5 md:py-1"
               style="
                 background: rgba(64, 6, 117, 0.12);
                 color: var(--color-ascent);
@@ -88,25 +88,25 @@
         </div>
 
         <!-- Card body -->
-        <div class="px-5 py-4 flex-1 flex flex-col">
-          <p class="text-gray-500 text-sm leading-relaxed mb-5 flex-1">
+        <div class="px-4 py-3 flex-1 flex flex-col md:px-5 md:py-4">
+          <p class="text-gray-500 text-xs leading-relaxed mb-4 flex-1 md:text-sm md:mb-5">
             {{ test.description }}
           </p>
 
           <!-- Meta chips -->
-          <div class="flex flex-wrap gap-2 mb-4">
+          <div class="flex flex-wrap gap-1.5 mb-3 md:gap-2 md:mb-4">
             <span
-              class="flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-50 text-gray-500"
+              class="flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-gray-50 text-gray-500 md:text-xs md:px-2.5 md:py-1"
             >
               ❓ {{ test.units }} Qs
             </span>
             <span
-              class="flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-50 text-gray-500"
+              class="flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-gray-50 text-gray-500 md:text-xs md:px-2.5 md:py-1"
             >
               ⏱️ {{ test.duration }} mins
             </span>
             <span
-              class="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full"
+              class="flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full md:text-xs md:px-2.5 md:py-1"
               [style]="
                 'background:' +
                 getDifficultyColor(test.difficult_level) +
@@ -120,13 +120,13 @@
 
           <!-- Attempts + Languages row -->
           <div
-            class="flex items-center justify-between text-xs text-gray-400 mb-4 font-semibold"
+            class="flex items-center justify-between text-[11px] text-gray-400 mb-3 font-semibold md:text-xs md:mb-4"
           >
             <span>👥 {{ test.attempts || 0}} attempts</span>
             <div class="flex gap-1">
                @if (test.languages == 'both') {
                  <span
-                  class="px-2 py-0.5 rounded text-[10px] font-bold"
+                  class="px-1.5 py-0.5 rounded text-[10px] font-bold md:px-2"
                   style="
                     background: rgba(137, 1, 23, 0.07);
                     color: var(--color-primary);
@@ -135,7 +135,7 @@
                     Hindi
                 </span>
                 <span
-                  class="px-2 py-0.5 rounded text-[10px] font-bold"
+                  class="px-1.5 py-0.5 rounded text-[10px] font-bold md:px-2"
                   style="
                     background: rgba(137, 1, 23, 0.07);
                     color: var(--color-primary);
@@ -146,7 +146,7 @@
                }
                @else {
                 <span
-                  class="px-2 py-0.5 rounded text-[10px] font-bold"
+                  class="px-1.5 py-0.5 rounded text-[10px] font-bold md:px-2"
                   style="
                     background: rgba(137, 1, 23, 0.07);
                     color: var(--color-primary);
@@ -161,7 +161,7 @@
           <!-- CTA button -->
           <button
             [routerLink]="['/test', test.slug]"
-            class="start-btn w-full text-white font-extrabold text-sm py-3 rounded-xl cursor-pointer border-none tracking-wide"
+            class="start-btn w-full text-white font-extrabold text-xs py-2.5 rounded-xl cursor-pointer border-none tracking-wide md:text-sm md:py-3"
             style="
               background: linear-gradient(
                 135deg,
@@ -181,21 +181,21 @@
     </div>
       } @else {
 
-      <div class="max-w-2xl mx-auto">
+      <div class="max-w-2xl mx-auto px-4">
         <div
-          class="bg-gradient-to-br from-red-50 to-purple-50 border border-red-100 rounded-3xl p-10 text-center shadow-sm"
+          class="bg-gradient-to-br from-red-50 to-purple-50 border border-red-100 rounded-2xl p-6 text-center shadow-sm md:rounded-3xl md:p-10"
         >
           <div
-            class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center text-4xl bg-white shadow"
+            class="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center text-3xl bg-white shadow md:w-20 md:h-20 md:mb-6 md:text-4xl"
           >
             🔒
           </div>
 
-          <h3 class="text-2xl font-bold text-gray-800 mb-3">
+          <h3 class="text-lg font-bold text-gray-800 mb-2 md:text-2xl md:mb-3">
             No Active Test Series Found
           </h3>
 
-          <p class="text-gray-500 mb-6 leading-relaxed">
+          <p class="text-gray-500 text-xs mb-5 leading-relaxed md:text-sm md:mb-6">
             You currently don't have access to any tests.
             Activate a subscription plan to unlock premium mock tests,
             practice sets, performance analysis and full test series.
@@ -203,7 +203,7 @@
 
           <a
             routerLink="/purchase-plan"
-            class="inline-flex items-center gap-2 px-8 py-3 rounded-xl text-white font-bold transition hover:scale-105"
+            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-white font-bold text-sm transition hover:scale-105 md:px-8 md:py-3"
             style="
               background: linear-gradient(
                 135deg,

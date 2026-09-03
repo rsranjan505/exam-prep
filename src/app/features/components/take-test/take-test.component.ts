@@ -91,16 +91,24 @@ export class TakeTestComponent implements OnInit, OnDestroy {
     });
   });
 
-  optionList = computed(() => {
-    const q = this.currentQuestion();
+optionList = computed(() => {
+  const q = this.currentQuestion();
 
-    return [
-      { key: 'a', text: q?.option_a },
-      { key: 'b', text: q?.option_b },
-      { key: 'c', text: q?.option_c },
-      { key: 'd', text: q?.option_d }
-    ];
-  });
+  const getOptionText = (eng?: string, hindi?: string) => {
+    const en = (eng ?? '').trim();
+    const hi = (hindi ?? '').trim();
+
+    // Return only English if Hindi is empty or both are the same
+    return !hi || en === hi ? en : `${en} / ${hi}`;
+  };
+
+  return [
+    { key: 'a', text: getOptionText(q?.option_a, q?.option_a_hindi) },
+    { key: 'b', text: getOptionText(q?.option_b, q?.option_b_hindi) },
+    { key: 'c', text: getOptionText(q?.option_c, q?.option_c_hindi) },
+    { key: 'd', text: getOptionText(q?.option_d, q?.option_d_hindi) },
+  ];
+});
 
   answeredCount = computed(() => Object.keys(this.answers()).length);
   markedCount = computed(() => this.marked().size);
@@ -176,7 +184,7 @@ export class TakeTestComponent implements OnInit, OnDestroy {
           );
 
 
-      console.log(this.currentTest);
+      console.log(this.questions);
 
       });
 
